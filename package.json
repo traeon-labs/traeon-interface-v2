@@ -19,6 +19,8 @@
     "@tma.js/react-router-integration": "^4.0.0",
     "@tma.js/sdk-react": "^2.2.1",
     "@tonconnect/ui-react": "^2.0.2",
+    "@types/crypto-js": "^4.2.2",
+    "crypto-js": "^4.2.0",
     "eruda": "^3.0.1",
     "ethers": "^5.5.4",
     "ethers-utils": "^2.1.11",
