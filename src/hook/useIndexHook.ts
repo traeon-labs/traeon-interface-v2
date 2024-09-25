@@ -1,6 +1,6 @@
 import {useMemo} from "react";
 
-const useAccs = () => {
+const useIndexHook = () => {
   const index = useMemo(() => {
     return 0;
   }, []);
@@ -9,4 +9,4 @@ const useAccs = () => {
   };
 };
 
-export default useAccs;
+export default useIndexHook;
