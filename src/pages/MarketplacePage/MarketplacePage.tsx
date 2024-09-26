@@ -1,9 +1,9 @@
-import { Card, List, Section } from "@telegram-apps/telegram-ui";
-import { FC } from "react";
 import marketplaceAssets from "@/_mock/metadata/nfts.json";
-import { AssetCard } from "./AssetCard";
-import { INFTMetadata } from "@/types/index.type";
+import {INFTMetadata} from "@/types/index.type";
 import {Grid2} from "@mui/material";
+import {List} from "@telegram-apps/telegram-ui";
+import {FC} from "react";
+import {AssetCard} from "./AssetCard";
 import {MarketplaceFilter} from "./MarketplaceFilter";
 export const MarketplacePage: FC = () => {
   return (

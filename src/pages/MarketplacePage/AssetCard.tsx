@@ -1,14 +1,11 @@
-import { INFTMetadata } from "@/types/index.type";
+import {INFTMetadata} from "@/types/index.type";
 import {
-  CardContent,
-  CardMedia,
-  Divider,
-  Grid2,
-  Card,
-  LinearProgress,
-  Typography,
   Button,
-  Chip,
+  Card,
+  CardMedia,
+  Grid2,
+  LinearProgress,
+  Typography
 } from "@mui/material";
 
 export const AssetCard = ({ item }: { item: INFTMetadata }) => {
