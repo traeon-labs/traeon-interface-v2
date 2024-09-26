@@ -1,8 +1,8 @@
 export function shortenAddress(address:string, startLen = 4, endLen = 4): string {
     // Validate that the input is a valid Ethereum address
-    if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
-      return address
-    }
+    // if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+    //   return address
+    // }
   
     // Extract the first 4 and last 4 characters of the address
     const start = address.slice(0, 2+startLen);

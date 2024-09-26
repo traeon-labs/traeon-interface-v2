@@ -1,15 +1,17 @@
-/* :root {
-  --tg-theme-text-color: white !important;
+:root {
+  /* --tgui--font-family: 'VT323', monospace !important; */
+  /* --tg-theme-text-color: white !important;
   --tg-theme-secondary-bg-color: #101010 !important;
   --tg-theme-section-bg-color: gray !important;
   --tg-theme-bg-color: #101010 !important;
   --tg-theme-bg-color-highlight: #202020 !important;
   --tg-theme-button-color: linear-gradient(270deg, rgba(255, 57, 45, 0.2) 20.35%, rgba(0, 0, 0, 0) 70.99%), rgb(252, 221, 93) !important;
   --tg-theme-button-text-color: #101010 !important;
-  --tg-theme-link-color: rgb(252, 221, 93) !important;
-} */
+  --tg-theme-link-color: rgb(252, 221, 93) !important; */
+}
 body {
   background: var(--tg-theme-secondary-bg-color, #101010);
+  /* font-family: 'VT323', monospace !important; */
   color: var(--tg-theme-text-color, white);
   padding: 0;
   margin: 0;

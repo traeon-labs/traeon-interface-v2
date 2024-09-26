@@ -1,7 +1,6 @@
+import {AEON_SANDBOX_PAYMENTS_BASE_API,AEON_SIGN_KEY} from '@/config';
 import axios from 'axios';
-import * as CryptoJS from 'crypto-js';
 import {generateSignature} from '../sign';
-import {AEON_SANDBOX_PAYMENTS_BASE_API, AEON_SIGN_KEY} from '@/config';
 
 // Define the request parameters interface
 interface RequestParams {

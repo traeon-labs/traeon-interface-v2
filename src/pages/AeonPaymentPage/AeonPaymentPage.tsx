@@ -1,3 +1,4 @@
+import {TonWalletButton} from "@/components/TonWallet/TonWalletButton";
 import useSignSHA512 from "@/pages/AeonPaymentPage/hook/useSignSHA512";
 import {createAeonOrdersWithTma} from "@/utils/aeon/createOrder";
 import {Button,Cell,List,Section} from "@telegram-apps/telegram-ui";
@@ -43,11 +44,11 @@ export const AeonPaymentPage: FC = () => {
   return (
     <List>
       <Section header="Aeon Payments">
+        <TonWalletButton/>
         <Cell>Clothes</Cell>
         <Button className="w-100" onClick={createOrdersTelegram}>
           Pay with Aeon $1
         </Button>
-        {sign}
       </Section>
     </List>
   );
