@@ -12,7 +12,7 @@ export const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: 5,
-      backgroundColor: 'gray',
+      backgroundColor: 'rgb(222,222,222)',
       ...theme.applyStyles('dark', {
         backgroundColor: '#308fe8',
       }),

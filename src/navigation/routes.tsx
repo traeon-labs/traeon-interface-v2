@@ -1,6 +1,7 @@
 import type { ComponentType, JSX } from 'react';
 
 import { IndexPage } from '@/pages/IndexPage/IndexPage';
+import {AssetPage} from '@/pages/AssetPage/AssetModal';
 // import { InitDataPage } from '@/pages/InitDataPage/InitDataPage';
 // import { LaunchParamsPage } from '@/pages/LaunchParamsPage/LaunchParamsPage.tsx';
 // import { ThemeParamsPage } from '@/pages/ThemeParamsPage/ThemeParamsPage.tsx';

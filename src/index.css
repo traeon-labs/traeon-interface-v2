@@ -1,6 +1,6 @@
 :root {
   --tgui--font-family: 'VT323', monospace !important;
-  --tg-theme-text-color: white !important;
+  --tg-theme-text-color: black !important;
   --tg-theme-secondary-bg-color: white !important;
   --tg-theme-section-bg-color: gray !important;
   --tg-theme-bg-color: white !important;
@@ -9,11 +9,16 @@
   --tg-theme-button-text-color: #101010 !important;
   --tg-theme-link-color: rgb(252, 221, 93) !important;
 }
+* {
+  font-family: 'VT323', monospace !important;
+}
 body {
+    padding: 0;
+   margin: 0;
   zoom: 80%;
   background: var(--tg-theme-secondary-bg-color, #101010);
   font-family: 'VT323', monospace !important;
-  color: var(--tg-theme-text-color, white);
+  color: var(--tg-theme-text-color);
   padding: 0;
   margin: 0;
   @media (max-width: 360px) {
