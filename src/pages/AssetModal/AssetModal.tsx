@@ -17,6 +17,7 @@ import { Modal, Typography } from "@telegram-apps/telegram-ui";
 import { useMemo, useState } from "react";
 import { WalletPropover } from "../IndexPage/AccountPropover/WalletPropover";
 import { BorderLinearProgress } from "@/components/Linear/customLinear";
+import AssetHistory from "./AssetHistory";
 
 const _MOCK_ATTS = [
   {
@@ -64,12 +65,12 @@ export default function AssetModal({
     {
       value: "trade_history",
       label: `Trade history`,
-      component: asset ? "history" : null,
+      component: asset ? <AssetHistory/> : null,
     },
     {
       value: "description",
       label: "description",
-      component: asset ? "description" : null,
+      component: asset ? <Typography Component={'h4'}>{asset.description}</Typography> : null,
     },
   ];
   const assetConfig = useMemo(() => {
@@ -239,14 +240,14 @@ export default function AssetModal({
               </Grid2>
               {_MOCK_ATTS.map((att, _) => {
                 return (
-                  <Grid2 container sx={{ width: "100%"}} key={_}>
+                  <Grid2 container sx={{ width: "100%" }} key={_}>
                     <Grid2 size={4} sx={{ textAlign: "left" }}>
                       <Chip
-                        variant='filled'
+                        variant="filled"
                         style={{
                           textAlign: "center",
-                          border: '1px solid  black',
-                          opacity: 0.7
+                          border: "1px solid  black",
+                          opacity: 0.7,
                         }}
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         color={att.color as any}
@@ -273,16 +274,14 @@ export default function AssetModal({
                       />
                     </Grid2>
                     <Grid2 size={2} sx={{ textAlign: "center" }}>
-                    <Chip
-                        variant='outlined'
+                      <Chip
+                        variant="outlined"
                         style={{
                           textAlign: "center",
-                          border: 'none',
+                          border: "none",
                         }}
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        label={
-                          <Typography Component={"h4"}>{12}</Typography>
-                        }
+                        label={<Typography Component={"h4"}>{12}</Typography>}
                         onClick={() => {
                           navigator.clipboard.writeText(asset.name);
                         }}

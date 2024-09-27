@@ -1,5 +1,114 @@
 [{
         "name": "#12341322",
+        "description": "A vibrant hat perfect for your next round of golf. This hat symbolizes not just style but a statement of excellence on the green.",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+                "trait_type": "type",
+                "value": "hats"
+            },
+            {
+                "trait_type": "color",
+                "value": "green"
+            },
+            {
+                "trait_type": "material",
+                "value": "cotton"
+            },
+            {
+                "trait_type": "rarity",
+                "value": "common"
+            }
+        ]
+    },
+    {
+        "name": "#21623605",
+        "description": "A sleek and stylish hat that fits perfectly for any outdoor adventure. With a lightweight design, it's ideal for golf or casual outings.",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+                "trait_type": "type",
+                "value": "hats"
+            },
+            {
+                "trait_type": "color",
+                "value": "blue"
+            },
+            {
+                "trait_type": "design",
+                "value": "minimal"
+            },
+            {
+                "trait_type": "rarity",
+                "value": "uncommon"
+            }
+        ]
+    },
+    {
+        "name": "#216276603",
+        "description": "A pair of artistic socks for those who love to draw and spend time in creative ventures. These socks are both comfy and inspirational.",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198beee7386b554a4f6_349.png",
+        "attributes": [{
+                "trait_type": "type",
+                "value": "socks"
+            },
+            {
+                "trait_type": "color",
+                "value": "multicolor"
+            },
+            {
+                "trait_type": "design",
+                "value": "artistic"
+            },
+            {
+                "trait_type": "rarity",
+                "value": "rare"
+            }
+        ]
+    },
+    {
+        "name": "#21603602",
+        "description": "This t-shirt is the perfect companion for a leisurely day spent with a book. Made from soft, breathable fabric, it's a must-have for readers.",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "attributes": [{
+                "trait_type": "type",
+                "value": "t-shirts"
+            },
+            {
+                "trait_type": "size",
+                "value": "large"
+            },
+            {
+                "trait_type": "color",
+                "value": "white"
+            },
+            {
+                "trait_type": "rarity",
+                "value": "common"
+            }
+        ]
+    },
+    {
+        "name": "#21656823604",
+        "description": "A trendy hat designed for those who love to dance. Whether you're hitting the dance floor or chilling at home, this hat keeps you stylish.",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "attributes": [{
+                "trait_type": "type",
+                "value": "hats"
+            },
+            {
+                "trait_type": "color",
+                "value": "black"
+            },
+            {
+                "trait_type": "style",
+                "value": "dance"
+            },
+            {
+                "trait_type": "rarity",
+                "value": "uncommon"
+            }
+        ]
+    }, {
+        "name": "#12341322",
         "description": "What about a round of golf?",
         "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
         "attributes": [{
@@ -186,7 +295,7 @@
             "trait_type": "type",
             "value": "bags"
         }]
-    },{
+    }, {
         "name": "#12341322",
         "description": "What about a round of golf?",
         "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
