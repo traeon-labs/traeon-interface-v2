@@ -1,32 +1,40 @@
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import * as React from 'react';
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+import {Iconify} from "@/components/iconify";
+import {IMarketplaceFilterTabs} from "@/types/index.type";
+import {MARKETPLACE_FILTERS_TABS} from "@/utils/constant";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import * as React from "react";
 
-export const MarketplaceFilter = () => {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+export const MarketplaceFilter = ({marketplaceTab, setMarketplaceTab}: {
+  setMarketplaceTab: React.Dispatch<React.SetStateAction<IMarketplaceFilterTabs>>
+  marketplaceTab: IMarketplaceFilterTabs
+} ) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: IMarketplaceFilterTabs) => {
+    setMarketplaceTab(newValue);
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box >
-        <Tabs value={value} centered onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="T-shirt" {...a11yProps(0)} />
-          <Tab label="Short" {...a11yProps(1)} />
-          <Tab label="Socks" {...a11yProps(2)} />
-          <Tab label="Bag" {...a11yProps(3)} />
-          <Tab label="Hats" {...a11yProps(4)} />
+    <Box sx={{ width: "100%" }}>
+      <Box>
+        <Tabs
+          centered
+          onChange={handleChange}
+          aria-label="icon tabs example"
+        >
+          {Object.keys(MARKETPLACE_FILTERS_TABS).map((_tab: string, _) => {
+            return (
+              <Tab
+                sx={_tab === marketplaceTab ? { borderBottom: "1px solid black" } : {borderBottom: "1px solid white"}}
+                className="aeon-transition"
+                key={_}
+                icon={<Iconify icon={_tab} width={30} height={30} />}
+                value={_tab}
+              />
+            );
+          })}
         </Tabs>
       </Box>
     </Box>
   );
-}
+};

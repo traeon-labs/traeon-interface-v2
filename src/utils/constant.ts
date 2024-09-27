@@ -7,3 +7,14 @@ export const TABS: {[key: string]: string} = {
     'mdi:shopping-outline': 'store'
 }
 
+
+export const MARKETPLACE_FILTERS_TABS: {[key: string]: string} = {
+    'ph:t-shirt-bold': 't-shirts',
+    'lucide-lab:shorts': 'shorts',
+    'ph:sock-bold': 'socks',
+    'ph:bag-bold': 'bags',
+    'mingcute:hat-2-line': 'hats'
+}
+
+
+
