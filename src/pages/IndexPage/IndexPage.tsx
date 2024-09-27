@@ -5,7 +5,7 @@ import { TabsController } from "../MarketplacePage/TabsController";
 import "./IndexPage.css";
 import { AccountPopover } from "./AccountPropover";
 import { INFTMetadata, ITabs } from "@/types/index.type";
-import AssetModal from "../AssetPage/AssetModal";
+import AssetModal from "../AssetModal/AssetModal";
 export const IndexPage: FC = () => {
   const [tab, setTab] = useState<ITabs>("mdi:shopping-outline");
   const [assetModal, setAssestModal] = useState<boolean>(false);
