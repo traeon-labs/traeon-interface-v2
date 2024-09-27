@@ -1,13 +1,15 @@
-import {BorderLinearProgress} from "@/components/Linear/customLinear";
-import {INFTMetadata} from "@/types/index.type";
+import { Iconify } from "@/components/iconify";
+import { BorderLinearProgress } from "@/components/Linear/customLinear";
+import { INFTMetadata } from "@/types/index.type";
 import {
   Button,
   Card,
   CardMedia,
   Chip,
   Grid2,
+  IconButton,
   LinearProgress,
-  Typography
+  Typography,
 } from "@mui/material";
 
 export const AssetCard = ({ item }: { item: INFTMetadata }) => {
@@ -16,7 +18,7 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
       <Card
         className="w-100 aeon-box-shadow aeon-box-border"
         style={{
-          padding: "0.2rem",
+          padding: "0.2rem 0.2rem 0rem 0.2rem",
         }}
       >
         <Chip
@@ -26,8 +28,9 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
           }}
           color="secondary"
           className="aeon-chip-border-radius"
-          size='small'
-          label="#123241 Clothes"/>
+          size="small"
+          label="#123241 Clothes"
+        />
         <CardMedia
           component="img"
           image={item.image}
@@ -43,8 +46,8 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
           style={{
             textAlign: "center",
             marginTop: "0.4rem",
-            width: "80%",
-            marginLeft: "10%",
+            width: '90%',
+            marginLeft:'5%',
           }}
         >
           <div
@@ -59,16 +62,41 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
             <Typography>Lv: 5</Typography>
           </div>
           {/* <LinearProgress color="info" /> */}
-          <BorderLinearProgress variant="determinate" style={{height: '5px'}} value={50} />
+          <BorderLinearProgress
+            variant="determinate"
+            color="inherit"
+            style={{ height: "5px" }}
+            value={50}
+          />
         </div>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems:'center',
+            justifyItems:'center',
+            width: '100%',
+            marginTop: "0.5rem",
+            marginBottom: "0.5rem",
           }}
         >
-          <Button disabled>$12</Button>
-          <Button>Buy</Button>
+          <div>
+            <Chip
+              sx={{ background: "none" }}
+              icon={<Iconify icon="token-branded:ton" />}
+              label={<Typography>20</Typography>}
+            />
+          </div>
+          <div>
+            <Button
+              variant='outlined'
+              color='inherit'
+              className='aeon-box-border'
+              startIcon={<Iconify icon="icon-park-outline:buy" />}
+            >
+              Buy
+            </Button>
+          </div>
         </div>
       </Card>
     </Grid2>
