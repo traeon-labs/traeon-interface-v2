@@ -49,7 +49,6 @@
   white-space: normal;
 }
 
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -68,4 +67,16 @@
 
 .grid-item:hover {
   transform: scale(1.05);
+}
+
+.aeon-box-shadow {
+  box-shadow: 5px 5px 5px var(--tg-theme-section-bg-color) !important;
+}
+.aeon-box-border {
+  border-radius: 20px !important;
+}
+
+.aeon-chip-border-radius {
+  border-radius: 0px 0px 10px 10px !important;
+  padding: 1px !important;
 }

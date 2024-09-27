@@ -14,9 +14,8 @@ export const TabsController = ({tab, setTab}: {
   return (
     <Card sx={{position: 'fixed', width: '80%', marginLeft: '10%', bottom: '1rem', borderRadius:'20px', background:'rgb(230, 230, 230)'}}>
       <Tabs onChange={onSelectTab} centered aria-label="icon tabs example" sx={{marginBottom: '0.5rem', marginTop: '0.5rem'}}>
-        {Object.keys(TABS).map((tab:string, _) => {
-          return  <Tab key={_} icon={<Iconify icon={tab} width={30} height={30} />} value={tab}/>
-
+        {Object.keys(TABS).map((_tab:string, _) => {
+          return  <Tab sx={_tab === tab ? {borderBottom: '1px solid black'} : {}} key={_} icon={<Iconify icon={_tab} width={30} height={30} />} value={_tab}/>
         })}
       </Tabs>
     </Card>

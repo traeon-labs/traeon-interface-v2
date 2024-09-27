@@ -6,7 +6,7 @@ import "./IndexPage.css";
 import { AccountPopover } from "./AccountPropover";
 import { ITabs } from "@/types/index.type";
 export const IndexPage: FC = () => {
-  const [tab, setTab] = useState<ITabs>("mdi:location-on-outline");
+  const [tab, setTab] = useState<ITabs>("mdi:shopping-outline");
   return (
     <div>
       {/* <AeonPaymentPage/> */}
@@ -25,9 +25,6 @@ export const IndexPage: FC = () => {
         ""
       )}
       <TabsController tab={tab} setTab={setTab} />
-      {/* <InitDataPage />
-      <LaunchParamsPage />
-      <ThemeParamsPage /> */}
     </div>
   );
 };

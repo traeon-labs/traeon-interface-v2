@@ -1,8 +1,10 @@
+import {BorderLinearProgress} from "@/components/Linear/customLinear";
 import {INFTMetadata} from "@/types/index.type";
 import {
   Button,
   Card,
   CardMedia,
+  Chip,
   Grid2,
   LinearProgress,
   Typography
@@ -12,19 +14,20 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
   return (
     <Grid2 size={6}>
       <Card
-        className="w-100"
+        className="w-100 aeon-box-shadow aeon-box-border"
         style={{
           padding: "0.2rem",
         }}
       >
-        <Card
+        <Chip
           style={{
             textAlign: "center",
             marginBottom: "0.4rem",
           }}
-        >
-          Clothes
-        </Card>
+          color="secondary"
+          className="aeon-chip-border-radius"
+          size='small'
+          label="#123241 Clothes"/>
         <CardMedia
           component="img"
           image={item.image}
@@ -55,7 +58,8 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
             <Typography>Mint: 0</Typography>
             <Typography>Lv: 5</Typography>
           </div>
-          <LinearProgress color="info" />
+          {/* <LinearProgress color="info" /> */}
+          <BorderLinearProgress variant="determinate" style={{height: '5px'}} value={50} />
         </div>
         <div
           style={{

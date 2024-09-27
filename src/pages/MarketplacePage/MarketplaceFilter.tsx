@@ -22,8 +22,9 @@ export const MarketplaceFilter = () => {
         <Tabs value={value} centered onChange={handleChange} aria-label="basic tabs example">
           <Tab label="T-shirt" {...a11yProps(0)} />
           <Tab label="Short" {...a11yProps(1)} />
+          <Tab label="Socks" {...a11yProps(2)} />
           <Tab label="Bag" {...a11yProps(3)} />
-          <Tab label="Hats" {...a11yProps(3)} />
+          <Tab label="Hats" {...a11yProps(4)} />
         </Tabs>
       </Box>
     </Box>
