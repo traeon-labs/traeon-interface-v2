@@ -17,6 +17,7 @@ export const TabsController = ({
   return (
     <Card
       sx={{
+        cursor: 'pointer',
         position: "fixed",
         width: "80%",
         marginLeft: "10%",

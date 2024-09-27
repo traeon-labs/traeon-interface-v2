@@ -18,3 +18,5 @@ export type IMarketplaceFilterTabs =
   | "ph:sock-bold"
   | "ph:bag-bold"
   | "mingcute:hat-2-line";
+
+export type IMUIColor = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning',

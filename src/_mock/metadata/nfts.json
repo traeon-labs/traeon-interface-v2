@@ -1,8 +1,172 @@
-[
-    {"name":"Duck #00","description":"What about a round of golf?","image":"https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png","attributes":[{"trait_type":"Awesomeness","value":"Super cool"}]},
-    {"name":"Duck #01","description":"Let's read some news...","image":"https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971986b790be9f4451425_164.png","attributes":[{"trait_type":"Awesomeness","value":"Cool"}]},
-    {"name":"Duck #02","description":"Books is perfect way to spend your laisure time.","image":"https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png","attributes":[{"trait_type":"Awesomeness","value":"Super mega cool"}]},
-    {"name":"Duck #03","description":"I like to spend time with my friends drawing beautiful pictures","image":"https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198beee7386b554a4f6_349.png","attributes":[{"trait_type":"Awesomeness","value":"Cool"}]},
-    {"name":"Duck #04","description":"It's a dance time!","image":"https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png","attributes":[{"trait_type":"Awesomeness","value":"Super cool"}]}
+[{
+        "name": "Duck #00",
+        "description": "What about a round of golf?",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "hats"
+        }]
+    },
+    {
+        "name": "Duck #00",
+        "description": "What about a round of golf?",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "hats"
+        }]
+    },
+    {
+        "name": "Duck #00",
+        "description": "What about a round of golf?",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "shorts"
+        }]
+    },
+    {
+        "name": "Duck #00",
+        "description": "What about a round of golf?",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "shorts"
+        }]
+    },
+    {
+        "name": "Duck #00",
+        "description": "What about a round of golf?",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "shorts"
+        }]
+    },
+    {
+        "name": "Duck #01",
+        "description": "Let's read some news...",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971986b790be9f4451425_164.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "socks"
+        }]
+    },
+    {
+        "name": "Duck #02",
+        "description": "Books is perfect way to spend your laisure time.",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "t-shirts"
+        }]
+    },
+    {
+        "name": "Duck #03",
+        "description": "I like to spend time with my friends drawing beautiful pictures",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198beee7386b554a4f6_349.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "socks"
+        }]
+    },
+    {
+        "name": "Duck #04",
+        "description": "It's a dance time!",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "hats"
+        }]
+    },
+    {
+        "name": "Duck #00",
+        "description": "What about a round of golf?",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "hats"
+        }]
+    },
+    {
+        "name": "Duck #01",
+        "description": "Let's read some news...",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971986b790be9f4451425_164.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "socks"
+        }]
+    },
+    {
+        "name": "Duck #02",
+        "description": "Books is perfect way to spend your laisure time.",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "t-shirts"
+        }]
+    },
+    {
+        "name": "Duck #03",
+        "description": "I like to spend time with my friends drawing beautiful pictures",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198beee7386b554a4f6_349.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "socks"
+        }]
+    },
+    {
+        "name": "Duck #04",
+        "description": "It's a dance time!",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "hats"
+        }]
+    },
+    {
+        "name": "Duck #00",
+        "description": "What about a round of golf?",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "hats"
+        }]
+    },
+    {
+        "name": "Duck #01",
+        "description": "Let's read some news...",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971986b790be9f4451425_164.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "socks"
+        }]
+    },
+    {
+        "name": "Duck #02",
+        "description": "Books is perfect way to spend your laisure time.",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "t-shirts"
+        }]
+    },
+    {
+        "name": "Duck #03",
+        "description": "I like to spend time with my friends drawing beautiful pictures",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198beee7386b554a4f6_349.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "socks"
+        }]
+    },
+    {
+        "name": "Duck #04",
+        "description": "It's a dance time!",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "hats"
+        }]
+    }
 ]
-

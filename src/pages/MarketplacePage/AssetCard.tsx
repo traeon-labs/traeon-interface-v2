@@ -1,6 +1,7 @@
 import { Iconify } from "@/components/iconify";
 import { BorderLinearProgress } from "@/components/Linear/customLinear";
 import { INFTMetadata } from "@/types/index.type";
+import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
 import {
   Button,
   Card,
@@ -11,13 +12,18 @@ import {
   LinearProgress,
   Typography,
 } from "@mui/material";
+import {useMemo} from "react";
 
 export const AssetCard = ({ item }: { item: INFTMetadata }) => {
+  const assetConfig = useMemo(() => {
+    return MARKETPLACE_ASSET_CONFIG[item.attributes.filter(att => att.trait_type === 'type')[0]?.value]
+  },[item])
   return (
     <Grid2 size={6}>
       <Card
         className="w-100 aeon-box-shadow aeon-box-border"
         style={{
+          cursor:'pointer',
           padding: "0.2rem 0.2rem 0rem 0.2rem",
         }}
       >
@@ -26,10 +32,11 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
             textAlign: "center",
             marginBottom: "0.4rem",
           }}
-          color="secondary"
+          color={assetConfig.color}
           className="aeon-chip-border-radius"
           size="small"
-          label="#123241 Clothes"
+          icon={<Iconify icon={assetConfig.icon}/>}
+          label={`#123241 ${assetConfig.label}`}
         />
         <CardMedia
           component="img"
@@ -40,7 +47,7 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
           }}
         />
         <Card style={{ textAlign: "center", marginTop: "0.4rem" }}>
-          {item.name}
+          {item.name}123241
         </Card>
         <div
           style={{
@@ -76,16 +83,23 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
             alignItems:'center',
             justifyItems:'center',
             width: '100%',
-            marginTop: "0.5rem",
+            marginTop: "0.8rem",
             marginBottom: "0.5rem",
           }}
         >
           <div>
-            <Chip
-              sx={{ background: "none" }}
+            {/* <Chip
               icon={<Iconify icon="token-branded:ton" />}
               label={<Typography>20</Typography>}
-            />
+            /> */}
+             <Button
+              color='inherit'
+              sx={{ background: "none", border: 'none'}}
+              disabled
+              startIcon={<Iconify icon="token-branded:ton" />}
+            >
+              <Typography sx={{color:'black'}}>20</Typography>
+            </Button>
           </div>
           <div>
             <Button
