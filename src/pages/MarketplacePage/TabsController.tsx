@@ -1,14 +1,23 @@
+import {Iconify} from "@/components/iconify";
 import { TickIcon } from "@/components/icons/TickIcon";
+import {ITabs} from "@/types/index.type";
+import {TABS} from "@/utils/constant";
 import { Card, Tab, Tabs } from "@mui/material";
 
-export const TabsController = () => {
+export const TabsController = ({tab, setTab}: {
+  setTab: React.Dispatch<React.SetStateAction<ITabs>>
+  tab: ITabs
+} ) => {
+  const onSelectTab = (_, newTab:ITabs) => {
+    setTab(newTab)
+  }
   return (
-    <Card sx={{position: 'fixed', width: '80%', marginLeft: '10%', top: '90vh', borderRadius:'20px', background:'rgb(222, 222, 222)'}}>
-      <Tabs centered aria-label="icon tabs example" sx={{marginBottom: '0.5rem', marginTop: '0.5rem'}}>
-        <Tab icon={<TickIcon />} aria-label="phone" />
-        <Tab icon={<TickIcon />} aria-label="favorite" />
-        <Tab icon={<TickIcon />} aria-label="person" />
-        <Tab icon={<TickIcon />} aria-label="person" />
+    <Card sx={{position: 'fixed', width: '80%', marginLeft: '10%', bottom: '1rem', borderRadius:'20px', background:'rgb(230, 230, 230)'}}>
+      <Tabs onChange={onSelectTab} centered aria-label="icon tabs example" sx={{marginBottom: '0.5rem', marginTop: '0.5rem'}}>
+        {Object.keys(TABS).map((tab:string, _) => {
+          return  <Tab key={_} icon={<Iconify icon={tab} width={30} height={30} />} value={tab}/>
+
+        })}
       </Tabs>
     </Card>
   );

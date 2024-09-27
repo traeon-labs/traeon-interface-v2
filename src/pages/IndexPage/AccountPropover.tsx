@@ -205,7 +205,7 @@ export function AccountPopover({
           style={{ border: 'none', borderRadius:'20px'}}
           size='large'
         >
-            <Iconify icon='fa-solid:list-ul'/>
+            <Iconify  icon='fa-solid:list-ul'/>
         </Button>
     </Card>
   );

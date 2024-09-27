@@ -7,3 +7,4 @@ export type INFTMetadata = {
     value: string
   }>
 }
+export type ITabs = 'mdi:location-on-outline' | 'akar-icons:thunder' | 'iconamoon:certificate-badge'  | 'mdi:shopping-outline'
