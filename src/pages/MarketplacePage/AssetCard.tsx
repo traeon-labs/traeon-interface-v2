@@ -91,7 +91,8 @@ export const AssetCard = ({ item }: { item: INFTMetadata }) => {
             <Button
               variant='outlined'
               color='inherit'
-              className='aeon-box-border'
+              sx={{marginRight: '0.5rem'}}
+              className='aeon-box-border aeon-box-shadow-bold aeon-transition'
               startIcon={<Iconify icon="icon-park-outline:buy" />}
             >
               Buy
