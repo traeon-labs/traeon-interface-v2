@@ -1,6 +1,6 @@
-import { Iconify } from "@/components/iconify";
-import { BorderLinearProgress } from "@/components/Linear/customLinear";
-import { INFTMetadata } from "@/types/index.type";
+import {Iconify} from "@/components/iconify";
+import {BorderLinearProgress} from "@/components/Linear/customLinear";
+import {INFTMetadata} from "@/types/index.type";
 import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
 import {
   Button,
@@ -8,9 +8,7 @@ import {
   CardMedia,
   Chip,
   Grid2,
-  IconButton,
-  LinearProgress,
-  Typography,
+  Typography
 } from "@mui/material";
 import {useMemo} from "react";
 
