@@ -29,6 +29,7 @@
     "eruda": "^3.0.1",
     "ethers": "^5.5.4",
     "ethers-utils": "^2.1.11",
+    "mapbox-gl": "^3.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-qr-reader": "^3.0.0-beta-1",

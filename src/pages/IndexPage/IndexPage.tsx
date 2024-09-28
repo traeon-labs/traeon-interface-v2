@@ -6,8 +6,9 @@ import "./IndexPage.css";
 import { AccountPopover } from "./AccountPropover";
 import { INFTMetadata, ITabs } from "@/types/index.type";
 import AssetModal from "../AssetModal/AssetModal";
+import {TravelPage} from "../TravelPage/TravelPage";
 export const IndexPage: FC = () => {
-  const [tab, setTab] = useState<ITabs>("mdi:shopping-outline");
+  const [tab, setTab] = useState<ITabs>('mdi:location-on-outline');
   const [assetModal, setAssestModal] = useState<boolean>(false);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>()
   useEffect(() => {
@@ -26,7 +27,7 @@ export const IndexPage: FC = () => {
       ) : tab === "iconamoon:certificate-badge" ? (
         "badge"
       ) : tab === "mdi:location-on-outline" ? (
-        "location"
+        <TravelPage/>
       ) : (
         ""
       )}

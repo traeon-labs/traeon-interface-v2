@@ -1,0 +1,29 @@
+  
+  @keyframes pulse {
+    0% {
+        width: 20px;
+        height: 20px
+    }
+    50% {
+        width: 25px;
+        height: 25px
+    }
+    100% {
+        width: 20px;
+        height: 20px
+    }
+  }
+  
+
+.current-location-marker {
+    width: 20px; /* Adjust size */
+    height: 20px; /* Adjust size */
+    background: rgb(0, 60, 255); /* Path to your location icon */
+    background-size: contain; /* Ensure the image fits the div */
+    background-repeat: no-repeat; /* Avoid repeating the background */
+    border-radius: 50%; /* Round shape */
+    border: 4px solid white; /* Border for emphasis */
+    box-shadow: 2px 5px 5px black;
+    transition: 0.1s;
+    animation: pulse 1.5s infinite; /* Apply wave animation */
+  }
