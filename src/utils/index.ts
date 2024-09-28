@@ -78,7 +78,7 @@ export function shortenAddress(address:string, startLen = 4, endLen = 4): string
     })
   }
 
-export function generateColorHex(input: string, opacity: number = 0.8): string {
+export function generateColorHex(input: string, opacity: number = 0.9): string {
   // Create a hash code from the string
   let hash = 0;
   for (let i = 0; i < input.length; i++) {

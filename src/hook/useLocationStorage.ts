@@ -14,8 +14,15 @@ const useLocationStorage = () => {
     journeyKeys: [],
     journeysData: {}
   });
-
-  const fetchJourney = useCallback(async () => {
+  useEffect(()=> {
+    console.log(visitedLocations.markLocations)
+  },[visitedLocations])
+  const fetchJourney = async (data?: {
+    markLocations: IMarkLocations;
+    journeysData: { [key: string]: ILocationStore };
+    journeyKeys: string[];
+  }) => {
+    if(data) {setVisitedLocations(data);return}
     const keys = await cloudData.getKeys();
     const journeyKeys = keys.filter(key => decodeLocationkey(key).length > 0);
     const journeysData = await cloudData.get(journeyKeys);
@@ -44,11 +51,11 @@ const useLocationStorage = () => {
       journeysData: journeysDataEncode,
       journeyKeys,
     });
-  }, [cloudData]);
+  };
 
   useEffect(() => {
     fetchJourney(); // Fetch data on initial mount
-  }, [fetchJourney]);
+  }, []);
 
   return { ...visitedLocations, refresh: fetchJourney }; // Return refresh function
 };

@@ -1,13 +1,12 @@
-import { useEffect, useRef } from "react";
+import {Iconify} from "@/components/iconify";
+import {ILocationStore} from "@/types/index.type";
+import {encodeLocationKey} from "@/utils";
+import {DEFAULT_LOCATION} from "@/utils/constant";
+import {Button,Grid2} from "@mui/material";
+import {useCloudStorage} from "@tma.js/sdk-react";
 import "mapbox-gl/dist/mapbox-gl.css";
+import {useRef} from "react";
 import useLocationTracking from "./hook/useLocationTracking";
-import { useCloudStorage } from "@tma.js/sdk-react";
-import { Button, Grid2 } from "@mui/material";
-import { Iconify } from "@/components/iconify";
-import { DEFAULT_LOCATION } from "@/utils/constant";
-import { decodeLocationkey, encodeLocationKey } from "@/utils";
-import useLocationStorage from "@/hook/useLocationStorage";
-import { ILocationStore } from "@/types/index.type";
 
 export const TravelPage = () => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
@@ -20,11 +19,11 @@ export const TravelPage = () => {
     locationData,
     locationName,
     currentLocationRef,
+    refresh,
     updateLocationData,
   } = useLocationTracking(mapContainerRef, PK_TOKEN);
   const cloudData = useCloudStorage(false);
   const onCheckin = async () => {
-    await updateLocationData(DEFAULT_LOCATION[0], DEFAULT_LOCATION[1]);
     console.log(locationData);
     const contextLength = locationData?.context.length || 2;
     const region = locationData?.context?.[contextLength - 2]?.text;
@@ -43,6 +42,9 @@ export const TravelPage = () => {
       };
       await cloudData.set(locationKeyHash, JSON.stringify(locationStorageData));
     }
+    setTimeout(async () => {
+        await refresh()
+    },1000)
   };
   const onResetData = async () => {
     const keys = await cloudData.getKeys();

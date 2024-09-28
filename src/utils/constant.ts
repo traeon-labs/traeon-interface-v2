@@ -45,4 +45,4 @@ export const MARKETPLACE_ASSET_CONFIG: {
   },
 };
 
-export const DEFAULT_LOCATION = [-74.0842, 40.6941]
+export const DEFAULT_LOCATION = [-7.2842, 41.6941]

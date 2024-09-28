@@ -14,7 +14,7 @@ const useLocationTracking = (
   pkToken: string
 ) => {
   const mapRef = useRef<mapboxgl.Map | null>(null);
-  const [zoom, setZoom] = useState(13.12);
+  const [zoom, setZoom] = useState(5.12);
   const [locationData, setLocationData] = useState<ILocationData | undefined>();
   const currentLocationRef = useRef<mapboxgl.Marker | null>(null);
   const { markLocations, refresh, journeysData } = useLocationStorage();
@@ -23,10 +23,8 @@ const useLocationTracking = (
     return locationData?.place_name || "Location not found";
   }, [locationData]);
 
-  // Store markers in an array for cleanup
   const markersRef = useRef<mapboxgl.Marker[]>([]);
 
-  // Function to create and add markers based on markLocations
   const addMarkersToMap = () => {
     if (!mapRef.current || !markLocations) return;
 
@@ -38,7 +36,7 @@ const useLocationTracking = (
     Object.keys(markLocations).forEach((key) => {
       const { marks, color } = markLocations[key];
 
-      marks.forEach(({center: [longitude, latitude], place_name}) => {
+      marks.forEach(({center: [longitude, latitude]}) => {
         // Create a custom marker element with the specified color
         const markerElement = document.createElement("div");
         markerElement.className = "mark-location-marker";
@@ -50,7 +48,6 @@ const useLocationTracking = (
               <path fill="currentColor" d="M12 2a3 3 0 0 1 .866 5.873l-.17.046l2.427 2.775l1.824.911a1 1 0 0 1-.787 1.836l-.107-.047l-1.824-.912a2 2 0 0 1-.476-.332l-.135-.14l-1.018-1.163l-.66 2.638a2 2 0 0 1-.306.669l-.11.142l1.928 1.763a2 2 0 0 1 .544.83l.047.16l.738 2.951H15a1 1 0 0 1 .117 1.993L15 22h-.922a1.1 1.1 0 0 1-1.03-.714l-.037-.12l-.908-3.631l-3.01-2.752a2 2 0 0 1-1.067-2.105l.034-.163l.513-2.052l-.323.23l-1.393 2.322a1 1 0 0 1-1.769-.926l.054-.104l1.393-2.321a2 2 0 0 1 .423-.498l.13-.1L9.85 7.091A3 3 0 0 1 12 2M9.316 15.551a1 1 0 0 1 .633 1.265l-.426 1.276a2 2 0 0 1-.483.782l-1.657 1.657a1 1 0 0 1-1.59 1.176l-.493-.493a1.01 1.01 0 0 1 0-1.428l2.326-2.326l.425-1.276a1 1 0 0 1 1.265-.633"/>
             </g>
           </svg>
-          <div style="color: black; font-size: 10px; margin-top: 5px; width: 200px">${place_name.split(',')[0]}</div>
         </div>`;
 
         markerElement.style.backgroundColor = color; // Set marker color
@@ -118,7 +115,11 @@ const useLocationTracking = (
             { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 }
           );
         },
-        () => console.error("Unable to access your location.")
+        async () => 
+          {
+            await updateLocationData(DEFAULT_LOCATION[0], DEFAULT_LOCATION[1])
+            console.error("Unable to access your location.")
+          }
       );
     }
 
@@ -132,7 +133,6 @@ const useLocationTracking = (
     };
   }, [mapContainerRef, pkToken]);
 
-  // Add markers to the map when markLocations changes
   useEffect(() => {
     addMarkersToMap();
   }, [markLocations]);
