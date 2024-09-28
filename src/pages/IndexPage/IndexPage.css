@@ -70,7 +70,7 @@
 }
 
 .aeon-box-shadow {
-  box-shadow: 5px 5px var(--tg-theme-section-bg-color) !important;
+  box-shadow: 2px 5px 5px black !important;
 }
 .aeon-transition {
   transition: 0.4s;
