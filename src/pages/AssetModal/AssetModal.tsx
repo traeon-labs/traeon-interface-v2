@@ -280,7 +280,7 @@ export default function AssetModal({
                           textAlign: "center",
                           border: "none",
                         }}
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                         
                         label={<Typography Component={"h4"}>{12}</Typography>}
                         onClick={() => {
                           navigator.clipboard.writeText(asset.name);
