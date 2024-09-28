@@ -44,3 +44,5 @@ export const MARKETPLACE_ASSET_CONFIG: {
     color: "secondary",
   },
 };
+
+export const DEFAULT_LOCATION = [-74.0842, 40.6941]

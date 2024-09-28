@@ -78,6 +78,24 @@ export function shortenAddress(address:string, startLen = 4, endLen = 4): string
     })
   }
 
+export function generateColorHex(input: string, opacity: number = 0.8): string {
+  // Create a hash code from the string
+  let hash = 0;
+  for (let i = 0; i < input.length; i++) {
+      hash = input.charCodeAt(i) + ((hash << 5) - hash); // Simple hash function
+  }
+
+  // Extract RGB components from the hash
+  const r = (hash & 0x00FF0000) >> 16;
+  const g = (hash & 0x0000FF00) >> 8;
+  const b = (hash & 0x000000FF);
+
+  // Convert opacity to a hex value (0-255)
+  const a = Math.round(opacity * 255).toString(16).padStart(2, '0'); // Convert to hex and ensure it's two digits
+
+  // Return the hex color string with alpha
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}${a}`;
+}
 export function getCurrentDateFormatted() {
   const date = new Date();
   return date.toISOString().slice(0, 10)
@@ -95,3 +113,11 @@ export function timestampToDateFormatted(timestamp: number): string {
 }
 
 
+export function encodeLocationKey(contry?:string, region?: string) {
+  return btoa(contry+'-'+region);
+}
+
+// Function to decode a Base64 string
+export function decodeLocationkey(encoded:string) {
+  return atob(encoded).split('-');
+}

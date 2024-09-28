@@ -20,3 +20,44 @@ export type IMarketplaceFilterTabs =
   | "mingcute:hat-2-line";
 
 export type IMUIColor = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning',
+
+export type ILocationData = {
+  id: string
+  type: string
+  place_type: Array<string>
+  relevance: number
+  properties: {
+    accuracy: string
+  }
+  text: string
+  place_name: string
+  center: Array<number>
+  geometry: {
+    type: string
+    coordinates: Array<number>
+  }
+  context: Array<{
+    id: string
+    mapbox_id: string
+    wikidata: string
+    text: string
+    short_code?: string
+  }>
+}
+
+export type ILocationStore = {
+  [id:string]: {
+    place_name: string
+    center: Array<number>
+  }
+}
+
+export type IMarkLocations = {
+  [key:string]: {
+    marks: {
+      center: Array<number>,
+      place_name: string
+    }[]
+    color: string
+  }
+}
