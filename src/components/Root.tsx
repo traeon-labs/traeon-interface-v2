@@ -1,5 +1,5 @@
 import {SDKProvider,useLaunchParams} from '@tma.js/sdk-react';
-import {TonConnectUIProvider} from '@tonconnect/ui-react';
+import {THEME, TonConnectUIProvider} from '@tonconnect/ui-react';
 import {useEffect,useMemo,type FC} from 'react';
 
 import {App} from '@/components/App.tsx';
@@ -42,7 +42,7 @@ const Inner: FC = () => {
 
   return (
     // <WagmiProvider config={config} >
-    <TonConnectUIProvider manifestUrl={manifestUrl}>
+    <TonConnectUIProvider manifestUrl={manifestUrl} uiPreferences={{theme: THEME.LIGHT}}>
       <SDKProvider acceptCustomStyles debug={debug}>
         <App/>
       </SDKProvider>
