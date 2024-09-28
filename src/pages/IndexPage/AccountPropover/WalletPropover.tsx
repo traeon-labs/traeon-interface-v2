@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import {
   useTonAddress,
   useTonConnectModal,
+  useTonConnectUI,
   useTonWallet,
 } from "@tonconnect/ui-react";
 
@@ -37,6 +38,8 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
   const tonWallet = useTonWallet();
   const tonWalletAddress = useTonAddress();
   const tonWalletModal = useTonConnectModal();
+  const tonWalletUI = useTonConnectUI();
+
   return tonWalletAddress ? (
     <div>
       <Button
@@ -44,6 +47,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
         variant="outlined"
         style={{ border: "1px solid gray", color: "black" }}
         size="small"
+        className="aeon-box-border aeon-box-shadow-bold aeon-transition"
         onClick={handleOpenPopover}
         startIcon={
           <div>
@@ -137,9 +141,12 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
           <Button
             fullWidth
             color="error"
-            startIcon={<Iconify icon="ant-design:disconnect-outlined" />}
+            startIcon={<Iconify icon="material-symbols-light:account-balance-wallet-outline" />}
             size="medium"
             variant="text"
+            onClick={async () => {
+              await tonWalletUI[0].disconnect()
+            }}
           >
             Disconnect
           </Button>
@@ -153,8 +160,9 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
       }}
       color="inherit"
       variant="outlined"
+      className="aeon-box-border aeon-box-shadow-bold aeon-transition"
       startIcon={
-        <Iconify icon="material-symbols-light:account-balance-wallet-outline" />
+        <Iconify icon="token:ton" />
       }
       sx={{
         borderRadius: "20px",
