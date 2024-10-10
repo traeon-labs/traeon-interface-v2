@@ -10,6 +10,7 @@ import {TravelPage} from "../TravelPage/TravelPage";
 export const IndexPage: FC = () => {
   const [tab, setTab] = useState<ITabs>('mdi:location-on-outline');
   const [assetModal, setAssestModal] = useState<boolean>(false);
+  const [travelMapModal, setTravelMapModal] = useState<boolean>(false);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>()
   useEffect(() => {
     console.log(assetModal)
@@ -27,7 +28,7 @@ export const IndexPage: FC = () => {
       ) : tab === "iconamoon:certificate-badge" ? (
         "badge"
       ) : tab === "mdi:location-on-outline" ? (
-        <TravelPage/>
+        <TravelPage visible={travelMapModal} setVisible={setTravelMapModal}/>
       ) : (
         ""
       )}
