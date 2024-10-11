@@ -80,7 +80,7 @@ export default function AssetModal({
       ];
   }, [asset]);
   return (
-    <Modal open={visible} trigger={undefined} onOpenChange={setVisible}>
+    <Modal open={visible} trigger={undefined} onOpenChange={setVisible} style={{maxHeight: '100vh'}}>
       <Container sx={{ height: "100vh" }}>
         {asset && assetConfig && (
           <>
