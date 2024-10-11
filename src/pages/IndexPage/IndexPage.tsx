@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 
 import { INFTMetadata, ITabs } from "@/types/index.type";
 import { AeonPaymentModal } from "../AeonPaymentPage/components/AeonPaymentModal";
@@ -9,6 +9,8 @@ import { TravelPage } from "../TravelPage/TravelPage";
 import { AccountPopover } from "./AccountPropover";
 import "./IndexPage.css";
 import { init, backButton, postEvent } from '@telegram-apps/sdk';
+import useDetectScroll, { Direction } from "@smakss/react-scroll-direction";
+
 init()
 postEvent('web_app_setup_swipe_behavior', {allow_vertical_swipe: false})
 export const IndexPage: FC = () => {
@@ -16,11 +18,16 @@ export const IndexPage: FC = () => {
   const [assetModal, setAssestModal] = useState<boolean>(false);
   const [travelMapModal, setTravelMapModal] = useState<boolean>(false);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>();
+  const customElementRef = useRef<HTMLDivElement>(null);
+  const [customElement, setCustomElement] = useState<HTMLDivElement>();
+  const {scrollDir} = useDetectScroll({target: customElement});
   useEffect(() => {
-    console.log(assetModal);
-  }, [assetModal]);
+    if(customElementRef.current) {
+      setCustomElement(customElementRef.current);
+    }
+}, [customElementRef])
   return (
-    <div>
+    <div ref={customElementRef} style={{overflow: 'scroll', height: '100vh'}}>
       {/* <AeonPaymentPage/> */}
       {/* <MerchantConfigPage/> */}
 
@@ -42,7 +49,7 @@ export const IndexPage: FC = () => {
         ""
       )}
       <AeonPaymentModal />
-      <TabsController tab={tab} setTab={setTab} />
+      <TabsController tab={tab} setTab={setTab} scrollDir={scrollDir}/>
       <AssetModal
         visible={assetModal}
         setVisible={setAssestModal}
