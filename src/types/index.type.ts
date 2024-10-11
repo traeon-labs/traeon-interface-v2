@@ -61,3 +61,15 @@ export type IMarkLocations = {
     color: string
   }
 }
+
+export type IAeonResponse = {
+  code: string
+  msg: string
+  model: {
+    webUrl: string
+    orderNo: string
+  }
+  traceId: string
+  success: boolean
+  error: boolean
+}

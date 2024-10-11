@@ -4,7 +4,7 @@ import {useMemo} from "react";
 
 const useSignSHA512 = ({ data }: { data: Record<string, string> }) => {
   const sign = useMemo(() => {
-    return generateSignature(data, AEON_SIGN_KEY)
+    return generateSignature(data)
   },[data]);
   return sign
 };

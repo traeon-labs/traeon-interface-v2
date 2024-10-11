@@ -7,6 +7,8 @@ import { AccountPopover } from "./AccountPropover";
 import { INFTMetadata, ITabs } from "@/types/index.type";
 import AssetModal from "../AssetModal/AssetModal";
 import {TravelPage} from "../TravelPage/TravelPage";
+import {AeonPaymentPage} from "../AeonPaymentPage/AeonPaymentPage";
+import {AeonPaymentModal} from "../AeonPaymentPage/components/AeonPaymentModal";
 export const IndexPage: FC = () => {
   const [tab, setTab] = useState<ITabs>('mdi:location-on-outline');
   const [assetModal, setAssestModal] = useState<boolean>(false);
@@ -17,7 +19,7 @@ export const IndexPage: FC = () => {
   },[assetModal])
   return (
     <div>
-      {/* <AeonPaymentPage/> */}
+      <AeonPaymentPage/>
       {/* <MerchantConfigPage/> */}
 
       <AccountPopover />
@@ -32,6 +34,7 @@ export const IndexPage: FC = () => {
       ) : (
         ""
       )}
+      <AeonPaymentModal/>
       <TabsController tab={tab} setTab={setTab} />
       <AssetModal visible={assetModal} setVisible={setAssestModal} asset={currentAsset} setCurrentAsset={setCurrentAsset}/> 
     </div>

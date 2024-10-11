@@ -1,10 +1,9 @@
 import * as CryptoJS from 'crypto-js';
-
 interface RequestParams {
   [key: string]: string;
 }
 
-export function generateSignature(params: RequestParams, secretKey: string): string {
+export function generateSignature(params: RequestParams): string {
   // Remove the 'sign' parameter from the object if it exists
   const filteredParams: RequestParams = Object.keys(params)
     .filter(key => key !== 'sign')
@@ -22,7 +21,7 @@ export function generateSignature(params: RequestParams, secretKey: string): str
     .join('&');
 
   // Append the secret key to the final string
-  const stringToSign = `${paramString}&key=${secretKey}`;
+  const stringToSign = `${paramString}&key=${import.meta.env.VITE_AEON_SECRET_KEY}`;
   // Generate SHA-512 hash using CryptoJS and convert it to uppercase
   const signature = CryptoJS.SHA512(stringToSign).toString(CryptoJS.enc.Hex).toUpperCase();
 
