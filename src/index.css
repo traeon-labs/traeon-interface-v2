@@ -9,10 +9,21 @@
   --tg-theme-button-text-color: #101010 !important;
   --tg-theme-link-color: rgb(252, 221, 93) !important;
 }
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* overscroll-behavior: none; */
+}
+#root {
+  /* Preserve scrolling behavior */
+  overflow-y: auto;
+}
 * {
   font-family: 'VT323', monospace !important;
 }
 body {
+
     padding: 0;
    margin: 0;
   zoom: 80%;
