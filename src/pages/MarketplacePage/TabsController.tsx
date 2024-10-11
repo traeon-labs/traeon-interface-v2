@@ -14,7 +14,6 @@ export const TabsController = ({
   tab: ITabs;
   scrollDir: Direction
 }) => {
-  console.log(scrollDir)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSelectTab = (_:any, newTab: ITabs) => {
     setTab(newTab);
@@ -26,7 +25,7 @@ export const TabsController = ({
         position: "fixed",
         width: "80%",
         marginLeft: "10%",
-        marginBottom: scrollDir === Direction.Up ? '0' : '-5rem',
+        marginBottom: scrollDir === Direction.Down ? '-5rem' : '0',
         transition: '0.4s',
         bottom: "1rem",
         borderRadius: "20px",

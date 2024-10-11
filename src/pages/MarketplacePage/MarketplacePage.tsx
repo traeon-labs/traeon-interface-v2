@@ -6,10 +6,13 @@ import { FC, useMemo, useState } from "react";
 import { AssetCard } from "./AssetCard";
 import { MarketplaceFilter } from "./MarketplaceFilter";
 import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
+import { Direction } from "@smakss/react-scroll-direction";
+
 export const MarketplacePage = ({
   setVisible,
   setCurrentAsset,
   visible,
+  scrollDir
 }: {
   asset?: INFTMetadata;
   setCurrentAsset: React.Dispatch<
@@ -17,6 +20,8 @@ export const MarketplacePage = ({
   >;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  scrollDir: Direction
+
 }) => {
   const [marketplaceTab, setMarketplaceTab] =
     useState<IMarketplaceFilterTabs>("ph:t-shirt-bold");
@@ -39,6 +44,7 @@ export const MarketplacePage = ({
       <MarketplaceFilter
         marketplaceTab={marketplaceTab}
         setMarketplaceTab={setMarketplaceTab}
+        scrollDir={scrollDir}
       />
       <Grid2 container spacing={3}>
         {marketplaceAssetsFilter.map((assetItem: INFTMetadata, _) => {
