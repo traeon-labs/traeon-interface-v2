@@ -1,6 +1,13 @@
 import { Iconify } from "@/components/iconify";
 import { IAeonResponse } from "@/types/index.type";
-import { Container, Grid2, IconButton } from "@mui/material";
+import {
+  Button,
+  Card,
+  Chip,
+  Grid2,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { Modal } from "@telegram-apps/telegram-ui";
 import { useEffect, useRef, useState } from "react";
 
@@ -39,46 +46,87 @@ export const AeonPaymentModal = () => {
       {/* <Container
         sx={{ height: "100vh", alignItems: "center", textAlign: "center" }}
       > */}
-        <Grid2 container sx={{ borderRadius: '20px'}}>
-          <Grid2
-            size={12}
-            sx={{
-              position: "fixed",
-              display: "flex",
-              zIndex: 10,
-              top: 0,
-              justifyContent: "space-between",
-              paddingTop: "0.5rem",
-              paddingBottom: "0.5rem",
-              paddingLeft: "0.5rem",
-
-            }}
-          >
-            <div style={{ marginTop: 0 }}>
-              <IconButton
-                size="large"
-                sx={{
-                  borderRadius: "50%",
-                  background: 'white',
-                }}
-                className="aeon-box-shadow-bold aeon-transition"
-                onClick={() => {
-                  setVisible(false);
-                }}
-              >
-                <Iconify icon="ic:outline-arrow-back-ios" width={20} />
-              </IconButton>{" "}
-            </div>
-          </Grid2>
-          <Grid2 size={12} className="w-100 aeon-box-shadow aeon-box-border">
-            <iframe
-              style={{ marginLeft: 0,height: "100vh", borderRadius: '20px', width: '100vw', border: 'none' }}
-              src={
-                "https://sbx-crypto-payment.alchemypay.org/?orderNum=300217285661440940802"
-              }
-            />
-          </Grid2>
+      <Grid2 container sx={{ borderRadius: "20px", marginBottom:'0.5rem' }}>
+        <Grid2
+          size={12}
+          sx={{
+            position: aeonResponse?.model?.webUrl ? "fixed" : 'sticky',
+            display: "flex",
+            zIndex: 10,
+            top: 0,
+            justifyContent: "space-between",
+            paddingTop: "0.5rem",
+            paddingBottom: "0.5rem",
+            paddingLeft: "0.5rem",
+          }}
+        >
+          <div style={{ marginTop: 0 }}>
+            <IconButton
+              size="large"
+              sx={{
+                borderRadius: "50%",
+                background: "white",
+              }}
+              className="aeon-box-shadow-bold aeon-transition"
+              onClick={() => {
+                setVisible(false);
+              }}
+            >
+              <Iconify icon="ic:outline-arrow-back-ios" width={20} />
+            </IconButton>{" "}
+          </div>
         </Grid2>
+        <Grid2 size={12} className="w-100 aeon-box-shadow aeon-box-border">
+          {aeonResponse?.model?.webUrl ? (
+            <iframe
+              style={{
+                marginLeft: 0,
+                height: "100vh",
+                borderRadius: "20px",
+                width: "100vw",
+                border: "none",
+              }}
+              src={aeonResponse?.model?.webUrl}
+            />
+          ) : (
+            <Card
+              className=""
+              sx={{
+                textAlign: "center",
+                paddingTop: "0.5rem",
+                paddingBottom: "0.5rem",
+
+                marginBottom: "1rem",
+                borderRadius: "20px",
+                width: "100%",
+              }}
+            >
+              <Typography sx={{paddingBottom:'0.5rem'}}>
+                <Chip variant="outlined" color="error" label={aeonResponse?.code} />{" "}
+                {aeonResponse?.msg}
+              </Typography>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  onClick={() => {setVisible(false)}}
+                  className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                  sx={{width: '48%', marginRight: '1%', marginLeft: '1%'}}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                  sx={{width: '48%', marginLeft: '1%', marginRight: '1%'}}
+
+                >
+                  Pending Orders
+                </Button>
+            </Card>
+          )}
+        </Grid2>
+      </Grid2>
       {/* </Container> */}
     </Modal>
   );

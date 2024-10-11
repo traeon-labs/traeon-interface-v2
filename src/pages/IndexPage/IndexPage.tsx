@@ -19,7 +19,7 @@ export const IndexPage: FC = () => {
   },[assetModal])
   return (
     <div>
-      <AeonPaymentPage/>
+      {/* <AeonPaymentPage/> */}
       {/* <MerchantConfigPage/> */}
 
       <AccountPopover />
