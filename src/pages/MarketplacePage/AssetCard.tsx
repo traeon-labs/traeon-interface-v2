@@ -35,6 +35,10 @@ export const AssetCard = ({
     setCurrentAsset(item);
     setVisible(true);
   };
+
+  const assetPurchase = () => {
+    
+  }
   return (
     <Grid2 size={6}>
       <Card
@@ -123,6 +127,7 @@ export const AssetCard = ({
               sx={{ marginRight: "0.5rem" }}
               className="aeon-box-border aeon-box-shadow-bold aeon-transition"
               startIcon={<Iconify icon="icon-park-outline:buy" />}
+              onClick={assetPurchase}
             >
               Buy
             </Button>

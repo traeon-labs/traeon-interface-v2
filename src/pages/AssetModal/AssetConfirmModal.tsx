@@ -3,7 +3,6 @@ import { IMUIColor, INFTMetadata } from "@/types/index.type";
 import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
 import {
   Box,
-  Button,
   Card,
   CardMedia,
   Chip,
@@ -43,7 +42,7 @@ const _MOCK_ATTS = [
   },
 ];
 
-export default function AssetModal({
+export default function AssetConfirmModal({
   setVisible,
   setCurrentAsset,
   visible,
@@ -62,20 +61,7 @@ export default function AssetModal({
   // }, [id]);
   const [currentTab, setCurrentTab] = useState("trade_history");
 
-  const TABS = [
-    {
-      value: "trade_history",
-      label: `Trade history`,
-      component: asset ? <AssetHistory /> : null,
-    },
-    {
-      value: "description",
-      label: "description",
-      component: asset ? (
-        <Typography Component={"h4"}>{asset.description}</Typography>
-      ) : null,
-    },
-  ];
+
   const assetConfig = useMemo(() => {
     if (asset)
       return MARKETPLACE_ASSET_CONFIG[
@@ -83,12 +69,7 @@ export default function AssetModal({
       ];
   }, [asset]);
   return (
-    <Modal
-      open={visible}
-      trigger={undefined}
-      onOpenChange={setVisible}
-      style={{ maxHeight: "100vh" }}
-    >
+    <Modal open={visible} trigger={undefined} onOpenChange={setVisible} style={{maxHeight: '100vh'}}>
       <Container sx={{ height: "100vh" }}>
         {asset && assetConfig && (
           <>
@@ -288,6 +269,7 @@ export default function AssetModal({
                           textAlign: "center",
                           border: "none",
                         }}
+                         
                         label={<Typography Component={"h4"}>{12}</Typography>}
                         onClick={() => {
                           navigator.clipboard.writeText(asset.name);
@@ -308,79 +290,6 @@ export default function AssetModal({
               }}
               sx={{ my: 1 }}
             ></Box>
-
-            <Card>
-              <Tabs
-                value={currentTab}
-                onChange={(event, newValue) => setCurrentTab(newValue)}
-                sx={{ px: 3, bgcolor: "background.neutral" }}
-              >
-                {TABS.map((tab) => (
-                  <Tab key={tab.value} value={tab.value} label={tab.label} />
-                ))}
-              </Tabs>
-
-              <Divider />
-
-              {TABS.map(
-                (tab) =>
-                  tab.value === currentTab && (
-                    <Box
-                      key={tab.value}
-                      sx={{
-                        p: 3,
-                      }}
-                    >
-                      {tab.component}
-                    </Box>
-                  )
-              )}
-            </Card>
-            <Card
-              // className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-              sx={{
-                position: "fixed",
-                zIndex: 2,
-                bottom: "20px",
-                borderRadius: "20px",
-                border: "1px solid gray",
-                left: "5%",
-                width: "90%",
-                display: "flex",
-                textAlign: "center",
-                paddingBottom: "0.5rem",
-                paddingTop: "0.5rem",
-                justifyContent: "space-between",
-              }}
-            >
-              <Button
-                color="inherit"
-                size="large"
-                sx={{
-                  background: "none",
-                  border: "none",
-                  color: "black",
-                  marginLeft: "1rem",
-                }}
-              >
-                <Chip
-                  variant="outlined"
-                  sx={{ fontSize: "20px", padding: "0.5rem" }}
-                  label="20"
-                  icon={<Iconify icon="token-branded:ton" />}
-                />
-              </Button>
-              <Button
-                variant="outlined"
-                color="inherit"
-                sx={{ marginRight: "1rem" }}
-                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                startIcon={<Iconify icon="icon-park-outline:buy" />}
-                // onClick={assetPurchase}
-              >
-                Buy
-              </Button>
-            </Card>
           </>
         )}
 
