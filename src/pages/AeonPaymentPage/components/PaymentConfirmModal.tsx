@@ -1,6 +1,7 @@
 import { Iconify } from "@/components/iconify";
 import { BorderLinearProgress } from "@/components/Linear/customLinear";
 import { INFTMetadata } from "@/types/index.type";
+import {createAeonOrdersWithTma} from "@/utils/aeon/createOrder";
 import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
 import {
   Avatar,
@@ -16,6 +17,7 @@ import {
 } from "@mui/material";
 import { Modal, Typography } from "@telegram-apps/telegram-ui";
 import { useEffect, useMemo, useRef, useState } from "react";
+import {openAeonPayment} from "./AeonPaymentModal";
 
 const _MOCK_ATTS = [
   {
@@ -77,7 +79,26 @@ export const PaymentConfirmModal = () => {
         asset.attributes.filter((att) => att.trait_type === "type")[0]?.value
       ];
   }, [asset]);
-  const purchaseItemViaAeon = () => {};
+  const purchaseItem = async () => {
+    if(paymentType==='AEON') { 
+      try {
+        const res = await createAeonOrdersWithTma({
+          merchantOrderNo: "5",
+          orderAmount: '200', // 10U
+          payCurrency: 'USD',
+          userId: "vindz@qq.com",
+          paymentExchange: "3b43c82c-8ead-4533-9e39-0bf433b6a321",
+          paymentTokens: "USDT,ETH",
+        })
+        console.log(res)
+        if(res) openAeonPayment(res)
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+
+    }
+  };
   return (
     <Modal open={visible} trigger={undefined} onOpenChange={setVisible}>
       <Container>
@@ -211,7 +232,7 @@ export const PaymentConfirmModal = () => {
                     <Chip
                       variant="filled"
                       sx={{
-                        fontSize: "20px",
+                        fontSize: "15px",
                         // background: 'none',
                         width: "100%",
                         padding: "0.5rem",
@@ -240,9 +261,11 @@ export const PaymentConfirmModal = () => {
                   startIcon={<Avatar alt="Natacha" sx={{width: '36px', height: '36px'}} src="/logo-aeon.png" />}
                   endIcon={
                     <AvatarGroup
+                    
                     >
                      <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:bnb'/>
-                     <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:ton'/>
+                     {/* <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:ton'/> */}
+                     <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:tron'/>
                      <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:eth'/>
                      <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:arbitrum-one'/>
                      <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:op'/>
@@ -258,14 +281,14 @@ export const PaymentConfirmModal = () => {
                 <Button
                   className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                   onClick={() => {setPaymentType('TON')}}
-                  endIcon={
+                  startIcon={
                      <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:ton'/>
                   }
                   sx={paymentType === 'TON' ? {background:'black', color: 'white'} : {}}
                   color="inherit"
                   
                 >
-                  $TON Currency Network
+                  TON Network
                 </Button>
               </Stack>
             </Box>
@@ -305,6 +328,7 @@ export const PaymentConfirmModal = () => {
                 }
                 className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                 sx={{ width: "50%", marginLeft: "1%", marginRight: "1%" }}
+                onClick={purchaseItem}
               >
                 Confirm
               </Button>

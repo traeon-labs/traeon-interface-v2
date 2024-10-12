@@ -46,7 +46,7 @@ export const AeonPaymentModal = () => {
       {/* <Container
         sx={{ height: "100vh", alignItems: "center", textAlign: "center" }}
       > */}
-      <Grid2 container sx={{ borderRadius: "20px", marginBottom:'0.5rem' }}>
+      <Grid2 container sx={{ height: aeonResponse?.model?.webUrl ? '100vh' : 'auto', borderRadius: "20px", marginBottom:'0.5rem' }}>
         <Grid2
           size={12}
           sx={{
