@@ -121,3 +121,19 @@ export function encodeLocationKey(contry?:string, region?: string) {
 export function decodeLocationkey(encoded:string) {
   return atob(encoded).split('-');
 }
+
+function generateDigitRandom(digital:number = 5): number {
+  return Math.floor(10000 + Math.random() * 90000);
+}
+
+export const generateOrderKey = (tgUserId?:string, merNoOrder?: string) => {
+  let _merNoOrder  = merNoOrder
+  if(!_merNoOrder) _merNoOrder = String(generateDigitRandom())
+  return `${tgUserId}-${_merNoOrder}`
+}
+export const encodeOrderKey = (tgUserId:string, merNoOrder?: string) => {
+  return `${tgUserId}-${merNoOrder}`
+}
+export const decodeOrderKey = (orderMerKey: string) => {
+  return orderMerKey.split('-')
+}

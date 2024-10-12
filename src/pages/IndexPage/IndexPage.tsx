@@ -11,11 +11,13 @@ import {TabsController} from "../MarketplacePage/TabsController";
 import {TravelPage} from "../TravelPage/TravelPage";
 import {AccountPopover} from "./AccountPropover";
 import "./IndexPage.css";
+import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
+import {useInitData} from "@tma.js/sdk-react";
 
 init()
 postEvent('web_app_setup_swipe_behavior', {allow_vertical_swipe: false})
 export const IndexPage: FC = () => {
-  const [tab, setTab] = useState<ITabs>("mdi:location-on-outline");
+  const [tab, setTab] = useState<ITabs>("mdi:shopping-outline");
   const [assetModal, setAssestModal] = useState<boolean>(false);
   const [travelMapModal, setTravelMapModal] = useState<boolean>(false);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>();
@@ -26,7 +28,15 @@ export const IndexPage: FC = () => {
     if(customElementRef.current) {
       setCustomElement(customElementRef.current);
     }
-}, [customElementRef])
+  }, [customElementRef])
+  const data = useInitData()
+  useEffect(() => {
+    fetchAeonOrder({
+      merchantOrderNo: '1'
+    }).then(res => {
+      console.log(res?.model)
+    })
+  },[])
   return (
     <div ref={customElementRef} style={{overflow: 'scroll', height: '100vh'}}>
       {/* <AeonPaymentPage/> */}

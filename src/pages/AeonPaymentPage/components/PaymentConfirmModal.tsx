@@ -18,6 +18,9 @@ import {
 import { Modal, Typography } from "@telegram-apps/telegram-ui";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {openAeonPayment} from "./AeonPaymentModal";
+import {generateOrderKey} from "@/utils";
+import {useCloudStorage, useInitData} from "@tma.js/sdk-react";
+import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
 
 const _MOCK_ATTS = [
   {
@@ -79,18 +82,38 @@ export const PaymentConfirmModal = () => {
         asset.attributes.filter((att) => att.trait_type === "type")[0]?.value
       ];
   }, [asset]);
+  const tgInitData = useInitData()
+  const cloudData = useCloudStorage(false)
   const purchaseItem = async () => {
     if(paymentType==='AEON') { 
       try {
+        if(!tgInitData?.user?.id) {
+          openAeonPayment({
+            code: '503',
+            msg: 'Telegram authentication Error',
+            traceId: '',
+            model: {
+              webUrl: '',
+              orderNo: ''
+            },
+            success: false,
+            error: false
+          })
+          return;
+        }
+        const merchantOrderKey = generateOrderKey(String(tgInitData?.user?.id))
         const res = await createAeonOrdersWithTma({
-          merchantOrderNo: "5",
+          merchantOrderNo: merchantOrderKey,
           orderAmount: '200', // 10U
           payCurrency: 'USD',
-          userId: "vindz@qq.com",
+          userId: String(tgInitData?.user?.id),
           paymentExchange: "3b43c82c-8ead-4533-9e39-0bf433b6a321",
           paymentTokens: "USDT,ETH",
         })
-        console.log(res)
+        const orderData = await fetchAeonOrder({merchantOrderNo: merchantOrderKey})
+        if(orderData?.model?.orderNo){
+          cloudData.set(`order/${merchantOrderKey}`, JSON.stringify(orderData))
+        }
         if(res) openAeonPayment(res)
       } catch (error) {
         console.log(error)
