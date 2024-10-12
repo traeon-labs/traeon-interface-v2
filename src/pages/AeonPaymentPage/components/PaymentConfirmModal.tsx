@@ -108,7 +108,7 @@ export const PaymentConfirmModal = () => {
                       setVisible(false);
                     }}
                   >
-                    <Iconify icon="ic:outline-arrow-back-ios" width={20} />
+                    <Iconify icon="vaadin:close" width={20} />
                   </IconButton>{" "}
                 </div>
                 <div>{/* <WalletPropover allowPopover={false} /> */}</div>
