@@ -60,7 +60,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
             <Chip
               sx={{ background: "none" }}
               size="small"
-              icon={<Iconify icon="token-branded:ton" />}
+              icon={<Iconify icon="token:ton" />}
               label="20"
             />
           </div>

@@ -19,6 +19,7 @@ import { useMemo, useState } from "react";
 import { WalletPropover } from "../IndexPage/AccountPropover/WalletPropover";
 import { BorderLinearProgress } from "@/components/Linear/customLinear";
 import AssetHistory from "./AssetHistory";
+import {openPaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
 
 const _MOCK_ATTS = [
   {
@@ -367,7 +368,7 @@ export default function AssetModal({
                   variant="outlined"
                   sx={{ fontSize: "20px", padding: "0.5rem" }}
                   label="20"
-                  icon={<Iconify icon="token-branded:ton" />}
+                  icon={<Iconify icon="token:ton" />}
                 />
               </Button>
               <Button
@@ -376,7 +377,7 @@ export default function AssetModal({
                 sx={{ marginRight: "1rem" }}
                 className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                 startIcon={<Iconify icon="icon-park-outline:buy" />}
-                // onClick={assetPurchase}
+                onClick={() => {openPaymentConfirmModal(asset)}}
               >
                 Buy
               </Button>

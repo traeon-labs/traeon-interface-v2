@@ -20,7 +20,7 @@ export const MarketplacePage = ({
   >;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  scrollDir: Direction
+  scrollDir?: Direction
 
 }) => {
   const [marketplaceTab, setMarketplaceTab] =

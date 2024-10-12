@@ -76,7 +76,7 @@ export default function AssetHistory() {
               <Chip
                 sx={{ background: "none" }}
                 size="small"
-                icon={<Iconify icon="token-branded:ton" />}
+                icon={<Iconify icon="token:ton" />}
                 label="Value"
               />
             </TableCell>

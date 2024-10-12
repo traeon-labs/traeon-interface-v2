@@ -16,7 +16,7 @@ export const MarketplaceFilter = ({
     React.SetStateAction<IMarketplaceFilterTabs>
   >;
   marketplaceTab: IMarketplaceFilterTabs;
-  scrollDir: Direction
+  scrollDir?: Direction
 
 }) => {
   const handleChange = (

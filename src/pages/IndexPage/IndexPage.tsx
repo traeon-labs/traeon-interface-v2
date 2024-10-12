@@ -1,15 +1,16 @@
-import { useEffect, useRef, useState, type FC } from "react";
+import {useEffect,useRef,useState,type FC} from "react";
 
-import { INFTMetadata, ITabs } from "@/types/index.type";
-import { AeonPaymentModal } from "../AeonPaymentPage/components/AeonPaymentModal";
+import {INFTMetadata,ITabs} from "@/types/index.type";
+import useDetectScroll from "@smakss/react-scroll-direction";
+import {init,postEvent} from '@telegram-apps/sdk';
+import {AeonPaymentModal} from "../AeonPaymentPage/components/AeonPaymentModal";
+import {PaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
 import AssetModal from "../AssetModal/AssetModal";
-import { MarketplacePage } from "../MarketplacePage/MarketplacePage";
-import { TabsController } from "../MarketplacePage/TabsController";
-import { TravelPage } from "../TravelPage/TravelPage";
-import { AccountPopover } from "./AccountPropover";
+import {MarketplacePage} from "../MarketplacePage/MarketplacePage";
+import {TabsController} from "../MarketplacePage/TabsController";
+import {TravelPage} from "../TravelPage/TravelPage";
+import {AccountPopover} from "./AccountPropover";
 import "./IndexPage.css";
-import { init, backButton, postEvent } from '@telegram-apps/sdk';
-import useDetectScroll, { Direction } from "@smakss/react-scroll-direction";
 
 init()
 postEvent('web_app_setup_swipe_behavior', {allow_vertical_swipe: false})
@@ -49,6 +50,7 @@ export const IndexPage: FC = () => {
         ""
       )}
       <AeonPaymentModal />
+      <PaymentConfirmModal/>
       <TabsController tab={tab} setTab={setTab} scrollDir={scrollDir}/>
       <AssetModal
         visible={assetModal}

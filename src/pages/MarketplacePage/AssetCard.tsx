@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useMemo } from "react";
+import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
 
 export const AssetCard = ({
   item,
@@ -36,9 +37,7 @@ export const AssetCard = ({
     setVisible(true);
   };
 
-  const assetPurchase = () => {
-    
-  }
+  const assetPurchase = () => {};
   return (
     <Grid2 size={6}>
       <Card
@@ -115,7 +114,7 @@ export const AssetCard = ({
               color="inherit"
               sx={{ background: "none", border: "none" }}
               disabled
-              startIcon={<Iconify icon="token-branded:ton" />}
+              startIcon={<Iconify icon="token:ton" />}
             >
               <Typography sx={{ color: "black" }}>20</Typography>
             </Button>
@@ -127,7 +126,9 @@ export const AssetCard = ({
               sx={{ marginRight: "0.5rem" }}
               className="aeon-box-border aeon-box-shadow-bold aeon-transition"
               startIcon={<Iconify icon="icon-park-outline:buy" />}
-              onClick={assetPurchase}
+              onClick={() => {
+                openPaymentConfirmModal(item);
+              }}
             >
               Buy
             </Button>

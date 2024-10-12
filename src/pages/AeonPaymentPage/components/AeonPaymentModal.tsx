@@ -109,6 +109,7 @@ export const AeonPaymentModal = () => {
                   variant="outlined"
                   color="inherit"
                   onClick={() => {setVisible(false)}}
+                  startIcon={<Iconify icon='uil:cancel'/>}
                   className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                   sx={{width: '48%', marginRight: '1%', marginLeft: '1%'}}
                 >
@@ -117,6 +118,7 @@ export const AeonPaymentModal = () => {
                 <Button
                   variant="outlined"
                   color="secondary"
+                  startIcon={<Iconify icon={'material-symbols:pending-actions'}/>}
                   className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                   sx={{width: '48%', marginLeft: '1%', marginRight: '1%'}}
 
