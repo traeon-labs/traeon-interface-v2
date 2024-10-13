@@ -110,9 +110,9 @@ export const PaymentConfirmModal = () => {
           paymentExchange: "3b43c82c-8ead-4533-9e39-0bf433b6a321",
           paymentTokens: "USDT,ETH",
         })
-        const orderData = await fetchAeonOrder({merchantOrderNo: merchantOrderKey})
-        console.log(orderData?.model)
-        if(orderData?.model?.orderNo){
+        console.log(res)
+        if(res?.model?.webUrl){
+          const orderData = await fetchAeonOrder({merchantOrderNo: merchantOrderKey})
           await cloudData.set(`order_${merchantOrderKey}`, JSON.stringify(orderData?.model))
         }
         if(res) openAeonPayment(res)
