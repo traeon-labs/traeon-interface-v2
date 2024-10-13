@@ -194,7 +194,10 @@ export const AccountOrdersModal = () => {
               textAlign: "center",
               borderRadius: "20px",
               py: 2,
+              mb: 4,
               width: "100%",
+              position: 'sticky',
+              bottom: '1rem',
             }}
           >
             <Button

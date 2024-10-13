@@ -42,15 +42,27 @@ export const AeonPaymentModal = () => {
   }, [visible]);
 
   return (
-    <Modal open={visible} trigger={undefined} onOpenChange={setVisible}>
+    <Modal
+      open={visible}
+      style={{ maxHeight: "100vh" }}
+      trigger={undefined}
+      onOpenChange={setVisible}
+    >
       {/* <Container
         sx={{ height: "100vh", alignItems: "center", textAlign: "center" }}
       > */}
-      <Grid2 container sx={{ height: aeonResponse?.model?.webUrl ? '100vh' : 'auto', borderRadius: "20px", marginBottom:'0.5rem' }}>
+      <Grid2
+        container
+        sx={{
+          height: aeonResponse?.model?.webUrl ? "100vh" : "auto",
+          borderRadius: "20px",
+          marginBottom: "0.5rem",
+        }}
+      >
         <Grid2
           size={12}
           sx={{
-            position: aeonResponse?.model?.webUrl ? "fixed" : 'sticky',
+            position: aeonResponse?.model?.webUrl ? "fixed" : "sticky",
             display: "flex",
             zIndex: 10,
             top: 0,
@@ -101,30 +113,37 @@ export const AeonPaymentModal = () => {
                 width: "100%",
               }}
             >
-              <Typography sx={{paddingBottom:'0.5rem'}}>
-                <Chip variant="outlined" color="error" label={aeonResponse?.code} />{" "}
+              <Typography sx={{ paddingBottom: "0.5rem" }}>
+                <Chip
+                  variant="outlined"
+                  color="error"
+                  label={aeonResponse?.code}
+                />{" "}
                 {aeonResponse?.msg}
               </Typography>
-                <Button
-                  variant="outlined"
-                  color="inherit"
-                  onClick={() => {setVisible(false)}}
-                  startIcon={<Iconify icon='uil:cancel'/>}
-                  className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                  sx={{width: '48%', marginRight: '1%', marginLeft: '1%'}}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  startIcon={<Iconify icon={'material-symbols:pending-actions'}/>}
-                  className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                  sx={{width: '48%', marginLeft: '1%', marginRight: '1%'}}
-
-                >
-                  Pending Orders
-                </Button>
+              <Button
+                variant="outlined"
+                color="inherit"
+                onClick={() => {
+                  setVisible(false);
+                }}
+                startIcon={<Iconify icon="uil:cancel" />}
+                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                sx={{ width: "48%", marginRight: "1%", marginLeft: "1%" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                startIcon={
+                  <Iconify icon={"material-symbols:pending-actions"} />
+                }
+                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                sx={{ width: "48%", marginLeft: "1%", marginRight: "1%" }}
+              >
+                Pending Orders
+              </Button>
             </Card>
           )}
         </Grid2>
