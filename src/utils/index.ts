@@ -230,6 +230,6 @@ export function decodeTimestampAgo(timestamp?: number, clean = false): string {
   } else if (hours > 0) {
     return `${hoursText} ${minutesText} ago`;
   } else {
-    return `${minutesText === "" ? '1' : minutesText} ago`;
+    return `${minutesText === "" ? '1m' : minutesText} ago`;
   }
 }
