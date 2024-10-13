@@ -1,4 +1,5 @@
 import { Iconify } from "@/components/iconify";
+import {openAccountOrdersModal} from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
 import { IAeonResponse } from "@/types/index.type";
 import {
   Button,
@@ -141,6 +142,7 @@ export const AeonPaymentModal = () => {
                 }
                 className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                 sx={{ width: "48%", marginLeft: "1%", marginRight: "1%" }}
+                onClick={() => {openAccountOrdersModal()}}
               >
                 Pending Orders
               </Button>

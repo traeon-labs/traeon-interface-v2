@@ -115,7 +115,7 @@ export const AccountOrdersModal = () => {
                     <Typography variant="subtitle1">
                       Address:{" "}
                       <strong>
-                        {shortenAddress(order?.address || "pending...")}
+                        {order?.address ? shortenAddress(order?.address) : 'pending...'}
                       </strong>
                     </Typography>
                   </Grid2>

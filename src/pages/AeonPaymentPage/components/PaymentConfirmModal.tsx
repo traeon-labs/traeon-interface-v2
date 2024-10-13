@@ -320,12 +320,12 @@ export const PaymentConfirmModal = () => {
                 </Button>
               </Stack>       
             </Box>
-            <Box
+            {pendingOrders.length > 0 ? <Box
               display="flex"
               sx={{ my: 0.5, marginLeft: "1%"}}
             >
                <Typography style={{paddingBottom: '0.3rem', cursor: 'pointer', borderBottom: '1px dashed'}}onClick={() => {openAccountOrdersModal()}}>Pending orders ({pendingOrders.length})</Typography>
-            </Box>
+            </Box> : ''}
 
             <Box
               gap={1}
