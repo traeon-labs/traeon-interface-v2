@@ -1,5 +1,7 @@
 import { Iconify } from "@/components/iconify";
 import {
+  AvatarGroup,
+  Avatar,
   Button,
   Card,
   Chip,
@@ -11,7 +13,7 @@ import {
   Skeleton,
   Typography,
 } from "@mui/material";
-import { Modal } from "@telegram-apps/telegram-ui";
+import {  Modal } from "@telegram-apps/telegram-ui";
 import { useEffect, useMemo, useRef, useState } from "react";
 import useAccountOrders from "./hook/useAccountOrders";
 import { AEON_EXPLORE_WEBURL } from "@/config";
@@ -129,12 +131,14 @@ export const AccountOrdersModal = () => {
                       Fee: <strong>${order.fee}</strong>
                     </Typography>
                   </Grid2>
+                 
                   <Grid2 size={12}>
                     <Typography variant="body1">
-                      View Order:{" "}
+                      Order:{" "}
                       <Button
                         color='inherit'
                         className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                        startIcon={<Avatar alt="Natacha" sx={{background: 'black', p: '4px', width: '24px', height: '24px'}} src="/logo-aeon.png" />}
                         endIcon={
                           <Iconify icon="lucide-lab:tab-arrow-up-right" />
                         }
@@ -163,6 +167,7 @@ export const AccountOrdersModal = () => {
                       />
                     </Typography>
                   </Grid2>
+
                   {/* <Grid2 size={12} >
                     <Typography variant="body1">
                       Status:{" "}
