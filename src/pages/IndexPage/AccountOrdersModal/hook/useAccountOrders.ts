@@ -1,11 +1,12 @@
 import { IAeonOrder } from "@/types/index.type";
 import { fetchAeonOrder } from "@/utils/aeon/fetchOrder";
-import { useCloudStorage } from "@tma.js/sdk-react";
+import { useCloudStorage, useCloudStorageRaw } from "@tma.js/sdk-react";
 import { useEffect, useMemo, useState } from "react";
 import { useAppContext } from "../../IndexPage";
 
 const useAccountOrders = () => {
   const cloudData = useCloudStorage(false);
+  const {result: cloudDataRaw} = useCloudStorageRaw(false)
   const [loadingOrders, setLoadingOrders] = useState(false);
   const { orders, setOrders, unfillOrders, setUnfillOrders } = useAppContext();
 
@@ -32,7 +33,7 @@ const useAccountOrders = () => {
   const refreshOrdersData = async () => {
     setLoadingOrders(true);
     try {
-      const orderStorageKeys = (await cloudData.getKeys()).filter(
+      const orderStorageKeys = (await (cloudDataRaw || cloudData)?.getKeys()).filter(
         (key) => key.split("_")?.[0] === "order"
       );
       const ordersData = await Promise.all(
@@ -55,7 +56,7 @@ const useAccountOrders = () => {
           }
         })
       );
-      console.log("#ordersData", ordersData);
+      // console.log("#ordersData", ordersData);
       setLoadingOrders(false);
     } catch (error) {
       console.log(error);
@@ -64,7 +65,7 @@ const useAccountOrders = () => {
   };
   useEffect(() => {
     refreshOrdersData();
-  }, [cloudData]);
+  }, [cloudData, cloudDataRaw]);
   return {
     loadingOrders,
     setLoadingOrders,

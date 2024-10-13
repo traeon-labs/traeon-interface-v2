@@ -67,9 +67,10 @@ export const IndexPage: FC = () => {
         ) : (
           ""
         )}
-        <AeonPaymentModal />
+        <AeonPaymentModal/>
         <PaymentConfirmModal />
-        <AccountOrdersModal />
+        <AccountOrdersModal setAssestModal={setAssestModal}
+          setCurrentAsset={setCurrentAsset}/>
         <TabsController tab={tab} setTab={setTab} scrollDir={scrollDir} />
         <AssetModal
           visible={assetModal}

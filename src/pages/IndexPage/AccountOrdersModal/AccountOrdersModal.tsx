@@ -22,17 +22,25 @@ import { decodeTimestampAgo, getOrderStatusColor, shortenAddress } from "@/utils
 import { WalletPropover } from "../AccountPropover/WalletPropover";
 import {openAeonPayment} from "@/pages/AeonPaymentPage/components/AeonPaymentModal";
 import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
+import marketplaceAssets from "@/nfts/metadata/nfts.json";
 
 let _confirm: (props: {
   resolve?: (value: boolean) => void;
 }) => void = () => {};
 
-export const AccountOrdersModal = () => {
+export const AccountOrdersModal = ({
+  setAssestModal,
+  setCurrentAsset,
+}: {
+  setCurrentAsset?: React.Dispatch<
+    React.SetStateAction<INFTMetadata | undefined>
+  >;
+  setAssestModal?: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [visible, setVisible] = useState(false);
   const { orders,unfillOrders, loadingOrders, refreshOrdersData } =
     useAccountOrders();
   const ordersWithSort = useMemo(() => {
-    console.log(orders)
     const _order = orders.sort(
       (a, b) =>
         Number(JSON.parse(b?.customParam || '{}')?.["orderTs"] || 0) -
@@ -112,6 +120,8 @@ export const AccountOrdersModal = () => {
           ) : (
             ordersWithSort.map((order, _) => {
               const ts = decodeTimestampAgo(JSON.parse(order?.customParam || "{}")?.orderTs, true)
+              const assetId = JSON.parse(order?.customParam || "{}")?.assetId
+              const assetData = marketplaceAssets.filter(asset => asset.name === assetId)?.[0]
               const isUnFilledOrders = unfillOrders.filter(uOrd => uOrd.orderNo === order.orderNo)[0]?.orderNo !== undefined
               return (
                 <Grid2
@@ -124,7 +134,7 @@ export const AccountOrdersModal = () => {
                     <Typography variant="subtitle1">
                       Address:{" "}
                       <strong>
-                        {order?.address ? shortenAddress(order?.address) : 'Need to select payment'}
+                        {order?.address ? shortenAddress(order?.address) : 'Pending address...'}
                       </strong>
                     </Typography>
                   </Grid2>
@@ -144,19 +154,37 @@ export const AccountOrdersModal = () => {
                       </strong>
                     </Typography>
                   </Grid2>
+                
                   <Grid2 size={12}>
                     <Typography variant="subtitle1">
-                      Fee: <strong> {order.fee ? order.fee : 'N/A'}</strong>
+                      Fee: <strong> {order.fee ? order.fee : 'Pending fee...'}</strong>
                     </Typography>
                   </Grid2>
-                 
+                  {assetData?.name ? <Grid2 size={12} sx={{mb:1}}>
+                    <Typography variant="subtitle1">
+                      Asset:  <Chip
+                        className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                        icon={<Avatar sx={{width: '28px', height: '28px', border: '1px solid'}} src={assetData?.image}/>}
+                        sx = {{opacity: 0.8}}
+                        onClick={() => {
+                          if(setCurrentAsset && setAssestModal) {
+                            setCurrentAsset(assetData)
+                            setAssestModal(true)
+                          }
+                        }}
+                        label={<strong> {shortenAddress(assetData?.name)}</strong>}
+                        color={'default'}
+                      />
+                    </Typography>
+                  </Grid2> : ''}
                   <Grid2 size={12}>
                     <Typography variant="body1">
-                      Order:{" "}
+                      Order: {' '}
                       <Button
+                        variant="contained"
                         color='inherit'
                         className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                        startIcon={<Avatar alt="Natacha" sx={{background: 'black', p: '4px', width: '24px', height: '24px'}} src="/logo-aeon.png" />}
+                        startIcon={<Avatar alt="Natacha" sx={{background: 'black', p: '4px', width: '18px', height: '18px'}} src="/logo-aeon.png" />}
                         endIcon={
                           <Iconify icon="lucide-lab:tab-arrow-up-right" />
                         }

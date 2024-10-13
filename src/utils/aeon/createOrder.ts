@@ -1,7 +1,7 @@
-import {AEON_SANDBOX_PAYMENTS_BASE_API,AEON_SIGN_KEY} from '@/config';
-import axios from 'axios';
-import {generateSignature} from '../sign';
-import {IAeonResponse} from '@/types/index.type';
+import { AEON_SANDBOX_PAYMENTS_BASE_API, AEON_SIGN_KEY } from "@/config";
+import axios from "axios";
+import { generateSignature } from "../sign";
+import { IAeonResponse } from "@/types/index.type";
 // Define the request parameters interface
 interface RequestParams {
   merchantOrderNo: string;
@@ -19,27 +19,34 @@ interface RequestParams {
   orderModel?: string;
   tgModel?: string;
   // for Traeon
-  assetId?:string;
 }
 
 // Define the API request function
-export async function createAeonOrdersWithTma(params: RequestParams): Promise<IAeonResponse | undefined> {
-  const requestParams:any = params
-  requestParams.appId = import.meta.env.VITE_AEON_APP_ID
+export async function createAeonOrdersWithTma(
+  params: RequestParams,
+  customParams: {[key:string]: any} = {}
+): Promise<IAeonResponse | undefined> {
+  const requestParams: any = params;
+  requestParams.appId = import.meta.env.VITE_AEON_APP_ID;
   requestParams.sign = generateSignature(JSON.parse(JSON.stringify(params)));
-  if(requestParams.customParam) requestParams.customParam.orderTs = String(Date.now())
-    else requestParams.customParam = {orderTs: Date.now()}
-  if(params.assetId)  requestParams.customParam.assetId = params.assetId
-    requestParams.customParam = JSON.stringify(requestParams.customParam)
+  const _customParams: {[key:string]: any} = customParams
+  _customParams.orderTs = String(Date.now());
+  requestParams.customParam = JSON.stringify(_customParams);
+  console.log(requestParams);
   try {
-    const response = await axios.post(`${AEON_SANDBOX_PAYMENTS_BASE_API}/open/api/payment`, requestParams, {
-      headers: {
-        'Content-Type': 'application/json'
+    const response = await axios.post(
+      `${AEON_SANDBOX_PAYMENTS_BASE_API}/open/api/payment`,
+      requestParams,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
+    console.log(response)
     const aeonResponse: IAeonResponse = response.data;
-    return aeonResponse
+    return aeonResponse;
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }

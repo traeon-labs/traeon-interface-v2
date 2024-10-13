@@ -1,7 +1,7 @@
 import { Iconify } from "@/components/iconify";
 import { BorderLinearProgress } from "@/components/Linear/customLinear";
 import { INFTMetadata } from "@/types/index.type";
-import {createAeonOrdersWithTma} from "@/utils/aeon/createOrder";
+import { createAeonOrdersWithTma } from "@/utils/aeon/createOrder";
 import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
 import {
   Avatar,
@@ -17,13 +17,17 @@ import {
 } from "@mui/material";
 import { Modal, Typography } from "@telegram-apps/telegram-ui";
 import { useEffect, useMemo, useRef, useState } from "react";
-import {openAeonPayment} from "./AeonPaymentModal";
-import {generateAeonResError, generateFractionalPrice, generateOrderKey} from "@/utils";
-import {useCloudStorage, useInitData} from "@tma.js/sdk-react";
-import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
+import { openAeonPayment } from "./AeonPaymentModal";
+import {
+  generateAeonResError,
+  generateFractionalPrice,
+  generateOrderKey,
+} from "@/utils";
+import { useCloudStorage, useCloudStorageRaw, useInitData } from "@tma.js/sdk-react";
+import { fetchAeonOrder } from "@/utils/aeon/fetchOrder";
 import useAccountOrders from "@/pages/IndexPage/AccountOrdersModal/hook/useAccountOrders";
-import {openAccountOrdersModal} from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
-import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
+import { openAccountOrdersModal } from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
+import { LineMdLoadingLoop } from "@/components/icons/LineMdLoadingLoop";
 
 const _MOCK_ATTS = [
   {
@@ -56,13 +60,19 @@ let _confirm: (props: {
 export const PaymentConfirmModal = () => {
   const [visible, setVisible] = useState(false);
   const [asset, setAsset] = useState<INFTMetadata>();
-  const [creatingOrder, setCreatingOrder] = useState<boolean>(false)
-  const [paymentType, setPaymentType]= useState<'TON' | 'AEON'>('AEON')
+  const [creatingOrder, setCreatingOrder] = useState<boolean>(false);
+  const [paymentType, setPaymentType] = useState<"TON" | "AEON">("AEON");
   const resolveRef = useRef<(value: boolean) => void>(() => {
     throw new Error("RESOLVE_REF_UNSET");
   });
-  const { orders, setUnfillOrders,  setOrders, pendingOrders, loadingOrders, refreshOrdersData } =
-    useAccountOrders();
+  const {
+    orders,
+    setUnfillOrders,
+    setOrders,
+    pendingOrders,
+    loadingOrders,
+    refreshOrdersData,
+  } = useAccountOrders();
   useEffect(() => {
     _confirm = ({
       resolve,
@@ -87,56 +97,65 @@ export const PaymentConfirmModal = () => {
         asset.attributes.filter((att) => att.trait_type === "type")[0]?.value
       ];
   }, [asset]);
-  const tgInitData = useInitData()
-  const cloudData = useCloudStorage(false)
+  const tgInitData = useInitData();
+  const cloudData = useCloudStorage(false);
+  const cloudDataRaw = useCloudStorageRaw(false);
+
   const purchaseItem = async () => {
-    if(paymentType==='AEON') { 
-      setCreatingOrder(true)
+    if (paymentType === "AEON") {
+      setCreatingOrder(true);
       try {
-        if(!tgInitData?.user?.id) {
-          openAeonPayment( generateAeonResError('Telegram authentication Error!','503'))
+        if (!tgInitData?.user?.id) {
+          openAeonPayment(
+            generateAeonResError("Telegram authentication Error!", "503")
+          );
           return;
         }
-        if(!asset?.name) {
-          openAeonPayment( generateAeonResError('Asset not available now!','404'))
+        if (!asset?.name) {
+          openAeonPayment(
+            generateAeonResError("Asset not available now!", "404")
+          );
           return;
         }
 
-        const merchantOrderKey = generateOrderKey(String(tgInitData?.user?.id))
-        const res = await createAeonOrdersWithTma({
-          merchantOrderNo: merchantOrderKey,
-          orderAmount: String(generateFractionalPrice(asset?.name) * 100), // 10U
-          payCurrency: 'USD',
-          userId: String(tgInitData?.user?.id),
-          paymentExchange: "3b43c82c-8ead-4533-9e39-0bf433b6a321",
-          paymentTokens: "USDT,ETH",
-          assetId: asset.name
-        })
-        if(res) openAeonPayment(res)
-        if(res?.model?.webUrl){
-          console.log('fetching aeon orders', merchantOrderKey)
-          const orderData = await fetchAeonOrder({merchantOrderNo: merchantOrderKey})
-          console.log('Adding to telegram store aeon orders', merchantOrderKey)
-          if(orderData?.model) setUnfillOrders([orderData?.model])
+        const merchantOrderKey = generateOrderKey(String(tgInitData?.user?.id));
+        const res = await createAeonOrdersWithTma(
+          {
+            merchantOrderNo: merchantOrderKey,
+            orderAmount: String(generateFractionalPrice(asset?.name) * 100), // 10U
+            payCurrency: "USD",
+            userId: String(tgInitData?.user?.id),
+            paymentExchange: "3b43c82c-8ead-4533-9e39-0bf433b6a321",
+            paymentTokens: "USDT,ETH",
+          },
+          { assetId: asset.name }
+        );
+        if (res) openAeonPayment(res);
+        if (res?.model?.webUrl) {
+          console.log("fetching aeon orders", merchantOrderKey);
+          const orderData = await fetchAeonOrder({
+            merchantOrderNo: merchantOrderKey,
+          });
+          console.log("Adding to telegram store aeon orders", merchantOrderKey);
+          if (orderData?.model) setUnfillOrders([orderData?.model]);
           try {
-            await cloudData.set(`order_${merchantOrderKey}`, '')
+            await cloudDataRaw?.result?.set(`order_${merchantOrderKey}`, "");
           } catch (error) {
-            console.log(error)
+            console.log(error);
           }
-          console.log('Added to telegram store aeon orders', merchantOrderKey)
+          console.log("Added to telegram store aeon orders", merchantOrderKey);
         }
         await setTimeout(async () => {
-          await refreshOrdersData()
-          setUnfillOrders([])
-          setCreatingOrder(false)
-        },1000)
+          await refreshOrdersData();
+          setUnfillOrders([]);
+          setCreatingOrder(false);
+        }, 1000);
       } catch (error) {
-        setCreatingOrder(false)
+        setCreatingOrder(false);
 
-        console.log(error)
+        console.log(error);
       }
     } else {
-
     }
   };
   return (
@@ -249,7 +268,11 @@ export const PaymentConfirmModal = () => {
                             textAlign: "center",
                             border: "none",
                           }}
-                          label={<Typography Component={"h4"}>{generateFractionalPrice(att.label + asset.name)}</Typography>}
+                          label={
+                            <Typography Component={"h4"}>
+                              {generateFractionalPrice(att.label + asset.name)}
+                            </Typography>
+                          }
                           onClick={() => {
                             navigator.clipboard.writeText(asset.name);
                           }}
@@ -291,53 +314,111 @@ export const PaymentConfirmModal = () => {
                 xs: "repeat(1, 1fr)",
                 md: "repeat(3, 1fr)",
               }}
-              sx={{ my: 3, border: '1px solid', p: 2, borderRadius: '20px' }}
+              sx={{ my: 3, border: "1px solid", p: 2, borderRadius: "20px" }}
             >
               <Stack direction="column" spacing={1.5}>
-              <Typography style={{ width: '100%', textAlign:'center', marginBottom: '0.5rem'}}>Payment Method</Typography>
+                <Typography
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Payment Method
+                </Typography>
                 <Button
                   className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                  onClick={() => {setPaymentType('AEON')}}
-                  startIcon={<Avatar alt="Natacha" sx={{width: '36px', height: '36px'}} src="/logo-aeon.png" />}
+                  onClick={() => {
+                    setPaymentType("AEON");
+                  }}
+                  startIcon={
+                    <Avatar
+                      alt="Natacha"
+                      sx={{ width: "36px", height: "36px" }}
+                      src="/logo-aeon.png"
+                    />
+                  }
                   endIcon={
-                    <AvatarGroup
-                    
-                    >
-                     <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:bnb'/>
-                     {/* <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:ton'/> */}
-                     <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:tron'/>
-                     <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:eth'/>
-                     <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:arbitrum-one'/>
-                     <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:op'/>
-
+                    <AvatarGroup>
+                      <Iconify
+                        width="28px"
+                        sx={{ marginLeft: "1px" }}
+                        icon="token:bnb"
+                      />
+                      {/* <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:ton'/> */}
+                      <Iconify
+                        width="28px"
+                        sx={{ marginLeft: "1px" }}
+                        icon="token:tron"
+                      />
+                      <Iconify
+                        width="28px"
+                        sx={{ marginLeft: "1px" }}
+                        icon="token:eth"
+                      />
+                      <Iconify
+                        width="28px"
+                        sx={{ marginLeft: "1px" }}
+                        icon="token:arbitrum-one"
+                      />
+                      <Iconify
+                        width="28px"
+                        sx={{ marginLeft: "1px" }}
+                        icon="token:op"
+                      />
                     </AvatarGroup>
                   }
                   color="inherit"
-                  sx={paymentType === 'AEON' ? {background:'black', color: 'white'} : {}}
-                  variant={ paymentType === 'AEON' ? 'contained' : "outlined"}
+                  sx={
+                    paymentType === "AEON"
+                      ? { background: "black", color: "white" }
+                      : {}
+                  }
+                  variant={paymentType === "AEON" ? "contained" : "outlined"}
                 >
                   payment Via Aeon
                 </Button>
                 <Button
                   className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                  onClick={() => {setPaymentType('TON')}}
+                  onClick={() => {
+                    setPaymentType("TON");
+                  }}
                   startIcon={
-                     <Iconify width='28px' sx={{marginLeft: '1px'}} icon='token:ton'/>
+                    <Iconify
+                      width="28px"
+                      sx={{ marginLeft: "1px" }}
+                      icon="token:ton"
+                    />
                   }
-                  sx={paymentType === 'TON' ? {background:'black', color: 'white'} : {}}
+                  sx={
+                    paymentType === "TON"
+                      ? { background: "black", color: "white" }
+                      : {}
+                  }
                   color="inherit"
-                  
                 >
                   TON Network
                 </Button>
-              </Stack>       
+              </Stack>
             </Box>
-            {pendingOrders.length > 0 ? <Box
-              display="flex"
-              sx={{ my: 0.5, marginLeft: "1%"}}
-            >
-               <Typography style={{paddingBottom: '0.3rem', cursor: 'pointer', borderBottom: '1px dashed'}}onClick={() => {openAccountOrdersModal()}}>Pending orders ({pendingOrders.length})</Typography>
-            </Box> : ''}
+            {pendingOrders.length > 0 ? (
+              <Box display="flex" sx={{ my: 0.5, marginLeft: "1%" }}>
+                <Typography
+                  style={{
+                    paddingBottom: "0.3rem",
+                    cursor: "pointer",
+                    borderBottom: "1px dashed",
+                  }}
+                  onClick={() => {
+                    openAccountOrdersModal();
+                  }}
+                >
+                  Pending orders ({pendingOrders.length})
+                </Typography>
+              </Box>
+            ) : (
+              ""
+            )}
 
             <Box
               gap={1}
@@ -370,9 +451,13 @@ export const PaymentConfirmModal = () => {
                 color="secondary"
                 disabled={creatingOrder}
                 startIcon={
-                  creatingOrder ? <LineMdLoadingLoop/> : <Iconify
-                    icon={"material-symbols:confirmation-number-outline"}
-                  />
+                  creatingOrder ? (
+                    <LineMdLoadingLoop />
+                  ) : (
+                    <Iconify
+                      icon={"material-symbols:confirmation-number-outline"}
+                    />
+                  )
                 }
                 className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                 sx={{ width: "50%", marginLeft: "1%", marginRight: "1%" }}
