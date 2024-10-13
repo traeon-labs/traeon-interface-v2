@@ -18,6 +18,8 @@ postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
 interface AppContextType {
   orders: IAeonOrder[];
   setOrders: React.Dispatch<React.SetStateAction<IAeonOrder[]>>;
+  unfillOrders: IAeonOrder[];
+  setUnfillOrders: React.Dispatch<React.SetStateAction<IAeonOrder[]>>;
 }
 
 // Create the context with default values (if any)
@@ -32,13 +34,15 @@ export const IndexPage: FC = () => {
   const [customElement, setCustomElement] = useState<HTMLDivElement>();
   const { scrollDir } = useDetectScroll({ target: customElement });
   const [orders, setOrders] = useState<IAeonOrder[]>([]);
+  const [unfillOrders, setUnfillOrders] = useState<IAeonOrder[]>([]);
+
   useEffect(() => {
     if (customElementRef.current) {
       setCustomElement(customElementRef.current);
     }
   }, [customElementRef]);
   return (
-    <AppContext.Provider value={{ setOrders, orders }}>
+    <AppContext.Provider value={{ setOrders, orders, setUnfillOrders, unfillOrders }}>
       <div
         ref={customElementRef}
         style={{ overflow: "scroll", height: "100vh" }}

@@ -7,27 +7,28 @@ import { useAppContext } from "../../IndexPage";
 const useAccountOrders = () => {
   const cloudData = useCloudStorage(false);
   const [loadingOrders, setLoadingOrders] = useState(false);
-  const { orders, setOrders } = useAppContext();
+  const { orders, setOrders, unfillOrders, setUnfillOrders } = useAppContext();
+
   const pendingOrders = useMemo(() => {
-    return orders.filter(
+    return [...unfillOrders ,...orders].filter(
       (o) => o?.orderStatus === "INIT" || o.orderStatus === "PROCESSING"
     );
-  }, [orders]);
-  const fetchOrdersFromStorage = async () => {
-    setLoadingOrders(true);
-    const orderStorageKeys = (await cloudData.getKeys()).filter(
-      (key) => key.split("_")?.[0] === "order"
-    );
-    const ordersDataRaw = await cloudData.get(orderStorageKeys);
-    const ordersData = Object.keys(ordersDataRaw).map((key) => {
-      return JSON.parse(ordersDataRaw[key]) as IAeonOrder;
-    });
-    if (ordersData) {
-      setOrders(ordersData);
-    }
-    setLoadingOrders(false);
-    return ordersData;
-  };
+  }, [orders ,unfillOrders]);
+  // const fetchOrdersFromStorage = async () => {
+  //   setLoadingOrders(true);
+  //   const orderStorageKeys = (await cloudData.getKeys()).filter(
+  //     (key) => key.split("_")?.[0] === "order"
+  //   );
+  //   const ordersDataRaw = await cloudData.get(orderStorageKeys);
+  //   const ordersData = Object.keys(ordersDataRaw).map((key) => {
+  //     return JSON.parse(ordersDataRaw[key]) as IAeonOrder;
+  //   });
+  //   if (ordersData) {
+  //     setOrders(ordersData);
+  //   }
+  //   setLoadingOrders(false);
+  //   return ordersData;
+  // };
   const refreshOrdersData = async () => {
     setLoadingOrders(true);
     try {
@@ -48,7 +49,8 @@ const useAccountOrders = () => {
           if (orderData?.orderNo) {
             await cloudData.set(
               `order_${orderData.merchantOrderNo}`,
-              JSON.stringify(orderData)
+              // JSON.stringify(orderData)
+              ""
             );
           }
         })
@@ -66,9 +68,12 @@ const useAccountOrders = () => {
   return {
     loadingOrders,
     setLoadingOrders,
-    orders,
+    orders: [...unfillOrders ,...orders],
     pendingOrders,
-    fetchOrdersFromStorage,
+    setOrders,
+    setUnfillOrders,
+    unfillOrders,
+    // fetchOrdersFromStorage,
     refreshOrdersData,
   };
 };

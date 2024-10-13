@@ -21,6 +21,7 @@ import { AEON_EXPLORE_WEBURL } from "@/config";
 import { decodeTimestampAgo, getOrderStatusColor, shortenAddress } from "@/utils";
 import { WalletPropover } from "../AccountPropover/WalletPropover";
 import {openAeonPayment} from "@/pages/AeonPaymentPage/components/AeonPaymentModal";
+import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
 
 let _confirm: (props: {
   resolve?: (value: boolean) => void;
@@ -28,7 +29,7 @@ let _confirm: (props: {
 
 export const AccountOrdersModal = () => {
   const [visible, setVisible] = useState(false);
-  const { orders, loadingOrders, refreshOrdersData, fetchOrdersFromStorage } =
+  const { orders,unfillOrders, loadingOrders, refreshOrdersData } =
     useAccountOrders();
   const ordersWithSort = useMemo(() => {
     console.log(orders)
@@ -52,7 +53,7 @@ export const AccountOrdersModal = () => {
 
   useEffect(() => {
     if (visible) window.scrollTo(0, 0);
-    fetchOrdersFromStorage();
+    refreshOrdersData();
   }, [visible]);
 
   return (
@@ -111,6 +112,7 @@ export const AccountOrdersModal = () => {
           ) : (
             ordersWithSort.map((order, _) => {
               const ts = decodeTimestampAgo(JSON.parse(order?.customParam || "{}")?.orderTs, true)
+              const isUnFilledOrders = unfillOrders.filter(uOrd => uOrd.orderNo === order.orderNo)[0]?.orderNo !== undefined
               return (
                 <Grid2
                   size={12}
@@ -177,9 +179,10 @@ export const AccountOrdersModal = () => {
                       </Button>
                       <Chip
                         className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                        icon={(isUnFilledOrders ? <LineMdLoadingLoop color="white"/> : '') as any}
                         sx = {{opacity: 0.8}}
-                        label={order.orderStatus}
-                        color={getOrderStatusColor(order.orderStatus)}
+                        label={isUnFilledOrders ? 'PENDING' : order.orderStatus}
+                        color={isUnFilledOrders ? 'warning' : getOrderStatusColor(order.orderStatus)}
                       />
                     </Typography>
                   </Grid2>
@@ -222,7 +225,7 @@ export const AccountOrdersModal = () => {
               className="aeon-box-border aeon-box-shadow-bold aeon-transition"
               sx={{ py: 1, width: "48%", marginLeft: "1%", marginRight: "1%" }}
               onClick={() => {
-                fetchOrdersFromStorage();
+                refreshOrdersData();
               }}
             >
               Reload

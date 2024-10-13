@@ -23,6 +23,7 @@ import {useCloudStorage, useInitData} from "@tma.js/sdk-react";
 import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
 import useAccountOrders from "@/pages/IndexPage/AccountOrdersModal/hook/useAccountOrders";
 import {openAccountOrdersModal} from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
+import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
 
 const _MOCK_ATTS = [
   {
@@ -55,11 +56,12 @@ let _confirm: (props: {
 export const PaymentConfirmModal = () => {
   const [visible, setVisible] = useState(false);
   const [asset, setAsset] = useState<INFTMetadata>();
+  const [creatingOrder, setCreatingOrder] = useState<boolean>(false)
   const [paymentType, setPaymentType]= useState<'TON' | 'AEON'>('AEON')
   const resolveRef = useRef<(value: boolean) => void>(() => {
     throw new Error("RESOLVE_REF_UNSET");
   });
-  const { orders, pendingOrders, loadingOrders, refreshOrdersData, fetchOrdersFromStorage } =
+  const { orders, setUnfillOrders,  setOrders, pendingOrders, loadingOrders, refreshOrdersData } =
     useAccountOrders();
   useEffect(() => {
     _confirm = ({
@@ -89,6 +91,7 @@ export const PaymentConfirmModal = () => {
   const cloudData = useCloudStorage(false)
   const purchaseItem = async () => {
     if(paymentType==='AEON') { 
+      setCreatingOrder(true)
       try {
         if(!tgInitData?.user?.id) {
           openAeonPayment( generateAeonResError('Telegram authentication Error!','503'))
@@ -113,18 +116,22 @@ export const PaymentConfirmModal = () => {
           console.log('fetching aeon orders', merchantOrderKey)
           const orderData = await fetchAeonOrder({merchantOrderNo: merchantOrderKey})
           console.log('Adding to telegram store aeon orders', merchantOrderKey)
+          if(orderData?.model) setUnfillOrders([orderData?.model])
           try {
-            await cloudData.set(`order_${merchantOrderKey}`, JSON.stringify(orderData?.model))
+            await cloudData.set(`order_${merchantOrderKey}`, '')
           } catch (error) {
             console.log(error)
           }
           console.log('Added to telegram store aeon orders', merchantOrderKey)
-
         }
         await setTimeout(async () => {
           await refreshOrdersData()
+          setUnfillOrders([])
+          setCreatingOrder(false)
         },1000)
       } catch (error) {
+        setCreatingOrder(false)
+
         console.log(error)
       }
     } else {
@@ -360,8 +367,9 @@ export const PaymentConfirmModal = () => {
               <Button
                 variant="outlined"
                 color="secondary"
+                disabled={creatingOrder}
                 startIcon={
-                  <Iconify
+                  creatingOrder ? <LineMdLoadingLoop/> : <Iconify
                     icon={"material-symbols:confirmation-number-outline"}
                   />
                 }
