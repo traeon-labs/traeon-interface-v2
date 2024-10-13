@@ -18,6 +18,7 @@ import {
   useTonConnectUI,
   useTonWallet,
 } from "@tonconnect/ui-react";
+import {openAccountOrdersModal} from "../AccountOrdersModal/AccountOrdersModal";
 
 export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(
@@ -121,6 +122,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
             key={"copy"}
             onClick={() => {
               navigator.clipboard.writeText(tonWalletAddress);
+              setOpenPopover(false)
             }}
           >
             <Iconify icon={"ion:copy-outline"} />
@@ -128,7 +130,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
           </MenuItem>
           <MenuItem
             key={"copy"}
-            //   onClick={() => handleClickItem(option.href)}
+            onClick={() => {openAccountOrdersModal(); setOpenPopover(false)}}
           >
             <Iconify icon={"hugeicons:profile"} />
             Manage
