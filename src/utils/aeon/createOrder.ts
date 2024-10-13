@@ -25,6 +25,8 @@ export async function createAeonOrdersWithTma(params: RequestParams): Promise<IA
   const requestParams:any = params
   requestParams.appId = import.meta.env.VITE_AEON_APP_ID
   requestParams.sign = generateSignature(JSON.parse(JSON.stringify(params)));
+  if(requestParams.customParam) requestParams.customParam.orderTs = Date.now() 
+  else requestParams.customParam = {orderTs: Date.now()}
   console.log('requestParams', requestParams)
   try {
     const response = await axios.post(`${AEON_SANDBOX_PAYMENTS_BASE_API}/open/api/payment`, requestParams, {

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Modal, Skeleton } from "@telegram-apps/telegram-ui";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useAccountOrders from "./hook/useAccountOrders";
 import { AEON_EXPLORE_WEBURL } from "@/config";
 import { getOrderStatusColor, shortenAddress } from "@/utils";
@@ -24,6 +24,10 @@ let _confirm: (props: {
 export const AccountOrdersModal = () => {
   const [visible, setVisible] = useState(false);
   const { orders, loadingOrders, refreshOrdersData,fetchOrdersFromStorage } = useAccountOrders();
+  const ordersWithSort = useMemo(() => {
+    const _order = orders.sort((a,b) => Number(a?.customParam?.['orderTs'] || 0) -  Number(b?.customParam?.['orderTs'] || 0))
+    return _order
+  },[orders])
   const resolveRef = useRef<(value: boolean) => void>(() => {
     throw new Error("RESOLVE_REF_UNSET");
   });
@@ -84,7 +88,7 @@ export const AccountOrdersModal = () => {
             ? "No Orders Found"
             : loadingOrders
             ? <Skeleton>Loading...</Skeleton>
-            : orders.map((order, _) => {
+            : ordersWithSort.map((order, _) => {
                 return (
                   <Grid2
                     size={12}
@@ -95,7 +99,7 @@ export const AccountOrdersModal = () => {
                     <Grid2 size={12}>
                       <Typography variant="subtitle1">
                         Address:{" "}
-                        <strong>{shortenAddress(order.address)}</strong>
+                        <strong>{shortenAddress(order?.address || 'pending...')}</strong>
                       </Typography>
                     </Grid2>
                     <Grid2 size={12}>
