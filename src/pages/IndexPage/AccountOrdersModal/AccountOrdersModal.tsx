@@ -18,7 +18,7 @@ import {  Modal } from "@telegram-apps/telegram-ui";
 import { useEffect, useMemo, useRef, useState } from "react";
 import useAccountOrders from "./hook/useAccountOrders";
 import { AEON_EXPLORE_WEBURL } from "@/config";
-import { getOrderStatusColor, shortenAddress } from "@/utils";
+import { decodeTimestampAgo, getOrderStatusColor, shortenAddress } from "@/utils";
 import { WalletPropover } from "../AccountPropover/WalletPropover";
 import {openAeonPayment} from "@/pages/AeonPaymentPage/components/AeonPaymentModal";
 
@@ -110,6 +110,7 @@ export const AccountOrdersModal = () => {
               })
           ) : (
             ordersWithSort.map((order, _) => {
+              const ts = decodeTimestampAgo(JSON.parse(order?.customParam || "{}")?.orderTs, true)
               return (
                 <Grid2
                   size={12}
@@ -135,7 +136,15 @@ export const AccountOrdersModal = () => {
                   </Grid2>
                   <Grid2 size={12}>
                     <Typography variant="subtitle1">
-                      Fee: {order.fee ? <><strong>${order.fee}</strong></> : 'N/A'}
+                      Create At:{" "}
+                      <strong>
+                      {ts === '0' ? 'N/A' : ts}
+                      </strong>
+                    </Typography>
+                  </Grid2>
+                  <Grid2 size={12}>
+                    <Typography variant="subtitle1">
+                      Fee: <strong> {order.fee ? order.fee : 'N/A'}</strong>
                     </Typography>
                   </Grid2>
                  
@@ -164,7 +173,7 @@ export const AccountOrdersModal = () => {
                         }}
                         sx={{ mr: 1, px: 2 }}
                       >
-                        {shortenAddress(order.orderNo)}
+                        {shortenAddress(order.orderNo,0,3)}
                       </Button>
                       <Chip
                         className="aeon-box-border aeon-box-shadow-bold aeon-transition"
@@ -213,7 +222,7 @@ export const AccountOrdersModal = () => {
               className="aeon-box-border aeon-box-shadow-bold aeon-transition"
               sx={{ py: 1, width: "48%", marginLeft: "1%", marginRight: "1%" }}
               onClick={() => {
-                refreshOrdersData();
+                fetchOrdersFromStorage();
               }}
             >
               Reload

@@ -181,7 +181,7 @@ export function generateFractionalPrice(item: string, factor?: number): number {
   // Ensure the result is still within 0 < price < 4
   normalizedPrice = Math.min(Math.max(normalizedPrice, 0), 4);
 
-  return normalizedPrice;
+  return Number(normalizedPrice);
 }
 
 export const generateAeonResError =(msg: string, code: string): IAeonResponse => {
@@ -195,5 +195,41 @@ export const generateAeonResError =(msg: string, code: string): IAeonResponse =>
     },
     success: false,
     error: false
+  }
+}
+export function decodeTimestampAgo(timestamp?: number, clean = false): string {
+  if (!timestamp) return "0";
+  const currentTime = Date.now();
+  const difference = currentTime - timestamp;
+
+  const millisecondsPerMinute = 60 * 1000;
+  const millisecondsPerHour = 60 * millisecondsPerMinute;
+  const millisecondsPerDay = 24 * millisecondsPerHour;
+
+  const days = Math.floor(difference / millisecondsPerDay);
+  const hours = Math.floor(
+    (difference % millisecondsPerDay) / millisecondsPerHour,
+  );
+  const minutes = Math.floor(
+    (difference % millisecondsPerHour) / millisecondsPerMinute,
+  );
+
+  const daysText =
+    days > 0 ? `${days}${clean ? "d" : ` day${days !== 1 ? "s" : ""}`}` : "";
+  const hoursText =
+    hours > 0
+      ? `${hours}${clean ? "h" : ` hour${hours !== 1 ? "s" : ""}`}`
+      : "";
+  const minutesText =
+    minutes > 0
+      ? `${minutes}${clean ? "m" : ` min${minutes !== 1 ? "s" : ""}`}`
+      : "";
+
+  if (days > 0) {
+    return `${daysText} ${hoursText} ago`;
+  } else if (hours > 0) {
+    return `${hoursText} ${minutesText} ago`;
+  } else {
+    return `${minutesText === "" ? '1' : minutesText} ago`;
   }
 }

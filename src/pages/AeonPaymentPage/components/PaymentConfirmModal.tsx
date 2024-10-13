@@ -108,13 +108,22 @@ export const PaymentConfirmModal = () => {
           paymentExchange: "3b43c82c-8ead-4533-9e39-0bf433b6a321",
           paymentTokens: "USDT,ETH",
         })
-        console.log(res)
-        if(res?.model?.webUrl){
-          const orderData = await fetchAeonOrder({merchantOrderNo: merchantOrderKey})
-          await cloudData.set(`order_${merchantOrderKey}`, JSON.stringify(orderData?.model))
-          await fetchOrdersFromStorage()
-        }
         if(res) openAeonPayment(res)
+        if(res?.model?.webUrl){
+          console.log('fetching aeon orders', merchantOrderKey)
+          const orderData = await fetchAeonOrder({merchantOrderNo: merchantOrderKey})
+          console.log('Adding to telegram store aeon orders', merchantOrderKey)
+          try {
+            await cloudData.set(`order_${merchantOrderKey}`, JSON.stringify(orderData?.model))
+          } catch (error) {
+            console.log(error)
+          }
+          console.log('Added to telegram store aeon orders', merchantOrderKey)
+
+        }
+        await setTimeout(async () => {
+          await refreshOrdersData()
+        },1000)
       } catch (error) {
         console.log(error)
       }

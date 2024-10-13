@@ -13,7 +13,6 @@ interface getOrderRequestParams {
     const requestParams:any = params
     requestParams.appId = import.meta.env.VITE_AEON_APP_ID
     requestParams.sign = generateSignature(JSON.parse(JSON.stringify(params)));
-    console.log('requestParams', requestParams)
     try {
       const response = await axios.post(`${AEON_SANDBOX_PAYMENTS_BASE_API}/open/api/payment/query`, requestParams, {
         headers: {
@@ -21,7 +20,6 @@ interface getOrderRequestParams {
         }
       });
       const aeonResponse: AeonOrderResponse = response.data;
-      console.log(aeonResponse)
       return aeonResponse
     } catch (error) {
       console.error('Error:', error);

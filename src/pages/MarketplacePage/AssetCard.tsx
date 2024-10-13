@@ -70,7 +70,7 @@ export const AssetCard = ({
           }}
         />
         <Card style={{ textAlign: "center", marginTop: "0.4rem" }}>
-          <Typography typography={"small"}>{item.name}</Typography>
+          <Typography typography={"small"} sx={{fontSize: '12px'}}>{item.name}</Typography>
         </Card>
         <div
           style={{
@@ -86,17 +86,19 @@ export const AssetCard = ({
               justifyContent: "space-between",
               // paddingLeft: "0.5rem",
               // paddingRight: "0.5rem",
+              paddingBottom: '0.2rem'
             }}
           >
-            <Typography>Mint: 0</Typography>
-            <Typography>Lv: 5</Typography>
+            <Typography sx={{fontSize: '12px'}}>Mint: {Math.round(generateFractionalPrice(item.name) * 1232)}</Typography>
+            <Typography sx={{fontSize: '12px'}}>Lv: {Math.round(generateFractionalPrice(item.name) * 7)}</Typography>
           </div>
           {/* <LinearProgress color="info" /> */}
           <BorderLinearProgress
             variant="determinate"
-            color="inherit"
-            style={{ height: "5px" }}
-            value={50}
+            // color="inherit"
+            color={assetConfig.color as any}
+            style={{ height: "5px", border: '0.5px solid black' }}
+            value={generateFractionalPrice(item.name) * 20}
           />
         </div>
         <div
@@ -106,7 +108,7 @@ export const AssetCard = ({
             alignItems: "center",
             justifyItems: "center",
             width: "100%",
-            marginTop: "0.8rem",
+            marginTop: "0.5rem",
             marginBottom: "0.5rem",
           }}
         >
@@ -115,14 +117,14 @@ export const AssetCard = ({
               color="inherit"
               sx={{ background: "none", border: "none" }}
             >
-              <Chip icon ={<Iconify icon="token:usdt" sx={{width: '24px', height: '24px'}} />}label={<Typography sx={{ color: "black" }}>{generateFractionalPrice(item.name)}</Typography>}/>
+              <Chip icon ={<Iconify icon="token:usdt" sx={{width: '18px', height: '18px'}} />}label={<Typography sx={{ color: "black", fontSize: '12px' }}>{generateFractionalPrice(item.name)}</Typography>}/>
             </Button>
           </div>
           <div>
             <Button
               variant="outlined"
               color="inherit"
-              sx={{ marginRight: "0.5rem" }}
+              sx={{ marginRight: "0.5rem", fontSize: '10px' }}
               className="aeon-box-border aeon-box-shadow-bold aeon-transition"
               startIcon={<Iconify icon="icon-park-outline:buy" />}
               onClick={() => {
