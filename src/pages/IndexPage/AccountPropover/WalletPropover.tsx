@@ -122,7 +122,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
             key={"copy"}
             onClick={() => {
               navigator.clipboard.writeText(tonWalletAddress);
-              setOpenPopover(false)
+              if(setOpenPopover) setOpenPopover(null)
             }}
           >
             <Iconify icon={"ion:copy-outline"} />
@@ -130,7 +130,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
           </MenuItem>
           <MenuItem
             key={"copy"}
-            onClick={() => {openAccountOrdersModal(); setOpenPopover(false)}}
+            onClick={() => {openAccountOrdersModal(); setOpenPopover(null)}}
           >
             <Iconify icon={"hugeicons:profile"} />
             Manage

@@ -15,7 +15,7 @@ export type ITabs =
 export type IMarketplaceFilterTabs =
   | "ph:t-shirt-bold"
   | "lucide-lab:shorts"
-  | "ph:sock-bold"
+  // | "ph:sock-bold"
   | "ph:bag-bold"
   | "mingcute:hat-2-line";
 

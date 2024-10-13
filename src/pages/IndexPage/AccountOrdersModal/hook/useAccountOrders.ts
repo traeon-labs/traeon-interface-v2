@@ -2,12 +2,13 @@ import {IAeonOrder} from "@/types/index.type";
 import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
 import {useCloudStorage} from "@tma.js/sdk-react";
 import {useEffect,useMemo,useState} from "react";
+import {useAppContext} from "../../IndexPage";
 
 const useAccountOrders = (
 ) => {
   const cloudData = useCloudStorage(false)
   const [loadingOrders, setLoadingOrders] = useState(false)
-  const [orders, setOrders] = useState<IAeonOrder[]>([])
+  const {orders, setOrders} = useAppContext()
   const pendingOrders = useMemo(() => {
     return orders.filter(o => o?.orderStatus === 'INIT' || o.orderStatus === 'PROCESSING')
   },[orders])

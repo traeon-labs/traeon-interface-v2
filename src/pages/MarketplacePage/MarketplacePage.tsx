@@ -24,7 +24,7 @@ export const MarketplacePage = ({
 
 }) => {
   const [marketplaceTab, setMarketplaceTab] =
-    useState<IMarketplaceFilterTabs>("ph:t-shirt-bold");
+    useState<IMarketplaceFilterTabs>('mingcute:hat-2-line');
 
   const marketplaceAssetsFilter = useMemo(() => {
     return marketplaceAssets.filter((asset) => {

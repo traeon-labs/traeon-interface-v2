@@ -12,6 +12,7 @@ import {
   Link,
   Skeleton,
   Typography,
+  Box,
 } from "@mui/material";
 import {  Modal } from "@telegram-apps/telegram-ui";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -94,6 +95,9 @@ export const AccountOrdersModal = () => {
               <WalletPropover allowPopover={false} />
             </div>
           </Grid2>
+           {!loadingOrders ?  <Grid2 size={12} sx={{textAlign:'center'}}>
+               <Typography style={{paddingBottom: '0.5rem'}}onClick={() => {openAccountOrdersModal()}}>Orders history ({orders.length})</Typography>
+               </Grid2> : ''}
           {orders.length === 0 && !loadingOrders ? (
             "No Orders Found"
           ) : loadingOrders ? (
@@ -115,7 +119,7 @@ export const AccountOrdersModal = () => {
                     <Typography variant="subtitle1">
                       Address:{" "}
                       <strong>
-                        {order?.address ? shortenAddress(order?.address) : 'pending...'}
+                        {order?.address ? shortenAddress(order?.address) : 'Need to select payment'}
                       </strong>
                     </Typography>
                   </Grid2>
@@ -129,7 +133,7 @@ export const AccountOrdersModal = () => {
                   </Grid2>
                   <Grid2 size={12}>
                     <Typography variant="subtitle1">
-                      Fee: <strong>${order.fee}</strong>
+                      Fee: {order.fee ? <><strong>${order.fee}</strong></> : 'N/A'}
                     </Typography>
                   </Grid2>
                  
@@ -169,16 +173,6 @@ export const AccountOrdersModal = () => {
                     </Typography>
                   </Grid2>
 
-                  {/* <Grid2 size={12} >
-                    <Typography variant="body1">
-                      Status:{" "}
-                      <Chip
-                        className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                        label={order.orderStatus}
-                        color={getOrderStatusColor(order.orderStatus)}
-                      />
-                    </Typography>
-                  </Grid2> */}
                 </Grid2>
               );
             })

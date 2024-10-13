@@ -10,7 +10,7 @@ export const TABS: { [key: string]: string } = {
 export const MARKETPLACE_FILTERS_TABS: { [key: string]: string } = {
   "ph:t-shirt-bold": "t-shirts",
   "lucide-lab:shorts": "shorts",
-  "ph:sock-bold": "socks",
+  // "ph:sock-bold": "socks",
   "ph:bag-bold": "bags",
   "mingcute:hat-2-line": "hats",
 };
@@ -28,11 +28,11 @@ export const MARKETPLACE_ASSET_CONFIG: {
     label: "Short",
     color: "success",
   },
-  socks: {
-    icon: "ph:sock-bold",
-    label: "Sock",
-    color: "inherit",
-  },
+  // socks: {
+  //   icon: "ph:sock-bold",
+  //   label: "Sock",
+  //   color: "inherit",
+  // },
   hats: {
     icon: "mingcute:hat-2-line",
     label: "Hat",

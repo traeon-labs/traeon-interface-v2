@@ -1,7 +1,7 @@
 [{
         "name": "#12341322",
         "description": "A vibrant hat perfect for your next round of golf. This hat symbolizes not just style but a statement of excellence on the green.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9019.png",
         "attributes": [{
                 "trait_type": "type",
                 "value": "hats"
@@ -23,7 +23,7 @@
     {
         "name": "#21623605",
         "description": "A sleek and stylish hat that fits perfectly for any outdoor adventure. With a lightweight design, it's ideal for golf or casual outings.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9079.png",
         "attributes": [{
                 "trait_type": "type",
                 "value": "hats"
@@ -67,10 +67,10 @@
     {
         "name": "#21603602",
         "description": "This t-shirt is the perfect companion for a leisurely day spent with a book. Made from soft, breathable fabric, it's a must-have for readers.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "image": "https://famousfoxes.com/tff/778.png",
         "attributes": [{
                 "trait_type": "type",
-                "value": "t-shirts"
+                "value": "shorts"
             },
             {
                 "trait_type": "size",
@@ -89,7 +89,7 @@
     {
         "name": "#21656823604",
         "description": "A trendy hat designed for those who love to dance. Whether you're hitting the dance floor or chilling at home, this hat keeps you stylish.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "image": "https://famousfoxes.com/hd/9054.png",
         "attributes": [{
                 "trait_type": "type",
                 "value": "hats"
@@ -108,9 +108,9 @@
             }
         ]
     }, {
-        "name": "#12341322",
+        "name": "#12341325",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9050.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -119,7 +119,7 @@
     {
         "name": "#21623605",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9052.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -131,25 +131,25 @@
         "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "shorts"
+            "value": "t-shirts"
         }]
     },
     {
         "name": "#21622600",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e54caddb74ca6a0b2_737.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "shorts"
+            "value": "t-shirts"
         }]
     },
     {
         "name": "#21613600",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971993601884a58d98957_1309.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "shorts"
+            "value": "t-shirts"
         }]
     },
     {
@@ -164,10 +164,10 @@
     {
         "name": "#21603602",
         "description": "Books is perfect way to spend your laisure time.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "image": "https://famousfoxes.com/tff/779.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "t-shirts"
+            "value": "shorts"
         }]
     },
     {
@@ -182,7 +182,7 @@
     {
         "name": "#2162568604",
         "description": "It's a dance time!",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "image": "https://famousfoxes.com/hd/9380.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -191,7 +191,7 @@
     {
         "name": "#21624353600",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9331.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -209,10 +209,10 @@
     {
         "name": "#2162123602",
         "description": "Books is perfect way to spend your laisure time.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "image": "https://famousfoxes.com/tff/768.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "t-shirts"
+            "value": "shorts"
         }]
     },
     {
@@ -227,7 +227,7 @@
     {
         "name": "#21656823604",
         "description": "It's a dance time!",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "image": "https://famousfoxes.com/hd/9351.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -236,7 +236,7 @@
     {
         "name": "#216956723600",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9325.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -254,10 +254,10 @@
     {
         "name": "#21625671253602",
         "description": "Books is perfect way to spend your laisure time.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "image": "https://famousfoxes.com/tff/775.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "t-shirts"
+            "value": "shorts"
         }]
     },
     {
@@ -272,16 +272,52 @@
     {
         "name": "#2162553604",
         "description": "It's a dance time!",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "image": "https://famousfoxes.com/hd/9321.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
         }]
     },
     {
+        "name": "#21612657934301",
+        "description": "Bagggggg",
+        "image": "https://prod-image-cdn.tensor.trade/images/slug=7278d4ac-497b-4c9b-a609-0c376e84d6e2/400x400/freeze=false/https%3A%2F%2Fna-assets.pinit.io%2FGvFSag6uZqsUXtdumGgU1Aw3BRmTgcR6Pg1wBptfoWyp%2Ff4a5e51f-ed0a-4de3-8572-2cadd6a0aa66%2F175",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "bags"
+        }]
+    },
+    {
+        "name": "#216126579346301",
+        "description": "Bagggggg",
+        "image": "https://prod-image-cdn.tensor.trade/images/slug=7278d4ac-497b-4c9b-a609-0c376e84d6e2/400x400/freeze=false/https%3A%2F%2Fna-assets.pinit.io%2FGvFSag6uZqsUXtdumGgU1Aw3BRmTgcR6Pg1wBptfoWyp%2Ff4a5e51f-ed0a-4de3-8572-2cadd6a0aa66%2F172",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "bags"
+        }]
+    },
+    {
+        "name": "#216126573434301",
+        "description": "Bagggggssg",
+        "image": "https://prod-image-cdn.tensor.trade/images/slug=7278d4ac-497b-4c9b-a609-0c376e84d6e2/400x400/freeze=false/https%3A%2F%2Fna-assets.pinit.io%2FGvFSag6uZqsUXtdumGgU1Aw3BRmTgcR6Pg1wBptfoWyp%2Ff4a5e51f-ed0a-4de3-8572-2cadd6a0aa66%2F171",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "bags"
+        }]
+    },
+    {
+        "name": "#21612342657934301",
+        "description": "Bagggggg culture",
+        "image": "https://prod-image-cdn.tensor.trade/images/slug=7278d4ac-497b-4c9b-a609-0c376e84d6e2/400x400/freeze=false/https%3A%2F%2Fna-assets.pinit.io%2FGvFSag6uZqsUXtdumGgU1Aw3BRmTgcR6Pg1wBptfoWyp%2Ff4a5e51f-ed0a-4de3-8572-2cadd6a0aa66%2F169",
+        "attributes": [{
+            "trait_type": "type",
+            "value": "bags"
+        }]
+    },
+    {
         "name": "#2161265793601",
         "description": "Let's read some news...",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971986b790be9f4451425_164.png",
+        "image": "https://prod-image-cdn.tensor.trade/images/slug=7278d4ac-497b-4c9b-a609-0c376e84d6e2/400x400/freeze=false/https%3A%2F%2Fna-assets.pinit.io%2FGvFSag6uZqsUXtdumGgU1Aw3BRmTgcR6Pg1wBptfoWyp%2Ff4a5e51f-ed0a-4de3-8572-2cadd6a0aa66%2F354",
         "attributes": [{
             "trait_type": "type",
             "value": "bags"
@@ -290,15 +326,15 @@
     {
         "name": "#2164765793601",
         "description": "Let's read some news...",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971986b790be9f4451425_164.png",
+        "image": "https://prod-image-cdn.tensor.trade/images/slug=7278d4ac-497b-4c9b-a609-0c376e84d6e2/400x400/freeze=false/https%3A%2F%2Fna-assets.pinit.io%2FGvFSag6uZqsUXtdumGgU1Aw3BRmTgcR6Pg1wBptfoWyp%2Ff4a5e51f-ed0a-4de3-8572-2cadd6a0aa66%2F353",
         "attributes": [{
             "trait_type": "type",
             "value": "bags"
         }]
     }, {
-        "name": "#12341322",
+        "name": "#12341327",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9365.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -307,7 +343,7 @@
     {
         "name": "#21623605",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9343.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -316,28 +352,28 @@
     {
         "name": "#21623603",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549719939df0d503dfb57af_378.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "shorts"
+            "value": "t-shirts"
         }]
     },
     {
         "name": "#21622600",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e0c28d92c0c7c2a9a_2250.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "shorts"
+            "value": "t-shirts"
         }]
     },
     {
         "name": "#21613600",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image":    "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549719911245cee4d4dedaf_572.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "shorts"
+            "value": "t-shirts"
         }]
     },
     {
@@ -352,10 +388,10 @@
     {
         "name": "#21603602",
         "description": "Books is perfect way to spend your laisure time.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "image": "https://famousfoxes.com/tff/765.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "t-shirts"
+            "value": "shorts"
         }]
     },
     {
@@ -370,7 +406,7 @@
     {
         "name": "#2162568604",
         "description": "It's a dance time!",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "image": "https://famousfoxes.com/hd/9330.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -379,7 +415,7 @@
     {
         "name": "#21624353600",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9399.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -397,16 +433,16 @@
     {
         "name": "#2162123602",
         "description": "Books is perfect way to spend your laisure time.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "image": "https://famousfoxes.com/tff/738.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "t-shirts"
+            "value": "shorts"
         }]
     },
     {
         "name": "#2164356353603",
         "description": "I like to spend time with my friends drawing beautiful pictures",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198beee7386b554a4f6_349.png",
+        "image": "https://i.seadn.io/s/raw/files/45f5430ac882cabdf3c8935e397a0700.png?auto=format&dpr=1&w=640",
         "attributes": [{
             "trait_type": "type",
             "value": "socks"
@@ -415,16 +451,16 @@
     {
         "name": "#21656823604",
         "description": "It's a dance time!",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "image": "https://famousfoxes.com/hd/9336.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
         }]
     },
     {
-        "name": "#216956723600",
+        "name": "#216956723605",
         "description": "What about a round of golf?",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/6549718e6773208e58db2276_277.png",
+        "image": "https://famousfoxes.com/hd/9324.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -442,10 +478,10 @@
     {
         "name": "#21625671253602",
         "description": "Books is perfect way to spend your laisure time.",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198a78163219621f60e_575.png",
+        "image": "https://famousfoxes.com/tff/790.png",
         "attributes": [{
             "trait_type": "type",
-            "value": "t-shirts"
+            "value": "shorts"
         }]
     },
     {
@@ -460,7 +496,7 @@
     {
         "name": "#2162553604",
         "description": "It's a dance time!",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/65497198e31f91f5c3a2917d_109.png",
+        "image": "https://famousfoxes.com/hd/9335.png",
         "attributes": [{
             "trait_type": "type",
             "value": "hats"
@@ -469,7 +505,7 @@
     {
         "name": "#2161265793601",
         "description": "Let's read some news...",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971986b790be9f4451425_164.png",
+        "image": "https://prod-image-cdn.tensor.trade/images/slug=7278d4ac-497b-4c9b-a609-0c376e84d6e2/400x400/freeze=false/https%3A%2F%2Fna-assets.pinit.io%2FGvFSag6uZqsUXtdumGgU1Aw3BRmTgcR6Pg1wBptfoWyp%2Ff4a5e51f-ed0a-4de3-8572-2cadd6a0aa66%2F356",
         "attributes": [{
             "trait_type": "type",
             "value": "bags"
@@ -478,7 +514,7 @@
     {
         "name": "#2164765793601",
         "description": "Let's read some news...",
-        "image": "https://assets-global.website-files.com/6531cf988b06260fbdbb0235/654971986b790be9f4451425_164.png",
+        "image": "https://prod-image-cdn.tensor.trade/images/slug=7278d4ac-497b-4c9b-a609-0c376e84d6e2/400x400/freeze=false/https%3A%2F%2Fna-assets.pinit.io%2FGvFSag6uZqsUXtdumGgU1Aw3BRmTgcR6Pg1wBptfoWyp%2Ff4a5e51f-ed0a-4de3-8572-2cadd6a0aa66%2F38",
         "attributes": [{
             "trait_type": "type",
             "value": "bags"
