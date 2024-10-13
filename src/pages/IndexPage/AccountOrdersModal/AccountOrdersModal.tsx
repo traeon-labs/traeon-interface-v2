@@ -8,9 +8,10 @@ import {
   Grid2,
   IconButton,
   Link,
+  Skeleton,
   Typography,
 } from "@mui/material";
-import { Modal, Skeleton } from "@telegram-apps/telegram-ui";
+import { Modal } from "@telegram-apps/telegram-ui";
 import { useEffect, useMemo, useRef, useState } from "react";
 import useAccountOrders from "./hook/useAccountOrders";
 import { AEON_EXPLORE_WEBURL } from "@/config";
@@ -93,14 +94,18 @@ export const AccountOrdersModal = () => {
           {orders.length === 0 && !loadingOrders ? (
             "No Orders Found"
           ) : loadingOrders ? (
-            <Skeleton>Loading...</Skeleton>
+              [1,2,3].map(_ => {
+                return <Grid2 size={12} key={_} py={1}>
+                  <Skeleton variant="rectangular" sx={{borderRadius:'20px'}} width={'100%'} height={'150px'} />
+                </Grid2>
+              })
           ) : (
             ordersWithSort.map((order, _) => {
               return (
                 <Grid2
                   size={12}
                   key={_}
-                  sx={{ p: 2, margin: 0.5 }}
+                  sx={{ p: 2, margin: 0.5, transition: 0 }}
                   className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                 >
                   <Grid2 size={12}>
@@ -127,22 +132,6 @@ export const AccountOrdersModal = () => {
                   <Grid2 size={12}>
                     <Typography variant="body1">
                       View Order:{" "}
-                      {/* <Link
-                          href={`${AEON_EXPLORE_WEBURL}/transferInformation?orderNo=${order.orderNo}`}
-                        > */}
-                      {/* <Chip
-                        startIcon={
-                          <Iconify
-                            icon={"streamline:arrow-reload-horizontal-2-solid"}
-                          />
-                        }
-                        className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                        onClick={() => {
-                          refreshOrdersData();
-                        }}
-                        label={shortenAddress(order.orderNo)}
-                      /> */}
-                      {/* </Link> */}
                       <Button
                         color='inherit'
                         className="aeon-box-border aeon-box-shadow-bold aeon-transition"
@@ -168,6 +157,7 @@ export const AccountOrdersModal = () => {
                       </Button>
                       <Chip
                         className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                        sx = {{opacity: 0.8}}
                         label={order.orderStatus}
                         color={getOrderStatusColor(order.orderStatus)}
                       />
