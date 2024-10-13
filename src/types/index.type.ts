@@ -89,7 +89,7 @@ export interface IAeonOrder  {
   hxAddress: string;               // Hash address, max length 256
   failReason?: string;             // Fail reason (optional), max length 256
   fee?: string;                    // Transaction fee (optional), max length 16
-  customParam?: Record<string, any>; // Expend parameter, max length 512
+  customParam?: string; // Expend parameter, max length 512
   settlementAmount: string;        // Amount of settlement, max length 16
   settlementCurrency: string;      // Currency of settlement, max length 16
 }

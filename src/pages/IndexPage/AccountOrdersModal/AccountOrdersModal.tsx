@@ -30,10 +30,11 @@ export const AccountOrdersModal = () => {
   const { orders, loadingOrders, refreshOrdersData, fetchOrdersFromStorage } =
     useAccountOrders();
   const ordersWithSort = useMemo(() => {
+    console.log(orders)
     const _order = orders.sort(
       (a, b) =>
-        Number(a?.customParam?.["orderTs"] || 0) -
-        Number(b?.customParam?.["orderTs"] || 0)
+        Number(JSON.parse(b?.customParam || '{}')?.["orderTs"] || 0) -
+        Number(JSON.parse(a?.customParam || '{}')?.["orderTs"] || 0)
     );
     return _order;
   }, [orders]);
