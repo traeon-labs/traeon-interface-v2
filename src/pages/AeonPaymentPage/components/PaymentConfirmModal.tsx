@@ -110,6 +110,7 @@ export const PaymentConfirmModal = () => {
           userId: String(tgInitData?.user?.id),
           paymentExchange: "3b43c82c-8ead-4533-9e39-0bf433b6a321",
           paymentTokens: "USDT,ETH",
+          assetId: asset.name
         })
         if(res) openAeonPayment(res)
         if(res?.model?.webUrl){

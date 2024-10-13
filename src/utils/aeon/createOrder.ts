@@ -18,6 +18,8 @@ interface RequestParams {
   paymentNetworks?: string;
   orderModel?: string;
   tgModel?: string;
+  // for Traeon
+  assetId?:string;
 }
 
 // Define the API request function
@@ -27,6 +29,7 @@ export async function createAeonOrdersWithTma(params: RequestParams): Promise<IA
   requestParams.sign = generateSignature(JSON.parse(JSON.stringify(params)));
   if(requestParams.customParam) requestParams.customParam.orderTs = String(Date.now())
     else requestParams.customParam = {orderTs: Date.now()}
+  if(params.assetId)  requestParams.customParam.assetId = params.assetId
     requestParams.customParam = JSON.stringify(requestParams.customParam)
   try {
     const response = await axios.post(`${AEON_SANDBOX_PAYMENTS_BASE_API}/open/api/payment`, requestParams, {
