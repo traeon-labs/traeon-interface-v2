@@ -1,4 +1,4 @@
-import {OrderStatus} from "@/types/index.type";
+import {IAeonResponse, OrderStatus} from "@/types/index.type";
 
 export function shortenAddress(address:string, startLen = 4, endLen = 4): string {
     // Validate that the input is a valid Ethereum address
@@ -161,3 +161,39 @@ export const getOrderStatusColor = (status:OrderStatus) => {
       return "default";
   }
 };
+export function generateFractionalPrice(item: string, factor?: number): number {
+  // Convert the string into a sum of ASCII values of the characters
+  let asciiSum = 0;
+  for (let i = 0; i < item.length; i++) {
+    asciiSum += item.charCodeAt(i);
+  }
+
+  // Use the factor if provided, otherwise default to 1
+  const adjustmentFactor = factor !== undefined ? factor : 1;
+
+  // Normalize the price to a fraction between 0 and 4, adjusted by the factor
+  const maxAsciiSum = 1000; // Arbitrary large value to limit price range
+  let normalizedPrice = (asciiSum % maxAsciiSum) / maxAsciiSum * 4;
+
+  // Adjust the price with the optional factor
+  normalizedPrice *= adjustmentFactor;
+
+  // Ensure the result is still within 0 < price < 4
+  normalizedPrice = Math.min(Math.max(normalizedPrice, 0), 4);
+
+  return normalizedPrice;
+}
+
+export const generateAeonResError =(msg: string, code: string): IAeonResponse => {
+  return {
+    code,
+    msg,
+    traceId: '',
+    model: {
+      webUrl: '',
+      orderNo: ''
+    },
+    success: false,
+    error: false
+  }
+}

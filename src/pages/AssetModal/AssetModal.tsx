@@ -19,7 +19,8 @@ import { useMemo, useState } from "react";
 import { WalletPropover } from "../IndexPage/AccountPropover/WalletPropover";
 import { BorderLinearProgress } from "@/components/Linear/customLinear";
 import AssetHistory from "./AssetHistory";
-import {openPaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
+import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
+import { generateFractionalPrice } from "@/utils";
 
 const _MOCK_ATTS = [
   {
@@ -289,7 +290,7 @@ export default function AssetModal({
                           textAlign: "center",
                           border: "none",
                         }}
-                        label={<Typography Component={"h4"}>{12}</Typography>}
+                        label={<Typography Component={"h4"}>{generateFractionalPrice(att.label + asset.name)}</Typography>}
                         onClick={() => {
                           navigator.clipboard.writeText(asset.name);
                         }}
@@ -355,7 +356,7 @@ export default function AssetModal({
               }}
             >
               <Button
-                color="inherit"
+                color="default"
                 size="large"
                 sx={{
                   background: "none",
@@ -365,10 +366,9 @@ export default function AssetModal({
                 }}
               >
                 <Chip
-                  variant="outlined"
                   sx={{ fontSize: "20px", padding: "0.5rem" }}
-                  label="20"
-                  icon={<Iconify icon="token:ton" />}
+                  label={generateFractionalPrice(asset.name)}
+                  icon={<Iconify icon="token:usdt" />}
                 />
               </Button>
               <Button
@@ -376,10 +376,15 @@ export default function AssetModal({
                 color="inherit"
                 sx={{ marginRight: "1rem" }}
                 className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                startIcon={<Iconify icon="icon-park-outline:buy" />}
                 onClick={() => {openPaymentConfirmModal(asset)}}
               >
-                Buy
+                 <Chip
+                  sx={{ background: 'none', fontSize: "16px" }}
+                  label='Buy'
+                  icon={<Iconify icon="icon-park-outline:buy" />}
+
+                />
+                {/* Buy */}
               </Button>
             </Card>
           </>

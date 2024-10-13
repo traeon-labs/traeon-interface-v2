@@ -18,7 +18,7 @@ import {
 import { Modal, Typography } from "@telegram-apps/telegram-ui";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {openAeonPayment} from "./AeonPaymentModal";
-import {generateOrderKey} from "@/utils";
+import {generateAeonResError, generateFractionalPrice, generateOrderKey} from "@/utils";
 import {useCloudStorage, useInitData} from "@tma.js/sdk-react";
 import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
 import useAccountOrders from "@/pages/IndexPage/AccountOrdersModal/hook/useAccountOrders";
@@ -91,23 +91,18 @@ export const PaymentConfirmModal = () => {
     if(paymentType==='AEON') { 
       try {
         if(!tgInitData?.user?.id) {
-          openAeonPayment({
-            code: '503',
-            msg: 'Telegram authentication Error',
-            traceId: '',
-            model: {
-              webUrl: '',
-              orderNo: ''
-            },
-            success: false,
-            error: false
-          })
+          openAeonPayment( generateAeonResError('Telegram authentication Error!','503'))
           return;
         }
+        if(!asset?.name) {
+          openAeonPayment( generateAeonResError('Asset not available now!','404'))
+          return;
+        }
+
         const merchantOrderKey = generateOrderKey(String(tgInitData?.user?.id))
         const res = await createAeonOrdersWithTma({
           merchantOrderNo: merchantOrderKey,
-          orderAmount: '200', // 10U
+          orderAmount: String(generateFractionalPrice(asset?.name) * 100), // 10U
           payCurrency: 'USD',
           userId: String(tgInitData?.user?.id),
           paymentExchange: "3b43c82c-8ead-4533-9e39-0bf433b6a321",
@@ -237,7 +232,7 @@ export const PaymentConfirmModal = () => {
                             textAlign: "center",
                             border: "none",
                           }}
-                          label={<Typography Component={"h4"}>{12}</Typography>}
+                          label={<Typography Component={"h4"}>{generateFractionalPrice(att.label + asset.name)}</Typography>}
                           onClick={() => {
                             navigator.clipboard.writeText(asset.name);
                           }}
@@ -265,8 +260,8 @@ export const PaymentConfirmModal = () => {
                         width: "100%",
                         padding: "0.5rem",
                       }}
-                      label={`20 ~ $${1.51}`}
-                      icon={<Iconify icon="token:ton" />}
+                      label={`${generateFractionalPrice(asset.name)}`}
+                      icon={<Iconify icon="token:usdt" />}
                     />
                   </Button>
                 </Grid2>

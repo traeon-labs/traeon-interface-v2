@@ -1,4 +1,4 @@
-import marketplaceAssets from "@/_mock/metadata/nfts.json";
+import marketplaceAssets from "@/nfts/metadata/nfts.json";
 import { IMarketplaceFilterTabs, INFTMetadata } from "@/types/index.type";
 import { Grid2 } from "@mui/material";
 import { List } from "@telegram-apps/telegram-ui";

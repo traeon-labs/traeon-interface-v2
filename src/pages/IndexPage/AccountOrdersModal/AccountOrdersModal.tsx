@@ -99,7 +99,9 @@ export const AccountOrdersModal = () => {
                <Typography style={{paddingBottom: '0.5rem'}}onClick={() => {openAccountOrdersModal()}}>Orders history ({orders.length})</Typography>
                </Grid2> : ''}
           {orders.length === 0 && !loadingOrders ? (
-            "No Orders Found"
+            <Grid2 size={12} py={1} sx={{textAlign: 'center'}}>
+              No Orders Found
+            </Grid2>
           ) : loadingOrders ? (
               [1,2,3].map(_ => {
                 return <Grid2 size={12} key={_} py={1}>

@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { useMemo } from "react";
 import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
+import {generateFractionalPrice} from "@/utils";
 
 export const AssetCard = ({
   item,
@@ -113,10 +114,8 @@ export const AssetCard = ({
             <Button
               color="inherit"
               sx={{ background: "none", border: "none" }}
-              disabled
-              startIcon={<Iconify icon="token:ton" />}
             >
-              <Typography sx={{ color: "black" }}>20</Typography>
+              <Chip icon ={<Iconify icon="token:usdt" sx={{width: '24px', height: '24px'}} />}label={<Typography sx={{ color: "black" }}>{generateFractionalPrice(item.name)}</Typography>}/>
             </Button>
           </div>
           <div>
