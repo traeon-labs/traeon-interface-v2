@@ -73,31 +73,31 @@ export type IAeonResponse = {
   success: boolean
   error: boolean
 }
-
+export interface IAeonOrder  {
+  orderNo: string;                 // AEON order number, max length 64
+  orderStatus: OrderStatus;        // Order status, max length 32
+  userId: string;                  // User ID (email or phone number), max length 128
+  merchantOrderNo: string;         // Merchant order number, max length 64
+  orderCurrency: string;           // Currency of order (USD/EUR), max length 32
+  orderAmount: string;             // Amount of order (in cents), max length 16
+  payCryptoRate: string;           // Rate of payment crypto (to USDT), max length 16
+  payFiatRate: string;             // Rate of payment fiat (to USD), max length 16
+  payCryptoCurrency: string;       // Cryptocurrency of payment, max length 32
+  payCryptoVolume: string;         // Cryptocurrency payment amount, max length 16
+  payCryptoNetwork: string;        // Cryptocurrency payment network, max length 32
+  address: string;                 // Address for user transfer, max length 256
+  hxAddress: string;               // Hash address, max length 256
+  failReason?: string;             // Fail reason (optional), max length 256
+  fee?: string;                    // Transaction fee (optional), max length 16
+  customParam?: Record<string, any>; // Expend parameter, max length 512
+  settlementAmount: string;        // Amount of settlement, max length 16
+  settlementCurrency: string;      // Currency of settlement, max length 16
+}
 // Response Parameter Interface
 export interface AeonOrderResponse {
   code: string
   msg: string
-  model: {
-    orderNo: string;                 // AEON order number, max length 64
-    orderStatus: OrderStatus;        // Order status, max length 32
-    userId: string;                  // User ID (email or phone number), max length 128
-    merchantOrderNo: string;         // Merchant order number, max length 64
-    orderCurrency: string;           // Currency of order (USD/EUR), max length 32
-    orderAmount: string;             // Amount of order (in cents), max length 16
-    payCryptoRate: string;           // Rate of payment crypto (to USDT), max length 16
-    payFiatRate: string;             // Rate of payment fiat (to USD), max length 16
-    payCryptoCurrency: string;       // Cryptocurrency of payment, max length 32
-    payCryptoVolume: string;         // Cryptocurrency payment amount, max length 16
-    payCryptoNetwork: string;        // Cryptocurrency payment network, max length 32
-    address: string;                 // Address for user transfer, max length 256
-    hxAddress: string;               // Hash address, max length 256
-    failReason?: string;             // Fail reason (optional), max length 256
-    fee?: string;                    // Transaction fee (optional), max length 16
-    customParam?: Record<string, any>; // Expend parameter, max length 512
-    settlementAmount: string;        // Amount of settlement, max length 16
-    settlementCurrency: string;      // Currency of settlement, max length 16
-  }
+  model: IAeonOrder,
   traceId: string
   success: boolean
   error: boolean

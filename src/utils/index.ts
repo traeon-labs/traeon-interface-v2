@@ -1,3 +1,5 @@
+import {OrderStatus} from "@/types/index.type";
+
 export function shortenAddress(address:string, startLen = 4, endLen = 4): string {
     // Validate that the input is a valid Ethereum address
     // if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
@@ -137,3 +139,25 @@ export const encodeOrderKey = (tgUserId:string, merNoOrder?: string) => {
 export const decodeOrderKey = (orderMerKey: string) => {
   return orderMerKey.split('-')
 }
+export const getOrderStatusColor = (status:OrderStatus) => {
+  switch (status) {
+    case "INIT":
+      return "info"; // Waiting for user payment
+    case "PROCESSING":
+      return "warning"; // During the payment process
+    case "COMPLETED":
+      return "success"; // Payment success
+    case "CLOSE":
+      return "default"; // Payment close
+    case "TIMEOUT":
+      return "error"; // Payment cancel
+    case "FAILED":
+      return "error"; // Payment failure
+    case "DELAY_SUCCESS":
+      return "success"; // Overtime payment success
+    case "DELAY_FAILED":
+      return "error"; // Overtime payment failed
+    default:
+      return "default";
+  }
+};

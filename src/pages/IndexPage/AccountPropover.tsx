@@ -6,6 +6,7 @@ import {Iconify} from "@/components/iconify";
 import {Card} from "@mui/material";
 import Button from "@mui/material/Button";
 import {WalletPropover} from "./AccountPropover/WalletPropover";
+import {openAccountOrdersModal} from "./AccountOrdersModal/AccountOrdersModal";
 
 export type AccountPopoverProps = IconButtonProps & {
   data?: {
@@ -34,6 +35,7 @@ export function AccountPopover() {
         color="inherit"
         variant="outlined"
         style={{ border: "none", borderRadius: "20px" }}
+        onClick={() => {openAccountOrdersModal()}}
         size="large"
       >
         <Iconify icon="fa-solid:list-ul" />

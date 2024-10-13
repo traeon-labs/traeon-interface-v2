@@ -13,6 +13,7 @@ import {AccountPopover} from "./AccountPropover";
 import "./IndexPage.css";
 import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
 import {useInitData} from "@tma.js/sdk-react";
+import {AccountOrdersModal} from "./AccountOrdersModal/AccountOrdersModal";
 
 init()
 postEvent('web_app_setup_swipe_behavior', {allow_vertical_swipe: false})
@@ -29,14 +30,6 @@ export const IndexPage: FC = () => {
       setCustomElement(customElementRef.current);
     }
   }, [customElementRef])
-  const data = useInitData()
-  useEffect(() => {
-    fetchAeonOrder({
-      merchantOrderNo: '1'
-    }).then(res => {
-      console.log(res?.model)
-    })
-  },[])
   return (
     <div ref={customElementRef} style={{overflow: 'scroll', height: '100vh'}}>
       {/* <AeonPaymentPage/> */}
@@ -61,6 +54,7 @@ export const IndexPage: FC = () => {
       )}
       <AeonPaymentModal />
       <PaymentConfirmModal/>
+      <AccountOrdersModal/>
       <TabsController tab={tab} setTab={setTab} scrollDir={scrollDir}/>
       <AssetModal
         visible={assetModal}
