@@ -16,6 +16,7 @@ import useAccountOrders from "./hook/useAccountOrders";
 import { AEON_EXPLORE_WEBURL } from "@/config";
 import { getOrderStatusColor, shortenAddress } from "@/utils";
 import { WalletPropover } from "../AccountPropover/WalletPropover";
+import {openAeonPayment} from "@/pages/AeonPaymentPage/components/AeonPaymentModal";
 
 let _confirm: (props: {
   resolve?: (value: boolean) => void;
@@ -23,11 +24,16 @@ let _confirm: (props: {
 
 export const AccountOrdersModal = () => {
   const [visible, setVisible] = useState(false);
-  const { orders, loadingOrders, refreshOrdersData,fetchOrdersFromStorage } = useAccountOrders();
+  const { orders, loadingOrders, refreshOrdersData, fetchOrdersFromStorage } =
+    useAccountOrders();
   const ordersWithSort = useMemo(() => {
-    const _order = orders.sort((a,b) => Number(a?.customParam?.['orderTs'] || 0) -  Number(b?.customParam?.['orderTs'] || 0))
-    return _order
-  },[orders])
+    const _order = orders.sort(
+      (a, b) =>
+        Number(a?.customParam?.["orderTs"] || 0) -
+        Number(b?.customParam?.["orderTs"] || 0)
+    );
+    return _order;
+  }, [orders]);
   const resolveRef = useRef<(value: boolean) => void>(() => {
     throw new Error("RESOLVE_REF_UNSET");
   });
@@ -84,94 +90,140 @@ export const AccountOrdersModal = () => {
               <WalletPropover allowPopover={false} />
             </div>
           </Grid2>
-          {orders.length === 0 && !loadingOrders
-            ? "No Orders Found"
-            : loadingOrders
-            ? <Skeleton>Loading...</Skeleton>
-            : ordersWithSort.map((order, _) => {
-                return (
-                  <Grid2
-                    size={12}
-                    key={_}
-                    sx={{p: 2, margin: 0.5}}
-                    className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                  >
-                    <Grid2 size={12}>
-                      <Typography variant="subtitle1">
-                        Address:{" "}
-                        <strong>{shortenAddress(order?.address || 'pending...')}</strong>
-                      </Typography>
-                    </Grid2>
-                    <Grid2 size={12}>
-                      <Typography variant="subtitle1">
-                        Amount:{" "}
-                        <strong>
-                          {order.orderAmount} {order.orderCurrency}
-                        </strong>
-                      </Typography>
-                    </Grid2>
-                    <Grid2 size={12}>
-                      <Typography variant="subtitle1">
-                        Fee: <strong>${order.fee}</strong>
-                      </Typography>
-                    </Grid2>
-                    <Grid2 size={12}>
-                      <Typography variant="body1">
-                        View Order:{" "}
-                        <Link
-                          href={`${AEON_EXPLORE_WEBURL}/transferInformation?orderNo=${order.orderNo}`}
-                        >
-                          {shortenAddress(order.orderNo)}
-                        </Link>
-                      </Typography>
-                    </Grid2>
-                    <Grid2 size={12}>
-                      <Typography variant="body1">
-                        Status:{" "}
-                        <Chip
-                          label={order.orderStatus}
-                          color={getOrderStatusColor(order.orderStatus)}
-                        />
-                      </Typography>
-                    </Grid2>
+          {orders.length === 0 && !loadingOrders ? (
+            "No Orders Found"
+          ) : loadingOrders ? (
+            <Skeleton>Loading...</Skeleton>
+          ) : (
+            ordersWithSort.map((order, _) => {
+              return (
+                <Grid2
+                  size={12}
+                  key={_}
+                  sx={{ p: 2, margin: 0.5 }}
+                  className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                >
+                  <Grid2 size={12}>
+                    <Typography variant="subtitle1">
+                      Address:{" "}
+                      <strong>
+                        {shortenAddress(order?.address || "pending...")}
+                      </strong>
+                    </Typography>
                   </Grid2>
-                );
-              })}
+                  <Grid2 size={12}>
+                    <Typography variant="subtitle1">
+                      Amount:{" "}
+                      <strong>
+                        {order.orderAmount} {order.orderCurrency}
+                      </strong>
+                    </Typography>
+                  </Grid2>
+                  <Grid2 size={12}>
+                    <Typography variant="subtitle1">
+                      Fee: <strong>${order.fee}</strong>
+                    </Typography>
+                  </Grid2>
+                  <Grid2 size={12}>
+                    <Typography variant="body1">
+                      View Order:{" "}
+                      {/* <Link
+                          href={`${AEON_EXPLORE_WEBURL}/transferInformation?orderNo=${order.orderNo}`}
+                        > */}
+                      {/* <Chip
+                        startIcon={
+                          <Iconify
+                            icon={"streamline:arrow-reload-horizontal-2-solid"}
+                          />
+                        }
+                        className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                        onClick={() => {
+                          refreshOrdersData();
+                        }}
+                        label={shortenAddress(order.orderNo)}
+                      /> */}
+                      {/* </Link> */}
+                      <Button
+                        color='inherit'
+                        className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                        endIcon={
+                          <Iconify icon="lucide-lab:tab-arrow-up-right" />
+                        }
+                        onClick={() => {
+                          openAeonPayment({
+                            code: '',
+                            msg: '',
+                            traceId: '',
+                            model: {
+                              webUrl: `${AEON_EXPLORE_WEBURL}/transferInformation?orderNo=${order.orderNo}`,
+                              orderNo: order.orderNo
+                            },
+                            success: true,
+                            error: false
+                          })
+                        }}
+                        sx={{ mr: 1, px: 2 }}
+                      >
+                        {shortenAddress(order.orderNo)}
+                      </Button>
+                      <Chip
+                        className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                        label={order.orderStatus}
+                        color={getOrderStatusColor(order.orderStatus)}
+                      />
+                    </Typography>
+                  </Grid2>
+                  {/* <Grid2 size={12} >
+                    <Typography variant="body1">
+                      Status:{" "}
+                      <Chip
+                        className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                        label={order.orderStatus}
+                        color={getOrderStatusColor(order.orderStatus)}
+                      />
+                    </Typography>
+                  </Grid2> */}
+                </Grid2>
+              );
+            })
+          )}
           {/* <Grid2 size={12} className="w-100 "> */}
-            <Card
-              className=""
-              sx={{
-                textAlign: "center",
-                borderRadius: "20px",
-                py: 2,
-                width: "100%",
+          <Card
+            className=""
+            sx={{
+              textAlign: "center",
+              borderRadius: "20px",
+              py: 2,
+              width: "100%",
+            }}
+          >
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={() => {
+                setVisible(false);
+              }}
+              startIcon={<Iconify icon="uil:cancel" />}
+              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+              sx={{ py: 1, width: "48%", marginRight: "1%", marginLeft: "1%" }}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="outlined"
+              color="inherit"
+              startIcon={
+                <Iconify icon={"streamline:arrow-reload-horizontal-2-solid"} />
+              }
+              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+              sx={{ py: 1, width: "48%", marginLeft: "1%", marginRight: "1%" }}
+              onClick={() => {
+                refreshOrdersData();
               }}
             >
-              <Button
-                variant="outlined"
-                color="inherit"
-                onClick={() => {
-                  setVisible(false);
-                }}
-                startIcon={<Iconify icon="uil:cancel" />}
-                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                sx={{ py: 1, width: "48%", marginRight: "1%", marginLeft: "1%" }}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="outlined"
-                color="inherit"
-                startIcon={
-                  <Iconify icon={"streamline:arrow-reload-horizontal-2-solid"} />
-                }
-                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                sx={{ py: 1, width: "48%", marginLeft: "1%", marginRight: "1%" }}
-                onClick={() => {refreshOrdersData()}}
-              >
-                Reload
-              </Button>
-            </Card>
+              Reload
+            </Button>
+          </Card>
           {/* </Grid2> */}
         </Grid2>
       </Container>
