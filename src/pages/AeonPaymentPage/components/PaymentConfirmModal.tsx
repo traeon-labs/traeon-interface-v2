@@ -23,11 +23,12 @@ import {
   generateFractionalPrice,
   generateOrderKey,
 } from "@/utils";
-import { useCloudStorage, useCloudStorageRaw, useInitData } from "@tma.js/sdk-react";
+import { useInitData } from "@tma.js/sdk-react";
 import { fetchAeonOrder } from "@/utils/aeon/fetchOrder";
 import useAccountOrders from "@/pages/IndexPage/AccountOrdersModal/hook/useAccountOrders";
 import { openAccountOrdersModal } from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
 import { LineMdLoadingLoop } from "@/components/icons/LineMdLoadingLoop";
+import { cloudStorage as cloudData } from "@telegram-apps/sdk";
 
 const _MOCK_ATTS = [
   {
@@ -98,8 +99,8 @@ export const PaymentConfirmModal = () => {
       ];
   }, [asset]);
   const tgInitData = useInitData();
-  const cloudData = useCloudStorage(false);
-  const cloudDataRaw = useCloudStorageRaw(false);
+  // const cloudData = useCloudStorage(false);
+  // const cloudData = useCloudStorageRaw(false);
 
   const purchaseItem = async () => {
     if (paymentType === "AEON") {
@@ -139,7 +140,7 @@ export const PaymentConfirmModal = () => {
           console.log("Adding to telegram store aeon orders", merchantOrderKey);
           if (orderData?.model) setUnfillOrders([orderData?.model]);
           try {
-            await cloudDataRaw?.result?.set(`order_${merchantOrderKey}`, "");
+            await cloudData.setItem(`order_${merchantOrderKey}`, "");
           } catch (error) {
             console.log(error);
           }

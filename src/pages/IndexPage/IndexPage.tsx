@@ -2,7 +2,7 @@ import {createContext,useContext,useEffect,useRef,useState,type FC} from "react"
 
 import {IAeonOrder,INFTMetadata,ITabs} from "@/types/index.type";
 import useDetectScroll from "@smakss/react-scroll-direction";
-import {init,postEvent} from "@telegram-apps/sdk";
+import {init,postEvent,cloudStorage} from "@telegram-apps/sdk";
 import {AeonPaymentModal} from "../AeonPaymentPage/components/AeonPaymentModal";
 import {PaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
 import AssetModal from "../AssetModal/AssetModal";
@@ -15,6 +15,7 @@ import "./IndexPage.css";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
+
 interface AppContextType {
   orders: IAeonOrder[];
   setOrders: React.Dispatch<React.SetStateAction<IAeonOrder[]>>;
@@ -26,9 +27,9 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const IndexPage: FC = () => {
-  const [tab, setTab] = useState<ITabs>("mdi:shopping-outline");
+  const [tab, setTab] = useState<ITabs>("mdi:location-on-outline");
   const [assetModal, setAssestModal] = useState<boolean>(false);
-  const [travelMapModal, setTravelMapModal] = useState<boolean>(false);
+  const [travelMapModal, setTravelMapModal] = useState<boolean>(true);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>();
   const customElementRef = useRef<HTMLDivElement>(null);
   const [customElement, setCustomElement] = useState<HTMLDivElement>();

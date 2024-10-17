@@ -7,9 +7,9 @@ import {
   Grid2,
   Typography,
 } from "@mui/material";
-import { useCloudStorage } from "@tma.js/sdk-react";
+import { cloudStorage as cloudData } from "@telegram-apps/sdk";
 import "mapbox-gl/dist/mapbox-gl.css";
-import {TravelMapModal} from "./TravelMapModal";
+import { TravelMapModal } from "./TravelMapModal";
 
 export const TravelPage = ({
   visible,
@@ -18,61 +18,45 @@ export const TravelPage = ({
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const cloudData = useCloudStorage(false);
   const onResetData = async () => {
     const keys = await cloudData.getKeys();
-    await cloudData.delete(keys);
+    await cloudData.deleteItem(keys);
   };
   return (
     <div>
-      <h1>Strava-like Map</h1>
-      <p>Total check-in Location: ... meters</p>
+      {!visible ? (
+        <Grid2 container pb={2} spacing={1}>
+          <Grid2 size={6}>
+            <Button
+              variant="outlined"
+              color="inherit"
+              sx={{ width: "100%" }}
+              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+              startIcon={<Iconify icon="entypo:location" />}
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
+              Start Jouney
+            </Button>
+          </Grid2>
+          <Grid2 size={6}>
+            <Button
+              variant="outlined"
+              color="inherit"
+              sx={{ width: "100%" }}
+              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+              // onClick={onResetData}
+            >
+              action
+            </Button>
+          </Grid2>
+        </Grid2>
+      ) : (
+      ''
+      )}
 
-      <Grid2 container pb={2} spacing={3}>
-        <Grid2 size={4}>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ width: "100%" }}
-            className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-            startIcon={<Iconify icon="entypo:location" />}
-            // onClick={onCheckin}
-          >
-            Checkin
-          </Button>
-        </Grid2>
-        <Grid2 size={4}>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ width: "100%" }}
-            className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-            // onClick={onResetData}
-          >
-            Reset
-          </Button>
-        </Grid2>
-        <Grid2 size={4}>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ width: "100%" }}
-            className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-            onClick={() => {
-              setVisible(true);
-            }}
-          >
-            Your Journey
-          </Button>
-        </Grid2>
-      </Grid2>
-      
-      <Grid2>
-        <TravelMapModal
-          visible={visible}
-          setVisible={setVisible}
-        />
-      </Grid2>
+      <TravelMapModal visible={visible} setVisible={setVisible} />
     </div>
   );
 };

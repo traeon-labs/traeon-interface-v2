@@ -31,8 +31,8 @@ const useLocationTracking = (
     // Remove previous markers
     markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = [];
-
     // Loop through markLocations and add markers to the map
+    console.log(markLocations)
     Object.keys(markLocations).forEach((key) => {
       const { marks, color } = markLocations[key];
 
@@ -68,11 +68,11 @@ const useLocationTracking = (
   useEffect(() => {
     mapboxgl.accessToken = pkToken;
 
-    if (mapContainerRef.current) {
+    if (mapContainerRef?.current) {
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
         zoom: zoom,
-        center: DEFAULT_LOCATION, // Default center
+        center: DEFAULT_LOCATION as any, // Default center
       });
 
       mapRef.current.addControl(new mapboxgl.NavigationControl());
@@ -85,7 +85,8 @@ const useLocationTracking = (
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           if (!mapRef.current) return;
-          const [longitude, latitude] = DEFAULT_LOCATION;
+          // const {longitude, latitude} = position.coords;
+          const [longitude, latitude] = DEFAULT_LOCATION
 
           mapRef.current.setCenter([longitude, latitude]);
 
@@ -107,7 +108,7 @@ const useLocationTracking = (
           watchId.current = navigator.geolocation.watchPosition(
             async (position) => {
               if (!mapRef.current) return;
-              const { longitude, latitude } = position.coords;
+              // const { longitude, latitude } = position.coords;
               currentLocationRef.current?.setLngLat([longitude, latitude]);
               await updateLocationData(longitude, latitude);
             },

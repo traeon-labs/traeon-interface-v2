@@ -1,12 +1,10 @@
 import { IAeonOrder } from "@/types/index.type";
 import { fetchAeonOrder } from "@/utils/aeon/fetchOrder";
-import { useCloudStorage, useCloudStorageRaw } from "@tma.js/sdk-react";
+import { cloudStorage as cloudData } from "@telegram-apps/sdk";
 import { useEffect, useMemo, useState } from "react";
 import { useAppContext } from "../../IndexPage";
 
 const useAccountOrders = () => {
-  const cloudData = useCloudStorage(false);
-  const {result: cloudDataRaw} = useCloudStorageRaw(false)
   const [loadingOrders, setLoadingOrders] = useState(false);
   const { orders, setOrders, unfillOrders, setUnfillOrders } = useAppContext();
 
@@ -33,7 +31,7 @@ const useAccountOrders = () => {
   const refreshOrdersData = async () => {
     setLoadingOrders(true);
     try {
-      const orderStorageKeys = (await (cloudDataRaw || cloudData)?.getKeys()).filter(
+      const orderStorageKeys = (await (cloudData)?.getKeys()).filter(
         (key) => key.split("_")?.[0] === "order"
       );
       const ordersData = await Promise.all(
@@ -48,7 +46,7 @@ const useAccountOrders = () => {
       Promise.all(
         ordersData.map(async (orderData) => {
           if (orderData?.orderNo) {
-            await cloudData.set(
+            await cloudData.setItem(
               `order_${orderData.merchantOrderNo}`,
               // JSON.stringify(orderData)
               ""
@@ -65,7 +63,7 @@ const useAccountOrders = () => {
   };
   useEffect(() => {
     refreshOrdersData();
-  }, [cloudData, cloudDataRaw]);
+  }, [cloudData]);
   return {
     loadingOrders,
     setLoadingOrders,

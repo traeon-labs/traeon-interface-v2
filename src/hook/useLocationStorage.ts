@@ -1,10 +1,11 @@
 import { ILocationStore, IMarkLocations } from "@/types/index.type";
 import { decodeLocationkey, generateColorHex } from "@/utils";
-import { useCloudStorage } from "@tma.js/sdk-react";
+// import { useCloudStorage } from "@tma.js/sdk-react";
+import { cloudStorage as cloudData } from "@telegram-apps/sdk";
 import { useEffect, useState, useCallback } from "react";
 
 const useLocationStorage = () => {
-  const cloudData = useCloudStorage(false);
+  // const cloudData = useCloudStorage(false);
   const [visitedLocations, setVisitedLocations] = useState<{
     markLocations: IMarkLocations;
     journeysData: { [key: string]: ILocationStore };
@@ -24,8 +25,8 @@ const useLocationStorage = () => {
   }) => {
     if(data) {setVisitedLocations(data);return}
     const keys = await cloudData.getKeys();
-    const journeyKeys = keys.filter(key => decodeLocationkey(key).length > 0);
-    const journeysData = await cloudData.get(journeyKeys);
+    const journeyKeys = keys.filter(key => !key.startsWith('order') && decodeLocationkey(key).length > 0);
+    const journeysData = await cloudData.getItem(journeyKeys);
     const journeysDataEncode: { [key: string]: ILocationStore } = {};
     const markLocations: IMarkLocations = {};
 
