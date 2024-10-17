@@ -1,9 +1,9 @@
 import useLocationStorage from "@/hook/useLocationStorage";
-import {ILocationData} from "@/types/index.type";
-import {DEFAULT_LOCATION} from "@/utils/constant";
+import { ILocationData } from "@/types/index.type";
+import { DEFAULT_LOCATION } from "@/utils/constant";
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
-import {useEffect,useMemo,useRef,useState} from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "../location.css";
 
 const MAPBOX_GEOCODING_URL =
@@ -32,12 +32,12 @@ const useLocationTracking = (
     markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = [];
     // Loop through markLocations and add markers to the map
-    console.log(markLocations)
     Object.keys(markLocations).forEach((key) => {
       const { marks, color } = markLocations[key];
-
-      marks.forEach(({center: [longitude, latitude]}) => {
+      const coordinates: [number, number][] = []; // Array to store coordinates for polyline
+      marks.forEach(({ center: [longitude, latitude] }) => {
         // Create a custom marker element with the specified color
+        coordinates.push([longitude, latitude]);
         const markerElement = document.createElement("div");
         markerElement.className = "mark-location-marker";
         markerElement.innerHTML = `
@@ -62,6 +62,37 @@ const useLocationTracking = (
         // Store the marker for future removal
         markersRef.current.push(marker);
       });
+      console.log(markersRef)
+      // Draw the line connecting the markers
+      try {
+        mapRef.current?.addSource(`line-source-${key}`, {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "LineString",
+              coordinates: coordinates, // Use the coordinates array
+            },
+          },
+        });
+  
+        mapRef.current?.addLayer({
+          id: `line-layer-${key}`,
+          type: "line",
+          source: `line-source-${key}`,
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": 'gray', // Use the same color for the line as the marker
+            "line-width": 4,
+            'line-dasharray': [2,2]
+          },
+        });
+      } catch (error) {
+      }
     });
   };
 
@@ -86,7 +117,7 @@ const useLocationTracking = (
         async (position) => {
           if (!mapRef.current) return;
           // const {longitude, latitude} = position.coords;
-          const [longitude, latitude] = DEFAULT_LOCATION
+          const [longitude, latitude] = DEFAULT_LOCATION;
 
           mapRef.current.setCenter([longitude, latitude]);
 
@@ -116,11 +147,10 @@ const useLocationTracking = (
             { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 }
           );
         },
-        async () => 
-          {
-            await updateLocationData(DEFAULT_LOCATION[0], DEFAULT_LOCATION[1])
-            console.error("Unable to access your location.")
-          }
+        async () => {
+          await updateLocationData(DEFAULT_LOCATION[0], DEFAULT_LOCATION[1]);
+          console.error("Unable to access your location.");
+        }
       );
     }
 

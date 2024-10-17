@@ -74,7 +74,7 @@ export const TravelMapModal = ({
           <Button
             variant="outlined"
             color="inherit"
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", height: '50px' }}
             className="aeon-box-border aeon-box-shadow-bold aeon-transition"
             startIcon={<Iconify icon="entypo:location" />}
             onClick={async () => {
@@ -84,9 +84,6 @@ export const TravelMapModal = ({
           >
             Checkin
           </Button>
-        </Grid2>
-        <Grid2 size={12}>
-          {locationName}
         </Grid2>
       </Grid2>
       <Grid2 container spacing={1} sx={{ height: "100vh" }}>
