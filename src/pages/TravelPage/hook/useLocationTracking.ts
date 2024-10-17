@@ -124,8 +124,8 @@ const useLocationTracking = (
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           if (!mapRef.current) return;
-          // const {longitude, latitude} = position.coords;
-          const [longitude, latitude] = DEFAULT_LOCATION;
+          const {longitude, latitude} = position.coords;
+          // const [longitude, latitude] = DEFAULT_LOCATION;
 
           mapRef.current.setCenter([longitude, latitude]);
 

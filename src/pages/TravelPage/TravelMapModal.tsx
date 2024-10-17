@@ -66,7 +66,7 @@ export const TravelMapModal = ({
         sx={{
           position: "fixed",
           zIndex: 1,
-          bottom: "120px",
+          bottom: "50px",
           background: "white",
           width: "40%",
           left: "30%",

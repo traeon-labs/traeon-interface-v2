@@ -73,9 +73,7 @@ export const IndexPage: FC = () => {
         <PaymentConfirmModal />
         <AccountOrdersModal setAssestModal={setAssestModal}
           setCurrentAsset={setCurrentAsset}/>
-        <TabsController tab={tab} setTab={setTab} 
-        // scrollDir={scrollDir} 
-        />
+        {!travelMapModal ? <TabsController tab={tab} setTab={setTab}/> : ''}
         <AssetModal
           visible={assetModal}
           setVisible={setAssestModal}
