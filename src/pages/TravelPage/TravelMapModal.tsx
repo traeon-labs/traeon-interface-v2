@@ -1,12 +1,12 @@
+import { Iconify } from "@/components/iconify";
 import { ILocationStore } from "@/types/index.type";
 import { encodeLocationKey } from "@/utils";
-import { Button, Grid, Grid2 } from "@mui/material";
-import "mapbox-gl/dist/mapbox-gl.css";
-import { useEffect, useRef, useState } from "react";
-import useLocationTracking from "./hook/useLocationTracking";
-import { Iconify } from "@/components/iconify";
+import { Button, Grid2, IconButton } from "@mui/material";
 import { cloudStorage as cloudData } from "@telegram-apps/sdk";
-import {LineMdMapMarkerRadius} from "./Components/LineMdMapMarkerRadius";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { useRef, useState } from "react";
+import { WalletPropover } from "../IndexPage/AccountPropover/WalletPropover";
+import useLocationTracking from "./hook/useLocationTracking";
 
 export const TravelMapModal = ({
   visible,
@@ -57,7 +57,27 @@ export const TravelMapModal = ({
     }, 1000);
   };
   return (
-    <div style={!visible ? { opacity: 0 } : {}}>
+    <div style={{ ...(!visible ? { opacity: 0 } : {})}}>
+          <div style={{ marginTop: 2 }}>
+            <IconButton
+              size="large"
+              sx={{
+                borderRadius: "50%",
+                position: "fixed",
+                zIndex: 10,
+                top: '80px',
+                marginLeft: 2,
+                p: '0.7rem',
+                background:"white"
+              }}
+              className="aeon-box-shadow-bold aeon-transition"
+              onClick={() => {
+                setVisible(false);
+              }}
+            >
+              <Iconify icon="ic:outline-arrow-back-ios" width={20} />
+            </IconButton>{" "}
+          </div>
       <Grid2
         container
         // p={1}
@@ -77,11 +97,11 @@ export const TravelMapModal = ({
           <Button
             variant="outlined"
             color="inherit"
-            sx={{ width: "100%", height: '50px' }}
+            sx={{ width: "100%", height: "50px" }}
             className="aeon-box-border aeon-box-shadow-bold aeon-transition"
             startIcon={<Iconify icon="entypo:location" />}
             onClick={async () => {
-              await refresh()
+              await refresh();
               onCheckinWithMap();
             }}
           >
