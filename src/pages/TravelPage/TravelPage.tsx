@@ -10,6 +10,8 @@ import {
 import { cloudStorage as cloudData } from "@telegram-apps/sdk";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { TravelMapModal } from "./TravelMapModal";
+import useLocationStorage from "@/hook/useLocationStorage";
+import { useEffect } from "react";
 
 export const TravelPage = ({
   visible,
@@ -22,10 +24,26 @@ export const TravelPage = ({
     const keys = await cloudData.getKeys();
     await cloudData.deleteItem(keys);
   };
+  const { journeyKeys, locationLoading, journeysData, markLocations, refresh } =
+    useLocationStorage();
+  useEffect(() => {
+    refresh();
+  }, []);
   return (
     <div>
       {!visible ? (
-        <Grid2 container pb={2} spacing={1}>
+        <Grid2 container spacing={1} py={2}>
+          <Grid2 size={12}>
+            {locationLoading ? (
+              "loading..."
+            ) : (
+              <>
+                {JSON.stringify(journeyKeys)}
+                {JSON.stringify(journeysData)}
+                {JSON.stringify(markLocations)}
+              </>
+            )}
+          </Grid2>
           <Grid2 size={6}>
             <Button
               variant="outlined"
@@ -53,7 +71,7 @@ export const TravelPage = ({
           </Grid2>
         </Grid2>
       ) : (
-      ''
+        ""
       )}
 
       <TravelMapModal visible={visible} setVisible={setVisible} />

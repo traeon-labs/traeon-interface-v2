@@ -1,18 +1,31 @@
-import {createContext,useContext,useEffect,useRef,useState,type FC} from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type FC,
+} from "react";
 
-import {IAeonOrder,INFTMetadata,ITabs} from "@/types/index.type";
+import {
+  IAeonOrder,
+  ILocationStore,
+  IMarkLocations,
+  INFTMetadata,
+  ITabs,
+} from "@/types/index.type";
 import useDetectScroll from "@smakss/react-scroll-direction";
-import {init,postEvent,cloudStorage} from "@telegram-apps/sdk";
-import {AeonPaymentModal} from "../AeonPaymentPage/components/AeonPaymentModal";
-import {PaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
+import { init, postEvent, cloudStorage } from "@telegram-apps/sdk";
+import { AeonPaymentModal } from "../AeonPaymentPage/components/AeonPaymentModal";
+import { PaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
 import AssetModal from "../AssetModal/AssetModal";
-import {MarketplacePage} from "../MarketplacePage/MarketplacePage";
-import {TabsController} from "../MarketplacePage/TabsController";
-import {TravelPage} from "../TravelPage/TravelPage";
-import {AccountOrdersModal} from "./AccountOrdersModal/AccountOrdersModal";
-import {AccountPopover} from "./AccountPropover";
+import { MarketplacePage } from "../MarketplacePage/MarketplacePage";
+import { TabsController } from "../MarketplacePage/TabsController";
+import { TravelPage } from "../TravelPage/TravelPage";
+import { AccountOrdersModal } from "./AccountOrdersModal/AccountOrdersModal";
+import { AccountPopover } from "./AccountPropover";
 import "./IndexPage.css";
-import {MainLoading} from "./MainLoading";
+import { MainLoading } from "./MainLoading";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -22,6 +35,22 @@ interface AppContextType {
   setOrders: React.Dispatch<React.SetStateAction<IAeonOrder[]>>;
   unfillOrders: IAeonOrder[];
   setUnfillOrders: React.Dispatch<React.SetStateAction<IAeonOrder[]>>;
+  visitedLocations: {
+    markLocations: IMarkLocations;
+    journeysData: {
+      [key: string]: ILocationStore;
+    };
+    journeyKeys: string[];
+  };
+  setVisitedLocations: React.Dispatch<
+    React.SetStateAction<{
+      markLocations: IMarkLocations;
+      journeysData: {
+        [key: string]: ILocationStore;
+      };
+      journeyKeys: string[];
+    }>
+  >;
 }
 
 // Create the context with default values (if any)
@@ -35,6 +64,15 @@ export const IndexPage: FC = () => {
   const customElementRef = useRef<HTMLDivElement>(null);
   const [customElement, setCustomElement] = useState<HTMLDivElement>();
   // const { scrollDir } = useDetectScroll({ target: customElement });
+  const [visitedLocations, setVisitedLocations] = useState<{
+    markLocations: IMarkLocations;
+    journeysData: { [key: string]: ILocationStore };
+    journeyKeys: string[];
+  }>({
+    markLocations: {},
+    journeyKeys: [],
+    journeysData: {},
+  });
   const [orders, setOrders] = useState<IAeonOrder[]>([]);
   const [unfillOrders, setUnfillOrders] = useState<IAeonOrder[]>([]);
 
@@ -44,14 +82,16 @@ export const IndexPage: FC = () => {
     }
   }, [customElementRef]);
   return (
-    <AppContext.Provider value={{ setOrders, orders, setUnfillOrders, unfillOrders }}>
+    <AppContext.Provider
+      value={{ setOrders, orders, setUnfillOrders, unfillOrders,setVisitedLocations, visitedLocations }}
+    >
       <div
         ref={customElementRef}
         style={{ overflow: "scroll", height: "100vh" }}
       >
         {/* <AeonPaymentPage/> */}
         {/* <MerchantConfigPage/> */}
-        <MainLoading/>
+        <MainLoading />
         <AccountPopover />
         {tab === "mdi:shopping-outline" ? (
           <MarketplacePage
@@ -69,11 +109,13 @@ export const IndexPage: FC = () => {
         ) : (
           ""
         )}
-        <AeonPaymentModal/>
+        <AeonPaymentModal />
         <PaymentConfirmModal />
-        <AccountOrdersModal setAssestModal={setAssestModal}
-          setCurrentAsset={setCurrentAsset}/>
-        {!travelMapModal ? <TabsController tab={tab} setTab={setTab}/> : ''}
+        <AccountOrdersModal
+          setAssestModal={setAssestModal}
+          setCurrentAsset={setCurrentAsset}
+        />
+        {!travelMapModal ? <TabsController tab={tab} setTab={setTab} /> : ""}
         <AssetModal
           visible={assetModal}
           setVisible={setAssestModal}
@@ -88,7 +130,7 @@ export const IndexPage: FC = () => {
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {
-    throw new Error('useAppContext must be used within an AppProvider');
+    throw new Error("useAppContext must be used within an AppProvider");
   }
   return context;
 };

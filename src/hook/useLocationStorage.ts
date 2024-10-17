@@ -1,3 +1,4 @@
+import {useAppContext} from "@/pages/IndexPage/IndexPage";
 import { ILocationStore, IMarkLocations } from "@/types/index.type";
 import { decodeLocationkey, generateColorHex } from "@/utils";
 // import { useCloudStorage } from "@tma.js/sdk-react";
@@ -6,15 +7,8 @@ import { useEffect, useState, useCallback } from "react";
 
 const useLocationStorage = () => {
   // const cloudData = useCloudStorage(false);
-  const [visitedLocations, setVisitedLocations] = useState<{
-    markLocations: IMarkLocations;
-    journeysData: { [key: string]: ILocationStore };
-    journeyKeys: string[];
-  }>({
-    markLocations: {},
-    journeyKeys: [],
-    journeysData: {}
-  });
+  const {visitedLocations, setVisitedLocations} = useAppContext()
+  const [locationLoading, setLocationLoading] = useState<boolean>(false)
   useEffect(()=> {
     console.log(visitedLocations.markLocations)
   },[visitedLocations])
@@ -23,7 +17,9 @@ const useLocationStorage = () => {
     journeysData: { [key: string]: ILocationStore };
     journeyKeys: string[];
   }) => {
-    if(data) {setVisitedLocations(data);return}
+    setLocationLoading(true)
+    if(data) {setVisitedLocations(data);    setLocationLoading(false)
+      return}
     const keys = await cloudData.getKeys();
     const journeyKeys = keys.filter(key => !key.startsWith('order') && decodeLocationkey(key).length > 0);
     const journeysData = await cloudData.getItem(journeyKeys);
@@ -46,7 +42,7 @@ const useLocationStorage = () => {
       });
       });
     });
-
+    setLocationLoading(false)
     setVisitedLocations({
       markLocations,
       journeysData: journeysDataEncode,
@@ -58,7 +54,7 @@ const useLocationStorage = () => {
     fetchJourney(); // Fetch data on initial mount
   }, []);
 
-  return { ...visitedLocations, refresh: fetchJourney }; // Return refresh function
+  return { ...visitedLocations, locationLoading, setLocationLoading, setVisitedLocations, refresh: fetchJourney }; // Return refresh function
 };
 
 export default useLocationStorage;
