@@ -14,11 +14,13 @@ const useLocationTracking = (
   pkToken: string
 ) => {
   const mapRef = useRef<mapboxgl.Map | null>(null);
-  const [zoom, setZoom] = useState(5.12);
+  const [zoom, setZoom] = useState(12.12);
   const [locationData, setLocationData] = useState<ILocationData | undefined>();
   const currentLocationRef = useRef<mapboxgl.Marker | null>(null);
   const { markLocations, refresh, journeysData } = useLocationStorage();
   const watchId = useRef<number | null>(null);
+  const [mapLoading, setMapLoading] = useState(false); // State to manage loading
+
   const locationName = useMemo(() => {
     return locationData?.place_name || "Location not found";
   }, [locationData]);
@@ -100,16 +102,22 @@ const useLocationTracking = (
     mapboxgl.accessToken = pkToken;
 
     if (mapContainerRef?.current) {
+      setMapLoading(true); // Set loading to false when the map has finished loading
+
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
-        zoom: zoom,
+        zoom,
+        style: 'mapbox://styles/mapbox/outdoors-v12?optimize=true',
         center: DEFAULT_LOCATION as any, // Default center
+        dragRotate: false,  // Disable drag rotation
+        trackResize: false,  // Disable automatic resize tracking
+        preserveDrawingBuffer: true, // May help with some rendering issues
       });
 
       mapRef.current.addControl(new mapboxgl.NavigationControl());
 
-      mapRef.current.on("move", () => {
-        setZoom(mapRef.current?.getZoom() || zoom);
+      mapRef.current.on('load', () => {
+        setMapLoading(false); // Set loading to false when the map has finished loading
       });
 
       // Get initial position
@@ -190,6 +198,7 @@ const useLocationTracking = (
     locationData,
     locationName,
     updateLocationData,
+    mapLoading,
     currentLocationRef,
     refresh,
   };
