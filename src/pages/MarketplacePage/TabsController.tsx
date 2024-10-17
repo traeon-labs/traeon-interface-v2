@@ -12,7 +12,7 @@ export const TabsController = ({
 }: {
   setTab: React.Dispatch<React.SetStateAction<ITabs>>;
   tab: ITabs;
-  scrollDir: Direction
+  scrollDir?: Direction
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSelectTab = (_:any, newTab: ITabs) => {

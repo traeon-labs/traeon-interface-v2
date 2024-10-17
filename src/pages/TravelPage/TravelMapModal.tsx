@@ -1,11 +1,12 @@
 import { ILocationStore } from "@/types/index.type";
 import { encodeLocationKey } from "@/utils";
-import { Button, Grid2 } from "@mui/material";
+import { Button, Grid, Grid2 } from "@mui/material";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef, useState } from "react";
 import useLocationTracking from "./hook/useLocationTracking";
 import { Iconify } from "@/components/iconify";
 import { cloudStorage as cloudData } from "@telegram-apps/sdk";
+import {LineMdMapMarkerRadius} from "./Components/LineMdMapMarkerRadius";
 
 export const TravelMapModal = ({
   visible,
@@ -21,16 +22,15 @@ export const TravelMapModal = ({
   const PK_TOKEN =
     "pk.eyJ1IjoiYXZpbmNlbnRhIiwiYSI6ImNtMWxsMGJicDBhNjcycG85OWZ5Znd5d2UifQ.krV7qPCTyTtHq53LoSjwQg";
 
-  // Use the custom hook
   const {
     zoom,
     locationData,
     locationName,
     currentLocationRef,
     refresh,
+    mapLoading,
     updateLocationData,
   } = useLocationTracking(mapContainerRef, PK_TOKEN);
-      
   const onCheckinWithMap = async () => {
     const contextLength = locationData?.context.length || 2;
     const region = locationData?.context?.[contextLength - 2]?.text;
@@ -39,15 +39,18 @@ export const TravelMapModal = ({
     const locationStorageData: ILocationStore = JSON.parse(
       (await cloudData.getItem(locationKeyHash)) || "{}"
     );
-    console.log(locationData)
+    console.log(locationData);
     if (locationData?.id) {
       locationStorageData[locationData?.id] = {
-        place_name: locationData?.place_name, 
+        place_name: locationData?.place_name,
         center: locationData.center,
       };
-      console.log('add', locationKeyHash, JSON.stringify(locationStorageData))
-      await cloudData.setItem(locationKeyHash, JSON.stringify(locationStorageData));
-      console.log('Done', locationKeyHash, JSON.stringify(locationStorageData))
+      console.log("add", locationKeyHash, JSON.stringify(locationStorageData));
+      await cloudData.setItem(
+        locationKeyHash,
+        JSON.stringify(locationStorageData)
+      );
+      console.log("Done", locationKeyHash, JSON.stringify(locationStorageData));
     }
     setTimeout(async () => {
       await refresh();

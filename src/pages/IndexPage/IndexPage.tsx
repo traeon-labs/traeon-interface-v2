@@ -12,6 +12,7 @@ import {TravelPage} from "../TravelPage/TravelPage";
 import {AccountOrdersModal} from "./AccountOrdersModal/AccountOrdersModal";
 import {AccountPopover} from "./AccountPropover";
 import "./IndexPage.css";
+import {MainLoading} from "./MainLoading";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -27,13 +28,13 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const IndexPage: FC = () => {
-  const [tab, setTab] = useState<ITabs>("mdi:location-on-outline");
+  const [tab, setTab] = useState<ITabs>("mdi:shopping-outline");
   const [assetModal, setAssestModal] = useState<boolean>(false);
-  const [travelMapModal, setTravelMapModal] = useState<boolean>(true);
+  const [travelMapModal, setTravelMapModal] = useState<boolean>(false);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>();
   const customElementRef = useRef<HTMLDivElement>(null);
   const [customElement, setCustomElement] = useState<HTMLDivElement>();
-  const { scrollDir } = useDetectScroll({ target: customElement });
+  // const { scrollDir } = useDetectScroll({ target: customElement });
   const [orders, setOrders] = useState<IAeonOrder[]>([]);
   const [unfillOrders, setUnfillOrders] = useState<IAeonOrder[]>([]);
 
@@ -50,7 +51,7 @@ export const IndexPage: FC = () => {
       >
         {/* <AeonPaymentPage/> */}
         {/* <MerchantConfigPage/> */}
-
+        <MainLoading/>
         <AccountPopover />
         {tab === "mdi:shopping-outline" ? (
           <MarketplacePage
@@ -72,7 +73,9 @@ export const IndexPage: FC = () => {
         <PaymentConfirmModal />
         <AccountOrdersModal setAssestModal={setAssestModal}
           setCurrentAsset={setCurrentAsset}/>
-        <TabsController tab={tab} setTab={setTab} scrollDir={scrollDir} />
+        <TabsController tab={tab} setTab={setTab} 
+        // scrollDir={scrollDir} 
+        />
         <AssetModal
           visible={assetModal}
           setVisible={setAssestModal}
