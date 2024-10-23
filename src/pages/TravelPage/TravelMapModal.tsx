@@ -57,7 +57,7 @@ export const TravelMapModal = ({
     }, 1000);
   };
   return (
-    <div style={{ ...(!visible ? { opacity: 0 } : {})}}>
+    <div style={{ ...(!visible ? { opacity: 0, height: 0  } : {})}}>
           <div style={{ marginTop: 2 }}>
             <IconButton
               size="large"

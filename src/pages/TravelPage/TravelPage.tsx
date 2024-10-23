@@ -43,6 +43,30 @@ export const TravelPage = ({
     <div>
       {!visible ? (
         <Grid2 container spacing={1} p={2}>
+            <Grid2 size={12}>
+              <Button
+                variant="outlined"
+                color="inherit"
+                sx={{ width: "100%" }}
+                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                startIcon={<Iconify icon="entypo:location" />}
+                onClick={() => {
+                  setVisible(!visible);
+                }}
+              >
+                Start Jouney
+              </Button>
+              <Button
+                variant="outlined"
+                color="inherit"
+                sx={{ width: "100%" }}
+                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                // onClick={onResetData}
+              >
+                action
+              </Button>
+            </Grid2>
+          
           {locationLoading
             ? "loading..."
             : journeyKeys.map((jKey, _) => {
@@ -108,32 +132,6 @@ export const TravelPage = ({
                   </Grid2>
                 );
               })}
-
-          <Grid2 size={6}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              sx={{ width: "100%" }}
-              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-              startIcon={<Iconify icon="entypo:location" />}
-              onClick={() => {
-                setVisible(!visible);
-              }}
-            >
-              Start Jouney
-            </Button>
-          </Grid2>
-          <Grid2 size={6}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              sx={{ width: "100%" }}
-              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-              // onClick={onResetData}
-            >
-              action
-            </Button>
-          </Grid2>
         </Grid2>
       ) : (
         ""
