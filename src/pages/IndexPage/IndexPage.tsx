@@ -27,6 +27,7 @@ import { AccountPopover } from "./AccountPropover";
 import "./IndexPage.css";
 import { MainLoading } from "./MainLoading";
 import useLocationStorage from "@/hook/useLocationStorage";
+import { BadgePage } from "../BadgePage/BadgePage";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -58,7 +59,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const IndexPage: FC = () => {
-  const [tab, setTab] = useState<ITabs>('mdi:location-on-outline');
+  const [tab, setTab] = useState<ITabs>("mdi:location-on-outline");
   const [assetModal, setAssestModal] = useState<boolean>(false);
   const [travelMapModal, setTravelMapModal] = useState<boolean>(false);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>();
@@ -84,7 +85,14 @@ export const IndexPage: FC = () => {
   }, [customElementRef]);
   return (
     <AppContext.Provider
-      value={{ setOrders, orders, setUnfillOrders, unfillOrders,setVisitedLocations, visitedLocations }}
+      value={{
+        setOrders,
+        orders,
+        setUnfillOrders,
+        unfillOrders,
+        setVisitedLocations,
+        visitedLocations,
+      }}
     >
       <div
         ref={customElementRef}
@@ -104,7 +112,12 @@ export const IndexPage: FC = () => {
         ) : tab === "akar-icons:thunder" ? (
           "akar"
         ) : tab === "iconamoon:certificate-badge" ? (
-          "badge"
+          <BadgePage
+            setCurrentAsset={setCurrentAsset}
+            visible={assetModal}
+            setVisible={setAssestModal}
+            asset={currentAsset}
+          />
         ) : tab === "mdi:location-on-outline" ? (
           <TravelPage visible={travelMapModal} setVisible={setTravelMapModal} />
         ) : (
