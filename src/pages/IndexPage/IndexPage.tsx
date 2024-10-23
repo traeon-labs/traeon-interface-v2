@@ -26,6 +26,7 @@ import { AccountOrdersModal } from "./AccountOrdersModal/AccountOrdersModal";
 import { AccountPopover } from "./AccountPropover";
 import "./IndexPage.css";
 import { MainLoading } from "./MainLoading";
+import useLocationStorage from "@/hook/useLocationStorage";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -57,7 +58,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const IndexPage: FC = () => {
-  const [tab, setTab] = useState<ITabs>("mdi:shopping-outline");
+  const [tab, setTab] = useState<ITabs>('mdi:location-on-outline');
   const [assetModal, setAssestModal] = useState<boolean>(false);
   const [travelMapModal, setTravelMapModal] = useState<boolean>(false);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>();
@@ -91,7 +92,7 @@ export const IndexPage: FC = () => {
       >
         {/* <AeonPaymentPage/> */}
         {/* <MerchantConfigPage/> */}
-        <MainLoading />
+        {/* <MainLoading /> */}
         <AccountPopover />
         {tab === "mdi:shopping-outline" ? (
           <MarketplacePage
