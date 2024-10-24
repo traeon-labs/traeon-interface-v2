@@ -28,6 +28,7 @@ import "./IndexPage.css";
 import { MainLoading } from "./MainLoading";
 import useLocationStorage from "@/hook/useLocationStorage";
 import { BadgePage } from "../BadgePage/BadgePage";
+import { BoostPage } from "../BoostPage/BoostPage";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -110,7 +111,12 @@ export const IndexPage: FC = () => {
             asset={currentAsset}
           />
         ) : tab === "akar-icons:thunder" ? (
-          "akar"
+          <BoostPage
+            setCurrentAsset={setCurrentAsset}
+            visible={assetModal}
+            setVisible={setAssestModal}
+            asset={currentAsset}
+          />
         ) : tab === "iconamoon:certificate-badge" ? (
           <BadgePage
             setCurrentAsset={setCurrentAsset}
