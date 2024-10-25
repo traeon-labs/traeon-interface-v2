@@ -35,7 +35,6 @@ export const TravelPage = ({
     refresh: locationRefresh,
   } = useLocationStorage();
 
-  console.log("#ma", markLocations);
   useEffect(() => {
     locationRefresh();
   }, []);
@@ -43,30 +42,21 @@ export const TravelPage = ({
     <div>
       {!visible ? (
         <Grid2 container spacing={1} p={2}>
-            <Grid2 size={12}>
-              <Button
-                variant="outlined"
-                color="inherit"
-                sx={{ width: "100%" }}
-                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                startIcon={<Iconify icon="entypo:location" />}
-                onClick={() => {
-                  setVisible(!visible);
-                }}
-              >
-                Start Jouney
-              </Button>
-              <Button
-                variant="outlined"
-                color="inherit"
-                sx={{ width: "100%" }}
-                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                // onClick={onResetData}
-              >
-                action
-              </Button>
-            </Grid2>
-          
+          <Grid2 size={12}>
+            <Button
+              variant="outlined"
+              color="inherit"
+              sx={{ width: "100%", height: "50px" }}
+              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+              startIcon={<Iconify icon="entypo:location" />}
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
+              Start Jouney
+            </Button>
+          </Grid2>
+
           {locationLoading
             ? "loading..."
             : journeyKeys.map((jKey, _) => {
@@ -77,12 +67,18 @@ export const TravelPage = ({
                   <Grid2
                     size={12}
                     key={_}
-                    sx={{ p: 2, margin: 0.5, transition: 0 }}
+                    sx={{ p: 2, my: 4, margin: 0.5, transition: 0 }}
                     className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                   >
-                    <Grid2 size={12}>
+                    <Grid2 size={12} py={1}>
                       <Typography variant="subtitle1">
-                        <strong>{country}</strong> {"|"} {place}
+                        <strong>{country}</strong> {"|"} {place}{" "}
+                        <Chip
+                          label="Place"
+                          sx={{background: color, opacity: 0.8, cursor:'pointer'}}
+                          onClick={() => {setVisible(true)}}
+                          icon={<Iconify color="black" icon="mi:location" />}
+                        />{" "}
                       </Typography>
                     </Grid2>
                     <BorderLinearProgress
@@ -103,13 +99,10 @@ export const TravelPage = ({
                         <div key={__}>
                           <Grid2 size={12} pt={2}>
                             <Typography variant="subtitle1">
-                              <Chip
-                                label="Place"
-                                icon={<Iconify icon="mi:location" />}
-                              />{" "}
-                              <strong>{mData.place_name}</strong>
+                              {mData.place_name}
                             </Typography>
                           </Grid2>
+
                           {/* <Grid2 size={12}>
                             <Typography variant="subtitle1">
                               <Button
@@ -129,6 +122,43 @@ export const TravelPage = ({
                         </div>
                       );
                     })}
+                    {/* <Grid2 container> */}
+                    <Grid2 size={8} key={_} pt={2}>
+                      <Card
+                        className="w-100 aeon-box-shadow aeon-box-border"
+                        style={{
+                          cursor: "pointer",
+                          padding: "0.2rem 0.2rem 0rem 0.2rem",
+                          textAlign: "left",
+                        }}
+                      >
+                        <Chip
+                          style={{
+                            textAlign: "center",
+                            marginBottom: "0.4rem",
+                            opacity: 0.7,
+                          }}
+                          // color={assetConfig.color}
+                          className="aeon-chip-border-radius"
+                          size="small"
+                          icon={<Iconify icon="streamline:star-badge-solid" />}
+                          label={`Badge`}
+                        />
+                        <CardMedia
+                          component="img"
+                          onClick={() => {setVisible(true)}}
+                          image={
+                            "/badge/" +
+                            Math.round(1 + Math.random() * 10) +
+                            ".png"
+                          }
+                          sx={{
+                            borderRadius: "20px",
+                          }}
+                        />
+                      </Card>
+                    </Grid2>
+                    {/* </Grid2> */}
                   </Grid2>
                 );
               })}
