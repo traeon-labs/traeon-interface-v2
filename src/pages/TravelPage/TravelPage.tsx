@@ -75,7 +75,7 @@ export const TravelPage = ({
                 </Typography>
               </Grid2>
             ) : (
-              journeyKeys.slice(0, 1).map((jKey, _) => {
+              journeyKeys.slice(0, 2).map((jKey, _) => {
                 const jData = journeysData[jKey];
                 const { color } = markLocations[jKey];
                 const [country, place] = decodeLocationkey(jKey);

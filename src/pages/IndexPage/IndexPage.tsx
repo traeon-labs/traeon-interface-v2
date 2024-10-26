@@ -115,8 +115,11 @@ export const IndexPage: FC = () => {
         ) : tab === "akar-icons:thunder" ? (
           <BoostPage
             setCurrentAsset={setCurrentAsset}
+            setTab={setTab}
             visible={assetModal}
             setVisible={setAssestModal}
+            travelMapVisible={travelMapModal}
+            setTravelMapVisible={setTravelMapModal}
             asset={currentAsset}
           />
         ) : tab === "iconamoon:certificate-badge" ? (

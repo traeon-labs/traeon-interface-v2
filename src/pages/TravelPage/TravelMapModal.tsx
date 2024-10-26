@@ -59,7 +59,15 @@ export const TravelMapModal = ({
   return (
     <div
       style={{
-        ...(!visible ? { opacity: 0, height: 0, position: "fixed" } : { position: 'relative'}),
+        ...(!visible
+          ? { opacity: 0, height: 0, position: "fixed" }
+          : {
+              position: "fixed",
+              width: "100vw",
+              height: "100vh",
+              left: 0,
+              zIndex: 10000,
+            }),
       }}
     >
       <div style={{ marginTop: 2 }}>
@@ -113,11 +121,12 @@ export const TravelMapModal = ({
           </Button>
         </Grid2>
       </Grid2>
-      <Grid2 container spacing={1} sx={{ height: "100vh" }}>
+      <Grid2 container spacing={1} sx={{ height: "100vh", width: '100vw' }}>
         <div
           id="map-container"
           style={{
-            width: "100%",
+            width: "100vw",
+            height: '100vh',
             transition: "0.4s",
             background: "white",
             ...(!visible

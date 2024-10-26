@@ -1,6 +1,6 @@
 import { Iconify } from "@/components/iconify";
 import { BorderLinearProgress } from "@/components/Linear/customLinear";
-import { INFTMetadata } from "@/types/index.type";
+import { INFTMetadata, ITabs } from "@/types/index.type";
 import { generateFractionalPrice } from "@/utils";
 import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
 import {
@@ -20,17 +20,22 @@ export const BoostCardMain = ({
   item,
   setCurrentAsset,
   setVisible,
+  travelMapVisible,
+  setTravelMapVisible,
+  setTab,
 }: // visible,
 {
   item: INFTMetadata;
   setCurrentAsset: React.Dispatch<
     React.SetStateAction<INFTMetadata | undefined>
   >;
+  setTab: React.Dispatch<React.SetStateAction<ITabs>>;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  travelMapVisible: boolean;
+  setTravelMapVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const assetConfig = useMemo(() => {
-    openPaymentSellModal(item)
     return MARKETPLACE_ASSET_CONFIG[
       item.attributes.filter((att) => att.trait_type === "type")[0]?.value
     ];
@@ -220,6 +225,8 @@ export const BoostCardMain = ({
               className="aeon-box-border aeon-box-shadow-bold aeon-transition"
               startIcon={<Iconify icon="akar-icons:thunder" />}
               onClick={() => {
+                setTab('mdi:location-on-outline')
+                // setTravelMapVisible(true)
                 // openPaymentConfirmModal(item);
               }}
             >

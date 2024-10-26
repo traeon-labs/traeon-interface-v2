@@ -33,7 +33,6 @@ export const BadgeCard = ({
     ];
   }, [item]);
   const navigateToAssetPage = () => {
-    setCurrentAsset(item);
     setVisible(true);
   };
 

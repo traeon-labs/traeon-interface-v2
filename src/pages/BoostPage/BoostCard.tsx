@@ -18,6 +18,8 @@ export const BoostCard = ({
   item,
   setCurrentAsset,
   setVisible,
+  setTravelMapVisible,
+  travelMapVisible
   // visible,
 }: {
   item: INFTMetadata;
@@ -26,6 +28,8 @@ export const BoostCard = ({
   >;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  travelMapVisible: boolean;
+  setTravelMapVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const assetConfig = useMemo(() => {
     return MARKETPLACE_ASSET_CONFIG[
