@@ -1,12 +1,13 @@
 import marketplaceAssets from "@/nfts/metadata/nfts.json";
 import {IMarketplaceFilterTabs,INFTMetadata} from "@/types/index.type";
 import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
-import {Grid2} from "@mui/material";
+import {Grid, Grid2} from "@mui/material";
 import {Direction} from "@smakss/react-scroll-direction";
 import {List} from "@telegram-apps/telegram-ui";
 import {useMemo,useState} from "react";
 import {BoostFilter} from "./BoostFilter";
 import {BoostCard} from "./BoostCard";
+import {BoostCardMain} from "./BoostCardMain";
 
 export const BoostPage = ({
   setVisible,
@@ -41,13 +42,16 @@ export const BoostPage = ({
   }, [marketplaceTab]);
   return (
     <List style={{ textAlign: "center" }}>
-      <BoostFilter
+      {/* <BoostFilter
         marketplaceTab={marketplaceTab}
         setMarketplaceTab={setMarketplaceTab}
         scrollDir={scrollDir}
-      />
+      /> */}
       <Grid2 container spacing={3}>
-        {marketplaceAssetsFilter.map((assetItem: INFTMetadata, _) => {
+        <Grid2 size={12}>
+          <BoostCardMain visible={visible} setVisible={setVisible} setCurrentAsset={setCurrentAsset} item={marketplaceAssetsFilter[0]} />
+        </Grid2>
+        {marketplaceAssetsFilter.reverse().slice(0,5).map((assetItem: INFTMetadata, _) => {
           return <BoostCard visible={visible} setVisible={setVisible} setCurrentAsset={setCurrentAsset} item={assetItem} key={_} />;
         })}
       </Grid2>

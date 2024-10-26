@@ -39,7 +39,7 @@ export const BoostCard = ({
 
   // const assetPurchase = () => {};
   return (
-    <Grid2 size={6}>
+    <Grid2 size={4}>
       <Card
         className="w-100 aeon-box-shadow aeon-box-border"
         style={{
@@ -96,43 +96,9 @@ export const BoostCard = ({
             variant="determinate"
             // color="inherit"
             color={assetConfig.color as any}
-            style={{ height: "5px", border: '0.5px solid black' }}
+            style={{ height: "5px", border: '0.5px solid black', marginBottom:'0.5rem', marginTop:'0.5rem'}}
             value={generateFractionalPrice(item.name) * 20}
           />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            justifyItems: "center",
-            width: "100%",
-            marginTop: "0.5rem",
-            marginBottom: "0.5rem",
-          }}
-        >
-          <div>
-            <Button
-              color="inherit"
-              sx={{ background: "none", border: "none" }}
-            >
-              <Chip icon ={<Iconify icon="token:usdt" sx={{width: '18px', height: '18px'}} />}label={<Typography sx={{ color: "black", fontSize: '12px' }}>{generateFractionalPrice(item.name)}</Typography>}/>
-            </Button>
-          </div>
-          <div>
-            <Button
-              variant="outlined"
-              color="inherit"
-              sx={{ marginRight: "0.5rem", fontSize: '10px' }}
-              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-              startIcon={<Iconify icon="icon-park-outline:buy" />}
-              onClick={() => {
-                openPaymentConfirmModal(item);
-              }}
-            >
-              Buy
-            </Button>
-          </div>
         </div>
       </Card>
     </Grid2>

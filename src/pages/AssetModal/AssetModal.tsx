@@ -22,7 +22,7 @@ import AssetHistory from "./AssetHistory";
 import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
 import { generateFractionalPrice } from "@/utils";
 
-const _MOCK_ATTS = [
+export const _MOCK_ATTS = [
   {
     label: "Efficiency",
     icon: "jam:rec",
