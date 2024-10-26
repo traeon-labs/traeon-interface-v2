@@ -14,6 +14,7 @@ import {
 import { useMemo } from "react";
 import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
 import { _MOCK_ATTS } from "../AssetModal/AssetModal";
+import {openPaymentSellModal} from "../AeonPaymentPage/components/PaymentSellModal";
 
 export const BoostCardMain = ({
   item,
@@ -29,6 +30,7 @@ export const BoostCardMain = ({
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const assetConfig = useMemo(() => {
+    openPaymentSellModal(item)
     return MARKETPLACE_ASSET_CONFIG[
       item.attributes.filter((att) => att.trait_type === "type")[0]?.value
     ];
@@ -202,7 +204,8 @@ export const BoostCardMain = ({
                 className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                 startIcon={<Iconify icon="ic:outline-sell" />}
                 onClick={() => {
-                  openPaymentConfirmModal(item);
+                  // openPaymentConfirmModal(item);
+                  openPaymentSellModal(item)
                 }}
               >
                 Sell
@@ -211,13 +214,13 @@ export const BoostCardMain = ({
           </div>
           <div>
             <Button
-              variant="outlined"
-              color="inherit"
+              variant="contained"
+              color="primary"
               sx={{ marginRight: "0.5rem", fontSize: "15px" }}
               className="aeon-box-border aeon-box-shadow-bold aeon-transition"
               startIcon={<Iconify icon="akar-icons:thunder" />}
               onClick={() => {
-                openPaymentConfirmModal(item);
+                // openPaymentConfirmModal(item);
               }}
             >
               Start with item (x3)

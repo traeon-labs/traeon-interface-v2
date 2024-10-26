@@ -28,7 +28,7 @@ export const BoostPage = ({
     useState<IMarketplaceFilterTabs>('mingcute:hat-2-line');
 
   const marketplaceAssetsFilter = useMemo(() => {
-    return marketplaceAssets.filter((asset) => {
+    return marketplaceAssets.reverse().filter((asset) => {
       const typeAttributes = asset.attributes.filter(
         (att) => att.trait_type === "type"
       )[0];
@@ -51,7 +51,7 @@ export const BoostPage = ({
         <Grid2 size={12}>
           <BoostCardMain visible={visible} setVisible={setVisible} setCurrentAsset={setCurrentAsset} item={marketplaceAssetsFilter.slice(-3)[0]} />
         </Grid2>
-        {marketplaceAssetsFilter.reverse().slice(0,5).map((assetItem: INFTMetadata, _) => {
+        {marketplaceAssetsFilter.slice(0,5).map((assetItem: INFTMetadata, _) => {
           return <BoostCard visible={visible} setVisible={setVisible} setCurrentAsset={setCurrentAsset} item={assetItem} key={_} />;
         })}
       </Grid2>

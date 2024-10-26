@@ -29,6 +29,7 @@ import { MainLoading } from "./MainLoading";
 import useLocationStorage from "@/hook/useLocationStorage";
 import { BadgePage } from "../BadgePage/BadgePage";
 import { BoostPage } from "../BoostPage/BoostPage";
+import {PaymentSellModal} from "../AeonPaymentPage/components/PaymentSellModal";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -130,6 +131,7 @@ export const IndexPage: FC = () => {
           ""
         )}
         <AeonPaymentModal />
+        <PaymentSellModal/>
         <PaymentConfirmModal />
         <AccountOrdersModal
           setAssestModal={setAssestModal}
