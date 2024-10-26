@@ -49,7 +49,7 @@ export const BoostPage = ({
       /> */}
       <Grid2 container spacing={3}>
         <Grid2 size={12}>
-          <BoostCardMain visible={visible} setVisible={setVisible} setCurrentAsset={setCurrentAsset} item={marketplaceAssetsFilter[0]} />
+          <BoostCardMain visible={visible} setVisible={setVisible} setCurrentAsset={setCurrentAsset} item={marketplaceAssetsFilter.slice(-3)[0]} />
         </Grid2>
         {marketplaceAssetsFilter.reverse().slice(0,5).map((assetItem: INFTMetadata, _) => {
           return <BoostCard visible={visible} setVisible={setVisible} setCurrentAsset={setCurrentAsset} item={assetItem} key={_} />;

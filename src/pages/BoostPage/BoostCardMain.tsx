@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useMemo } from "react";
 import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
-import {_MOCK_ATTS} from "../AssetModal/AssetModal";
+import { _MOCK_ATTS } from "../AssetModal/AssetModal";
 
 export const BoostCardMain = ({
   item,
@@ -45,7 +45,7 @@ export const BoostCardMain = ({
         className="w-100 aeon-box-shadow aeon-box-border"
         style={{
           cursor: "pointer",
-          background:'#ECECEC',
+          background: "#ECECEC",
           padding: "0.2rem 0.2rem 0rem 0.2rem",
         }}
       >
@@ -62,19 +62,19 @@ export const BoostCardMain = ({
           label={`${item.name} | ${assetConfig.label}`}
         />
         <Grid2 container>
-        <Grid2 size={2}/>
-        <Grid2 size={8}>
-          <CardMedia
-            onClick={navigateToAssetPage}
-            component="img"
-            image={item.image}
-            alt="App 1"
-            sx={{
-              borderRadius: "20px",
-            }}
-          />
-        </Grid2>
-        <Grid2 size={2}/>
+          <Grid2 size={2} />
+          <Grid2 size={8} className="aeon-box-border">
+            <CardMedia
+              onClick={navigateToAssetPage}
+              component="img"
+              image={item.image}
+              alt="App 1"
+              sx={{
+                borderRadius: "20px",
+              }}
+            />
+          </Grid2>
+          <Grid2 size={2} />
         </Grid2>
 
         {/* <Card style={{ textAlign: "center", marginTop: "0.4rem" }}>
@@ -99,65 +99,80 @@ export const BoostCardMain = ({
               paddingBottom: "0.2rem",
             }}
           >
-            <Typography sx={{ fontSize: "12px", textAlign:'left' }}>
-            Boost NFTs are exclusive collectibles that enhance your gaming experience. Holders enjoy a 20% increase in experience points (XP) and a 15% token multiplier, allowing for faster leveling and token accumulation. <br/>
-            {' '} Plus, gain access to exclusive events and personalized rewards tailored to your gaming journey.            
+            <Typography sx={{ fontSize: "12px", textAlign: "left" }}>
+              Boost NFTs are exclusive collectibles that enhance your gaming
+              experience. Holders enjoy a 20% increase in experience points (XP)
+              and a 15% token multiplier, allowing for faster leveling and token
+              accumulation. <br /> Plus, gain access to exclusive events and
+              personalized rewards tailored to your gaming journey.
             </Typography>
             {/* <Typography sx={{ fontSize: "12px" }}>
               Lv: {Math.round(generateFractionalPrice(item.name) * 7)}
             </Typography> */}
           </div>
           {_MOCK_ATTS.map((att, _) => {
-                return (
-                  <Grid2 container sx={{ width: "100%" }} key={_} py={0.5} pt={1}>
-                    <Grid2 size={4} sx={{ textAlign: "left" }}>
-                      <Chip
-                        variant="filled"
-                        style={{
-                          textAlign: "center",
-                          border: "1px solid  black",
-                          opacity: 0.7,
-                        }}
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        color={att.color as any}
-                        icon={<Iconify icon={att.icon} />}
-                        label={
-                          <Typography sx={{fontSize: "12px"}} typography={"small"} >{att.label}</Typography>
-                        }
-                        onClick={() => {
-                          navigator.clipboard.writeText(item.name);
-                        }}
-                      />
-                    </Grid2>
-                    <Grid2 size={6} sx={{ textAlign: "center" }}>
-                      <BorderLinearProgress
-                        variant="determinate"
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        color={att.color as any}
-                        style={{
-                          height: "5px",
-                          border: "1px solid black",
-                          marginTop: "0.5rem",
-                        }}
-                        value={20 + _ * 10}
-                      />
-                    </Grid2>
-                    <Grid2 size={2} sx={{ textAlign: "center" }}>
-                      <Chip
-                        variant="outlined"
-                        style={{
-                          textAlign: "center",
-                          border: "none",
-                        }}
-                        label={<Typography sx={{fontSize: "12px"}} typography={"small"} >{generateFractionalPrice(att.label + item.name)}</Typography>}
-                        onClick={() => {
-                          navigator.clipboard.writeText(item.name);
-                        }}
-                      />
-                    </Grid2>
-                  </Grid2>
-                );
-              })}
+            return (
+              <Grid2 container sx={{ width: "100%" }} key={_} py={0.5} pt={1}>
+                <Grid2 size={4} sx={{ textAlign: "left" }}>
+                  <Chip
+                    variant="filled"
+                    style={{
+                      textAlign: "center",
+                      border: "1px solid  black",
+                      opacity: 0.7,
+                    }}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    color={att.color as any}
+                    icon={<Iconify icon={att.icon} />}
+                    label={
+                      <Typography
+                        sx={{ fontSize: "12px" }}
+                        typography={"small"}
+                      >
+                        {att.label}
+                      </Typography>
+                    }
+                    onClick={() => {
+                      navigator.clipboard.writeText(item.name);
+                    }}
+                  />
+                </Grid2>
+                <Grid2 size={6} sx={{ textAlign: "center" }}>
+                  <BorderLinearProgress
+                    variant="determinate"
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    color={att.color as any}
+                    style={{
+                      height: "5px",
+                      border: "1px solid black",
+                      marginTop: "0.5rem",
+                    }}
+                    value={20 + _ * 10}
+                  />
+                </Grid2>
+                <Grid2 size={2} sx={{ textAlign: "center" }}>
+                  <Chip
+                    variant="outlined"
+                    style={{
+                      textAlign: "center",
+                      border: "none",
+                    }}
+                    label={
+                      <Typography
+                        sx={{ fontSize: "12px" }}
+                        typography={"small"}
+                      >
+                        {generateFractionalPrice(att.label + item.name)}
+                      </Typography>
+                    }
+                    onClick={() => {
+                      navigator.clipboard.writeText(item.name);
+                    }}
+                  />
+                </Grid2>
+              </Grid2>
+            );
+          })}
           {/* <LinearProgress color="info" /> */}
           {/* <BorderLinearProgress
             variant="determinate"
@@ -180,18 +195,18 @@ export const BoostCardMain = ({
         >
           <div>
             <Button color="inherit" sx={{ background: "none", border: "none" }}>
-            <Button
-              variant="outlined"
-              color="error"
-              sx={{ marginRight: "0.5rem", fontSize: "15px" }}
-              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-              startIcon={<Iconify icon="ic:outline-sell" />}
-              onClick={() => {
-                openPaymentConfirmModal(item);
-              }}
-            >
-              Sell
-            </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                sx={{ marginRight: "0.5rem", fontSize: "15px" }}
+                className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+                startIcon={<Iconify icon="ic:outline-sell" />}
+                onClick={() => {
+                  openPaymentConfirmModal(item);
+                }}
+              >
+                Sell
+              </Button>
             </Button>
           </div>
           <div>

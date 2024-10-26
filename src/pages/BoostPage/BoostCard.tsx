@@ -88,8 +88,7 @@ export const BoostCard = ({
               paddingBottom: '0.2rem'
             }}
           >
-            <Typography sx={{fontSize: '12px'}}>Mint: {Math.round(generateFractionalPrice(item.name) * 1232)}</Typography>
-            <Typography sx={{fontSize: '12px'}}>Lv: {Math.round(generateFractionalPrice(item.name) * 7)}</Typography>
+            <Typography sx={{fontSize: '12px'}}>Mint: {Math.round(generateFractionalPrice(item.name) * 1232)} |  {Math.round(generateFractionalPrice(item.name) * 7)}</Typography>
           </div>
           {/* <LinearProgress color="info" /> */}
           <BorderLinearProgress
