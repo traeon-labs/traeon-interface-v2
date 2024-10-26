@@ -41,8 +41,8 @@ export const BoostCardMain = ({
     ];
   }, [item]);
   const navigateToAssetPage = () => {
-    setCurrentAsset(item);
-    setVisible(true);
+    // setCurrentAsset(item);
+    // setVisible(true);
   };
 
   // const assetPurchase = () => {};
@@ -119,7 +119,7 @@ export const BoostCardMain = ({
           </div>
           {_MOCK_ATTS.map((att, _) => {
             return (
-              <Grid2 container sx={{ width: "100%" }} key={_} py={0.5} pt={1}>
+              <Grid2 container sx={{ width: "100%" }} key={_} py={0.5} spacing={1} pt={1}>
                 <Grid2 size={4} sx={{ textAlign: "left" }}>
                   <Chip
                     variant="filled"
@@ -133,7 +133,7 @@ export const BoostCardMain = ({
                     icon={<Iconify icon={att.icon} />}
                     label={
                       <Typography
-                        sx={{ fontSize: "12px" }}
+                        sx={{ fontSize: "11px" }}
                         typography={"small"}
                       >
                         {att.label}
@@ -205,7 +205,7 @@ export const BoostCardMain = ({
               <Button
                 variant="outlined"
                 color="error"
-                sx={{ marginRight: "0.5rem", fontSize: "15px" }}
+                sx={{ marginRight: "0.5rem", fontSize: "12px" }}
                 className="aeon-box-border aeon-box-shadow-bold aeon-transition"
                 startIcon={<Iconify icon="ic:outline-sell" />}
                 onClick={() => {
@@ -221,7 +221,7 @@ export const BoostCardMain = ({
             <Button
               variant="contained"
               color="primary"
-              sx={{ marginRight: "0.5rem", fontSize: "15px" }}
+              sx={{ marginRight: "0.5rem", fontSize: "12px" }}
               className="aeon-box-border aeon-box-shadow-bold aeon-transition"
               startIcon={<Iconify icon="akar-icons:thunder" />}
               onClick={() => {

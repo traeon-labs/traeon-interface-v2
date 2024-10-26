@@ -37,8 +37,8 @@ export const BoostCard = ({
     ];
   }, [item]);
   const navigateToAssetPage = () => {
-    setCurrentAsset(item);
-    setVisible(true);
+    // setCurrentAsset(item);
+    // setVisible(true);
   };
 
   // const assetPurchase = () => {};
@@ -83,7 +83,7 @@ export const BoostCard = ({
             marginLeft: "5%",
           }}
         >
-          <div
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -92,8 +92,8 @@ export const BoostCard = ({
               paddingBottom: '0.2rem'
             }}
           >
-            <Typography sx={{fontSize: '12px'}}>Mint: {Math.round(generateFractionalPrice(item.name) * 1232)} |  {Math.round(generateFractionalPrice(item.name) * 7)}</Typography>
-          </div>
+            <Typography sx={{fontSize: '12px'}}>Mint: {Math.round(generateFractionalPrice(item.name) * 1232)}</Typography>
+          </div> */}
           {/* <LinearProgress color="info" /> */}
           <BorderLinearProgress
             variant="determinate"

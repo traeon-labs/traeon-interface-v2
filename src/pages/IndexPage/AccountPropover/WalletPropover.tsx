@@ -1,6 +1,6 @@
 import type { IconButtonProps } from "@mui/material/IconButton";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Iconify } from "@/components/iconify";
 import { shortenAddress } from "@/utils";
@@ -18,7 +18,8 @@ import {
   useTonConnectUI,
   useTonWallet,
 } from "@tonconnect/ui-react";
-import {openAccountOrdersModal} from "../AccountOrdersModal/AccountOrdersModal";
+import { openAccountOrdersModal } from "../AccountOrdersModal/AccountOrdersModal";
+import { useTonBalance } from "./hook/useAccountBalance";
 
 export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(
@@ -40,7 +41,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
   const tonWalletAddress = useTonAddress();
   const tonWalletModal = useTonConnectModal();
   const tonWalletUI = useTonConnectUI();
-
+  const { balance } = useTonBalance(tonWalletAddress);
   return tonWalletAddress ? (
     <div>
       <Button
@@ -52,17 +53,26 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
         onClick={handleOpenPopover}
         startIcon={
           <div>
+            {balance ? (
+              <Chip
+                sx={{ background: "none" }}
+                icon={<Iconify icon="token-branded:usdt" />}
+                size="small"
+                label={12.45}
+              />
+            ) : (
+              <Chip
+                sx={{ background: "none" }}
+                icon={<Iconify icon="token-branded:usdt" />}
+                size="small"
+                label={'-'}
+              />
+            )}
             <Chip
               sx={{ background: "none" }}
-              icon={<Iconify icon="token-branded:usdt" />}
               size="small"
-              label="20"
-            />
-            <Chip
-              sx={{ background: "none" }}
-              size="small"
-              icon={<Iconify icon="token:ton" />}
-              label="20"
+              icon={<Iconify icon="token-branded:ton" />}
+              label={balance}
             />
           </div>
         }
@@ -78,7 +88,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
         onClose={handleClosePopover}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         transformOrigin={{ vertical: "top", horizontal: "left" }}
-        sx={{left: 100}}
+        sx={{ left: 100 }}
         slotProps={{
           paper: {
             sx: { borderRadius: "20px", width: 200 },
@@ -122,7 +132,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
             key={"copy"}
             onClick={() => {
               navigator.clipboard.writeText(tonWalletAddress);
-              if(setOpenPopover) setOpenPopover(null)
+              if (setOpenPopover) setOpenPopover(null);
             }}
           >
             <Iconify icon={"ion:copy-outline"} />
@@ -130,7 +140,10 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
           </MenuItem>
           <MenuItem
             key={"copy"}
-            onClick={() => {openAccountOrdersModal(); setOpenPopover(null)}}
+            onClick={() => {
+              openAccountOrdersModal();
+              setOpenPopover(null);
+            }}
           >
             <Iconify icon={"hugeicons:profile"} />
             Manage
@@ -143,11 +156,13 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
           <Button
             fullWidth
             color="error"
-            startIcon={<Iconify icon="material-symbols-light:account-balance-wallet-outline" />}
+            startIcon={
+              <Iconify icon="material-symbols-light:account-balance-wallet-outline" />
+            }
             size="medium"
             variant="text"
             onClick={async () => {
-              await tonWalletUI[0].disconnect()
+              await tonWalletUI[0].disconnect();
             }}
           >
             Disconnect
@@ -163,9 +178,7 @@ export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
       color="inherit"
       variant="outlined"
       className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-      startIcon={
-        <Iconify icon="token:ton" />
-      }
+      startIcon={<Iconify icon="token:ton" />}
       sx={{
         borderRadius: "20px",
       }}

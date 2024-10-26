@@ -295,9 +295,9 @@ export const PaymentSellModal = () => {
                     }}
                     endIcon={
                       <Iconify
-                        icon="token:usdt"
+                        icon="token-branded:usdt"
                         width={35}
-                        sx={{ color: "gray" }}
+                        // sx={{ color: "gray" }}
                       />
                     }
                   >
