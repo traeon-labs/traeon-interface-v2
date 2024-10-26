@@ -1,11 +1,10 @@
 import marketplaceAssets from "@/nfts/metadata/nfts.json";
 import {IMarketplaceFilterTabs,INFTMetadata} from "@/types/index.type";
 import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
-import {Grid, Grid2} from "@mui/material";
+import {Grid2} from "@mui/material";
 import {Direction} from "@smakss/react-scroll-direction";
 import {List} from "@telegram-apps/telegram-ui";
 import {useMemo,useState} from "react";
-import {BoostFilter} from "./BoostFilter";
 import {BoostCard} from "./BoostCard";
 import {BoostCardMain} from "./BoostCardMain";
 

@@ -57,27 +57,31 @@ export const TravelMapModal = ({
     }, 1000);
   };
   return (
-    <div style={{ ...(!visible ? { opacity: 0, height: 0  } : {})}}>
-          <div style={{ marginTop: 2 }}>
-            <IconButton
-              size="large"
-              sx={{
-                borderRadius: "50%",
-                position: "fixed",
-                zIndex: 10,
-                top: '80px',
-                marginLeft: 2,
-                p: '0.7rem',
-                background:"white"
-              }}
-              className="aeon-box-shadow-bold aeon-transition"
-              onClick={() => {
-                setVisible(false);
-              }}
-            >
-              <Iconify icon="ic:outline-arrow-back-ios" width={20} />
-            </IconButton>{" "}
-          </div>
+    <div
+      style={{
+        ...(!visible ? { opacity: 0, height: 0, position: "fixed" } : { position: 'relative'}),
+      }}
+    >
+      <div style={{ marginTop: 2 }}>
+        <IconButton
+          size="large"
+          sx={{
+            borderRadius: "50%",
+            position: "fixed",
+            zIndex: 10,
+            top: "80px",
+            marginLeft: 2,
+            p: "0.7rem",
+            background: "white",
+          }}
+          className="aeon-box-shadow-bold aeon-transition"
+          onClick={() => {
+            setVisible(false);
+          }}
+        >
+          <Iconify icon="ic:outline-arrow-back-ios" width={20} />
+        </IconButton>{" "}
+      </div>
       <Grid2
         container
         // p={1}

@@ -29,7 +29,8 @@ import { MainLoading } from "./MainLoading";
 import useLocationStorage from "@/hook/useLocationStorage";
 import { BadgePage } from "../BadgePage/BadgePage";
 import { BoostPage } from "../BoostPage/BoostPage";
-import {PaymentSellModal} from "../AeonPaymentPage/components/PaymentSellModal";
+import { PaymentSellModal } from "../AeonPaymentPage/components/PaymentSellModal";
+import { TravelMapModal } from "../TravelPage/TravelMapModal";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -119,19 +120,18 @@ export const IndexPage: FC = () => {
             asset={currentAsset}
           />
         ) : tab === "iconamoon:certificate-badge" ? (
-          <BadgePage
-            setCurrentAsset={setCurrentAsset}
-            visible={assetModal}
-            setVisible={setAssestModal}
-            asset={currentAsset}
-          />
+          <BadgePage visible={travelMapModal} setVisible={setTravelMapModal} />
         ) : tab === "mdi:location-on-outline" ? (
           <TravelPage visible={travelMapModal} setVisible={setTravelMapModal} />
         ) : (
           ""
         )}
+        <TravelMapModal
+          visible={travelMapModal}
+          setVisible={setTravelMapModal}
+        />
         <AeonPaymentModal />
-        <PaymentSellModal/>
+        <PaymentSellModal />
         <PaymentConfirmModal />
         <AccountOrdersModal
           setAssestModal={setAssestModal}

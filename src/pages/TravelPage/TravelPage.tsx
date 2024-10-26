@@ -40,26 +40,42 @@ export const TravelPage = ({
   }, []);
   return (
     <div>
-      {!visible ? (
-        <Grid2 container spacing={1} p={2}>
-          <Grid2 size={12}>
-            <Button
-              variant="outlined"
-              color="inherit"
-              sx={{ width: "100%", height: "50px" }}
-              className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-              startIcon={<Iconify icon="entypo:location" />}
-              onClick={() => {
-                setVisible(!visible);
-              }}
-            >
-              Start Jouney
-            </Button>
-          </Grid2>
-
-          {locationLoading
-            ? "loading..."
-            : journeyKeys.map((jKey, _) => {
+    {!visible ? (
+      <Grid2 container spacing={1} p={2}>
+        <Grid2 size={12}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            sx={{ width: "100%", height: "50px" }}
+            className="aeon-box-border aeon-box-shadow-bold aeon-transition"
+            startIcon={<Iconify icon="entypo:location" />}
+            onClick={() => {
+              setVisible(!visible);
+            }}
+          >
+            Start Journey
+          </Button>
+        </Grid2>
+  
+        {locationLoading
+          ? "Loading..."
+          : journeyKeys.length === 0 ? (
+              <Grid2 size={12} sx={{ p: 2, textAlign: "left" }}>
+                <Typography variant="h6">
+                  No locations available.
+                </Typography>
+                <Typography variant="body1" sx={{ mt: 2 }}>
+                  Please follow these directions to get started:
+                  <ul>
+                    <li>Check your internet connection.</li>
+                    <li>Ensure your device's location services are enabled.</li>
+                    <li>Try refreshing the page.</li>
+                    <li>If the issue persists, contact support.</li>
+                  </ul>
+                </Typography>
+              </Grid2>
+            ) : (
+              journeyKeys.slice(0, 1).map((jKey, _) => {
                 const jData = journeysData[jKey];
                 const { color } = markLocations[jKey];
                 const [country, place] = decodeLocationkey(jKey);
@@ -75,8 +91,8 @@ export const TravelPage = ({
                         <strong>{country}</strong> {"|"} {place}{" "}
                         <Chip
                           label="Place"
-                          sx={{background: color, opacity: 0.8, cursor:'pointer'}}
-                          onClick={() => {setVisible(true)}}
+                          sx={{ background: color, opacity: 0.8, cursor: 'pointer' }}
+                          onClick={() => { setVisible(true) }}
                           icon={<Iconify color="black" icon="mi:location" />}
                         />{" "}
                       </Typography>
@@ -102,72 +118,18 @@ export const TravelPage = ({
                               {mData.place_name}
                             </Typography>
                           </Grid2>
-
-                          {/* <Grid2 size={12}>
-                            <Typography variant="subtitle1">
-                              <Button
-                                variant="contained"
-                                color="inherit"
-                                className="aeon-box-border aeon-box-shadow-bold"
-                                sx={{ borderColor: color }}
-                                startIcon={<Iconify icon="mi:location" />}
-                                onClick={() => {
-                                  console.log("Location Clicked", mData.center);
-                                }}
-                              >
-                                See on map
-                              </Button>
-                            </Typography>
-                          </Grid2> */}
                         </div>
                       );
                     })}
-                    {/* <Grid2 container> */}
-                    <Grid2 size={8} key={_} pt={2}>
-                      <Card
-                        className="w-100 aeon-box-shadow aeon-box-border"
-                        style={{
-                          cursor: "pointer",
-                          padding: "0.2rem 0.2rem 0rem 0.2rem",
-                          textAlign: "left",
-                        }}
-                      >
-                        <Chip
-                          style={{
-                            textAlign: "center",
-                            marginBottom: "0.4rem",
-                            opacity: 0.7,
-                          }}
-                          // color={assetConfig.color}
-                          className="aeon-chip-border-radius"
-                          size="small"
-                          icon={<Iconify icon="streamline:star-badge-solid" />}
-                          label={`Badge`}
-                        />
-                        <CardMedia
-                          component="img"
-                          onClick={() => {setVisible(true)}}
-                          image={
-                            "/badge/" +
-                            Math.round(1 + Math.random() * 10) +
-                            ".png"
-                          }
-                          sx={{
-                            borderRadius: "20px",
-                          }}
-                        />
-                      </Card>
-                    </Grid2>
-                    {/* </Grid2> */}
                   </Grid2>
                 );
-              })}
-        </Grid2>
-      ) : (
-        ""
-      )}
-
-      <TravelMapModal visible={visible} setVisible={setVisible} />
-    </div>
+              })
+            )}
+      </Grid2>
+    ) : (
+      ""
+    )}
+  </div>
+  
   );
 };
