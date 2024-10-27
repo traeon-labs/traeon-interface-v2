@@ -20,6 +20,7 @@ import {Modal} from "@telegram-apps/telegram-ui";
 import {useEffect,useMemo,useRef,useState} from "react";
 import {WalletPropover} from "../AccountPropover/WalletPropover";
 import useAccountOrders from "./hook/useAccountOrders";
+import {useTonAddress} from "@tonconnect/ui-react";
 
 let _confirm: (props: {
   resolve?: (value: boolean) => void;
@@ -60,7 +61,7 @@ export const AccountOrdersModal = ({
     if (visible) window.scrollTo(0, 0);
     refreshOrdersData();
   }, [visible]);
-
+  const tonWalletAddress = useTonAddress()
   return (
     <Modal
       open={visible}
@@ -102,9 +103,9 @@ export const AccountOrdersModal = ({
             </div>
           </Grid2>
            {!loadingOrders ?  <Grid2 size={12} sx={{textAlign:'center'}}>
-               <Typography style={{paddingBottom: '0.5rem'}}onClick={() => {openAccountOrdersModal()}}>Orders history ({orders.length})</Typography>
+               <Typography style={{paddingBottom: '0.5rem'}}onClick={() => {openAccountOrdersModal()}}>Orders history ({tonWalletAddress ? orders.length : 0})</Typography>
                </Grid2> : ''}
-          {orders.length === 0 && !loadingOrders ? (
+          {(!tonWalletAddress || orders.length === 0) && !loadingOrders ? (
             <Grid2 size={12} py={1} sx={{textAlign: 'center'}}>
               No Orders Found
             </Grid2>
@@ -139,7 +140,7 @@ export const AccountOrdersModal = ({
                     <Typography variant="subtitle1">
                       Amount:{" "}
                       <strong>
-                        {order.orderAmount} {order.orderCurrency}
+                        {order.orderAmount} ({order.orderCurrency})
                       </strong>
                     </Typography>
                   </Grid2>
@@ -154,7 +155,7 @@ export const AccountOrdersModal = ({
                 
                   <Grid2 size={12}>
                     <Typography variant="subtitle1">
-                      Fee: <strong> {order.fee ? order.fee : 'Pending fee...'}</strong>
+                      Fee: <strong> {order.fee ? '$'+order.fee : 'Pending fee...'}</strong>
                     </Typography>
                   </Grid2>
                   {assetData?.name ? <Grid2 size={12} sx={{mb:1}}>

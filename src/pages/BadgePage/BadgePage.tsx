@@ -3,6 +3,7 @@ import { BorderLinearProgress } from "@/components/Linear/customLinear";
 import useLocationStorage from "@/hook/useLocationStorage";
 import { decodeLocationkey, generateFractionalPrice } from "@/utils";
 import { Button, Card, CardMedia, Chip, Grid2, Typography } from "@mui/material";
+import {useTonAddress} from "@tonconnect/ui-react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect } from "react";
 
@@ -25,6 +26,9 @@ export const BadgePage = ({
     locationRefresh();
   }, []);
 
+  const tonWalletAddress = useTonAddress();
+
+
   return (
     <div>
       {!visible ? (
@@ -46,7 +50,7 @@ export const BadgePage = ({
 
           {locationLoading ? (
             "loading..."
-          ) : journeyKeys.length === 0 ? (
+          ) : (!tonWalletAddress || journeyKeys.length === 0) ? (
             <Grid2 size={12} sx={{ p: 2, textAlign: "center" }}>
               <Typography variant="h6">No Check-ins Yet</Typography>
               <Typography variant="body1" sx={{ mt: 2 }}>

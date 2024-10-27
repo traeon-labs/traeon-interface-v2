@@ -1,8 +1,8 @@
-import { IAeonOrder } from "@/types/index.type";
-import { fetchAeonOrder } from "@/utils/aeon/fetchOrder";
-import { cloudStorage as cloudData } from "@telegram-apps/sdk";
-import { useEffect, useMemo, useState } from "react";
-import { useAppContext } from "../../IndexPage";
+import {IAeonOrder,OrderStatus} from "@/types/index.type";
+import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
+import {cloudStorage as cloudData} from "@telegram-apps/sdk";
+import {useEffect,useMemo,useState} from "react";
+import {useAppContext} from "../../IndexPage";
 
 const useAccountOrders = () => {
   const [loadingOrders, setLoadingOrders] = useState(false);
@@ -42,7 +42,12 @@ const useAccountOrders = () => {
         })
       );
       if (ordersData)
-        setOrders(ordersData.filter((o) => o !== undefined) as IAeonOrder[]);
+        setOrders(ordersData.filter((o) => o !== undefined).map(o => {
+      return {
+        ...o,
+        orderStatus: ((Date.now() - Number(JSON.parse(o?.customParam || '{}')?.["orderTs"])) >= 1000 * 3600 * 24 * 3) ? OrderStatus.TIMEOUT : o.orderStatus
+      }
+    }) as IAeonOrder[]);
       Promise.all(
         ordersData.map(async (orderData) => {
           if (orderData?.orderNo) {

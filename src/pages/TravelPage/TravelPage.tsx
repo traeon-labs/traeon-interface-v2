@@ -8,6 +8,7 @@ import {
   Grid2,
   Typography
 } from "@mui/material";
+import {useTonAddress} from "@tonconnect/ui-react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import {useEffect} from "react";
 
@@ -33,6 +34,7 @@ export const TravelPage = ({
   useEffect(() => {
     locationRefresh();
   }, []);
+  const tonWalletAddress = useTonAddress()
   return (
     <div>
     {!visible ? (
@@ -54,7 +56,7 @@ export const TravelPage = ({
   
         {locationLoading
           ? "Loading..."
-          : journeyKeys.length === 0 ? (
+          : (!tonWalletAddress || journeyKeys.length === 0) ? (
             <Grid2 size={12} sx={{ p: 2, textAlign: "left" }}>
             <Typography variant="h6">No check-in data found.</Typography>
             <Typography variant="body1" sx={{ mt: 2 }}>
