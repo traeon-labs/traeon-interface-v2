@@ -11,7 +11,8 @@
     "lint:fix": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview",
     "deploy": "cp -r ./dist/* ../mtcauto.github.io/;",
-    "predeploy": "pnpm run build"
+    "predeploy": "pnpm run build",
+    "test": "yarn run test"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
