@@ -1,8 +1,8 @@
-import { LineMdLoadingLoop } from "@/components/icons/LineMdLoadingLoop";
-import { Avatar, Chip, Grid2, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import {Iconify} from "@/components/iconify";
+import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
+import {Avatar,Chip,Grid2,Typography} from "@mui/material";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Iconify } from "@/components/iconify";
+import {useEffect,useState} from "react";
 
 export const MainLoading = () => {
   const [loading, setLoading] = useState(true);
@@ -77,6 +77,8 @@ export const MainLoading = () => {
             height={64}
             style={{ margin: "auto", animation: "spin 1s linear infinite" }}
           />
+          {/* <LinearProgress sx={{ background: 'black', height: '10px' ,margin: "auto"}}/> */}
+          {/* <CircularProgress  sx={{margin: "auto"}}/> */}
           <Typography variant="body1" sx={{ mb: 4 }}>
             Powered by
             <br />
