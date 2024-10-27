@@ -1,4 +1,4 @@
-import { IMarketplaceFilterTabs, IMUIColor, ITabs } from "@/types/index.type";
+import {IMarketplaceFilterTabs,IMUIColor} from "@/types/index.type";
 
 export const TABS: { [key: string]: string } = {
   "mdi:location-on-outline": "travel",

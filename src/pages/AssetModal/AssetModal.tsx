@@ -1,6 +1,8 @@
-import { Iconify } from "@/components/iconify";
-import { IMUIColor, INFTMetadata } from "@/types/index.type";
-import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
+import {Iconify} from "@/components/iconify";
+import {BorderLinearProgress} from "@/components/Linear/customLinear";
+import {INFTMetadata} from "@/types/index.type";
+import {generateFractionalPrice} from "@/utils";
+import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
 import {
   Box,
   Button,
@@ -14,13 +16,11 @@ import {
   Tab,
   Tabs,
 } from "@mui/material";
-import { Modal, Typography } from "@telegram-apps/telegram-ui";
-import { useMemo, useState } from "react";
-import { WalletPropover } from "../IndexPage/AccountPropover/WalletPropover";
-import { BorderLinearProgress } from "@/components/Linear/customLinear";
+import {Modal,Typography} from "@telegram-apps/telegram-ui";
+import {useMemo,useState} from "react";
+import {openPaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
+import {WalletPropover} from "../IndexPage/AccountPropover/WalletPropover";
 import AssetHistory from "./AssetHistory";
-import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
-import { generateFractionalPrice } from "@/utils";
 
 export const _MOCK_ATTS = [
   {
@@ -47,7 +47,7 @@ export const _MOCK_ATTS = [
 
 export default function AssetModal({
   setVisible,
-  setCurrentAsset,
+  // setCurrentAsset,
   visible,
   asset,
 }: {
@@ -314,7 +314,7 @@ export default function AssetModal({
             <Card>
               <Tabs
                 value={currentTab}
-                onChange={(event, newValue) => setCurrentTab(newValue)}
+                onChange={(_event, newValue) => setCurrentTab(newValue)}
                 sx={{ px: 3, bgcolor: "background.neutral" }}
               >
                 {TABS.map((tab) => (
@@ -356,7 +356,7 @@ export default function AssetModal({
               }}
             >
               <Button
-                color="default"
+                // color="default"
                 size="large"
                 sx={{
                   background: "none",

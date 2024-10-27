@@ -1,11 +1,10 @@
-import { Iconify } from "@/components/iconify";
-import { ILocationStore } from "@/types/index.type";
-import { encodeLocationKey } from "@/utils";
-import { Button, Grid2, IconButton } from "@mui/material";
-import { cloudStorage as cloudData } from "@telegram-apps/sdk";
+import {Iconify} from "@/components/iconify";
+import {ILocationStore} from "@/types/index.type";
+import {encodeLocationKey} from "@/utils";
+import {Button,Grid2,IconButton} from "@mui/material";
+import {cloudStorage as cloudData} from "@telegram-apps/sdk";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useRef, useState } from "react";
-import { WalletPropover } from "../IndexPage/AccountPropover/WalletPropover";
+import {useRef} from "react";
 import useLocationTracking from "./hook/useLocationTracking";
 
 export const TravelMapModal = ({
@@ -16,20 +15,20 @@ export const TravelMapModal = ({
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
-  const [mapRef, setMapRef] = useState<
-    React.MutableRefObject<HTMLDivElement | null>
-  >({ current: null });
+  // const [mapRef, setMapRef] = useState<
+  //   React.MutableRefObject<HTMLDivElement | null>
+  // >({ current: null });
   const PK_TOKEN =
     "pk.eyJ1IjoiYXZpbmNlbnRhIiwiYSI6ImNtMWxsMGJicDBhNjcycG85OWZ5Znd5d2UifQ.krV7qPCTyTtHq53LoSjwQg";
 
   const {
-    zoom,
+    // zoom,
     locationData,
-    locationName,
-    currentLocationRef,
+    // locationName,
+    // currentLocationRef,
     refresh,
-    mapLoading,
-    updateLocationData,
+    // mapLoading,
+    // updateLocationData,
   } = useLocationTracking(mapContainerRef, PK_TOKEN);
   const onCheckinWithMap = async () => {
     const contextLength = locationData?.context.length || 2;

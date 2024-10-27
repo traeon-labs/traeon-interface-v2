@@ -14,23 +14,20 @@ import {
   INFTMetadata,
   ITabs,
 } from "@/types/index.type";
-import useDetectScroll from "@smakss/react-scroll-direction";
-import { init, postEvent, cloudStorage } from "@telegram-apps/sdk";
-import { AeonPaymentModal } from "../AeonPaymentPage/components/AeonPaymentModal";
-import { PaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
+import {init,postEvent} from "@telegram-apps/sdk";
+import {AeonPaymentModal} from "../AeonPaymentPage/components/AeonPaymentModal";
+import {PaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
+import {PaymentSellModal} from "../AeonPaymentPage/components/PaymentSellModal";
 import AssetModal from "../AssetModal/AssetModal";
-import { MarketplacePage } from "../MarketplacePage/MarketplacePage";
-import { TabsController } from "../MarketplacePage/TabsController";
-import { TravelPage } from "../TravelPage/TravelPage";
-import { AccountOrdersModal } from "./AccountOrdersModal/AccountOrdersModal";
-import { AccountPopover } from "./AccountPropover";
+import {BadgePage} from "../BadgePage/BadgePage";
+import {BoostPage} from "../BoostPage/BoostPage";
+import {MarketplacePage} from "../MarketplacePage/MarketplacePage";
+import {TabsController} from "../MarketplacePage/TabsController";
+import {TravelMapModal} from "../TravelPage/TravelMapModal";
+import {TravelPage} from "../TravelPage/TravelPage";
+import {AccountOrdersModal} from "./AccountOrdersModal/AccountOrdersModal";
+import {AccountPopover} from "./AccountPropover";
 import "./IndexPage.css";
-import { MainLoading } from "./MainLoading";
-import useLocationStorage from "@/hook/useLocationStorage";
-import { BadgePage } from "../BadgePage/BadgePage";
-import { BoostPage } from "../BoostPage/BoostPage";
-import { PaymentSellModal } from "../AeonPaymentPage/components/PaymentSellModal";
-import { TravelMapModal } from "../TravelPage/TravelMapModal";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -67,7 +64,7 @@ export const IndexPage: FC = () => {
   const [travelMapModal, setTravelMapModal] = useState<boolean>(false);
   const [currentAsset, setCurrentAsset] = useState<INFTMetadata | undefined>();
   const customElementRef = useRef<HTMLDivElement>(null);
-  const [customElement, setCustomElement] = useState<HTMLDivElement>();
+  const [_customElement, setCustomElement] = useState<HTMLDivElement>();
   // const { scrollDir } = useDetectScroll({ target: customElement });
   const [visitedLocations, setVisitedLocations] = useState<{
     markLocations: IMarkLocations;

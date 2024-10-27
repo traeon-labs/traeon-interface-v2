@@ -124,7 +124,7 @@ export function decodeLocationkey(encoded:string) {
   return atob(encoded).split('-');
 }
 
-function generateDigitRandom(digital:number = 5): number {
+function generateDigitRandom(): number {
   return Math.floor(10000 + Math.random() * 90000);
 }
 

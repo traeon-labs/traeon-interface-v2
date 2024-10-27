@@ -1,20 +1,15 @@
-import { Iconify } from "@/components/iconify";
+import {Iconify} from "@/components/iconify";
+import {BorderLinearProgress} from "@/components/Linear/customLinear";
+import useLocationStorage from "@/hook/useLocationStorage";
+import {decodeLocationkey,generateFractionalPrice} from "@/utils";
 import {
   Button,
-  Card,
-  CardMedia,
   Chip,
-  Divider,
   Grid2,
-  Typography,
+  Typography
 } from "@mui/material";
-import { cloudStorage as cloudData } from "@telegram-apps/sdk";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { TravelMapModal } from "./TravelMapModal";
-import useLocationStorage from "@/hook/useLocationStorage";
-import { useEffect } from "react";
-import { decodeLocationkey, generateFractionalPrice } from "@/utils";
-import { BorderLinearProgress } from "@/components/Linear/customLinear";
+import {useEffect} from "react";
 
 export const TravelPage = ({
   visible,
@@ -23,10 +18,10 @@ export const TravelPage = ({
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const onResetData = async () => {
-    const keys = await cloudData.getKeys();
-    await cloudData.deleteItem(keys);
-  };
+  // const onResetData = async () => {
+  //   const keys = await cloudData.getKeys();
+  //   await cloudData.deleteItem(keys);
+  // };
   const {
     journeyKeys,
     locationLoading,

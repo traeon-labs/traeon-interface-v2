@@ -1,8 +1,16 @@
-import { Iconify } from "@/components/iconify";
-import { BorderLinearProgress } from "@/components/Linear/customLinear";
-import { INFTMetadata } from "@/types/index.type";
-import { createAeonOrdersWithTma } from "@/utils/aeon/createOrder";
-import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
+import {Iconify} from "@/components/iconify";
+import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
+import {openAccountOrdersModal} from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
+import useAccountOrders from "@/pages/IndexPage/AccountOrdersModal/hook/useAccountOrders";
+import {INFTMetadata} from "@/types/index.type";
+import {
+  generateAeonResError,
+  generateFractionalPrice,
+  generateOrderKey,
+} from "@/utils";
+import {createAeonOrdersWithTma} from "@/utils/aeon/createOrder";
+import {fetchAeonOrder} from "@/utils/aeon/fetchOrder";
+import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
 import {
   Avatar,
   AvatarGroup,
@@ -15,20 +23,11 @@ import {
   IconButton,
   Stack,
 } from "@mui/material";
-import { Modal, Typography } from "@telegram-apps/telegram-ui";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { openAeonPayment } from "./AeonPaymentModal";
-import {
-  generateAeonResError,
-  generateFractionalPrice,
-  generateOrderKey,
-} from "@/utils";
-import { useInitData } from "@tma.js/sdk-react";
-import { fetchAeonOrder } from "@/utils/aeon/fetchOrder";
-import useAccountOrders from "@/pages/IndexPage/AccountOrdersModal/hook/useAccountOrders";
-import { openAccountOrdersModal } from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
-import { LineMdLoadingLoop } from "@/components/icons/LineMdLoadingLoop";
-import { cloudStorage as cloudData } from "@telegram-apps/sdk";
+import {cloudStorage as cloudData} from "@telegram-apps/sdk";
+import {Modal,Typography} from "@telegram-apps/telegram-ui";
+import {useInitData} from "@tma.js/sdk-react";
+import {useEffect,useMemo,useRef,useState} from "react";
+import {openAeonPayment} from "./AeonPaymentModal";
 
 const _MOCK_ATTS = [
   {
@@ -67,11 +66,11 @@ export const PaymentConfirmModal = () => {
     throw new Error("RESOLVE_REF_UNSET");
   });
   const {
-    orders,
+    // orders,
     setUnfillOrders,
-    setOrders,
+    // setOrders,
     pendingOrders,
-    loadingOrders,
+    // loadingOrders,
     refreshOrdersData,
   } = useAccountOrders();
   useEffect(() => {
@@ -151,10 +150,12 @@ export const PaymentConfirmModal = () => {
           setUnfillOrders([]);
           setCreatingOrder(false);
         }, 1000);
-      } catch (error) {
+      } catch (error:any) {
         setCreatingOrder(false);
-
-        console.log(error);
+        openAeonPayment(
+          generateAeonResError("Asset not available now!", "404")
+        );
+        console.log(error?.code || error?.message || error?.msg);
       }
     } else {
     }

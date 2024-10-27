@@ -1,13 +1,11 @@
-import { shortenAddress } from "@/utils";
-import { Button, IconContainer, List, Section } from "@telegram-apps/telegram-ui";
+import {shortenAddress} from "@/utils";
+import {Button,List} from "@telegram-apps/telegram-ui";
 import {
-  TonConnectButton,
   useTonAddress,
   useTonConnectModal,
-  useTonConnectUI,
-  useTonWallet,
+  useTonConnectUI
 } from "@tonconnect/ui-react";
-import { type FC } from "react";
+import {type FC} from "react";
 
 export const TonWalletButton: FC = () => {
   const tonModal = useTonConnectModal();

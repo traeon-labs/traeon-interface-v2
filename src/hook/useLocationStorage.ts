@@ -1,9 +1,9 @@
 import {useAppContext} from "@/pages/IndexPage/IndexPage";
-import { ILocationStore, IMarkLocations } from "@/types/index.type";
-import { decodeLocationkey, generateColorHex } from "@/utils";
+import {ILocationStore,IMarkLocations} from "@/types/index.type";
+import {decodeLocationkey,generateColorHex} from "@/utils";
 // import { useCloudStorage } from "@tma.js/sdk-react";
-import { cloudStorage as cloudData } from "@telegram-apps/sdk";
-import { useEffect, useState, useCallback } from "react";
+import {cloudStorage as cloudData} from "@telegram-apps/sdk";
+import {useEffect,useState} from "react";
 
 const useLocationStorage = () => {
   // const cloudData = useCloudStorage(false);

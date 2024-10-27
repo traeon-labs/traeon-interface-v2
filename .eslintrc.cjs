@@ -31,6 +31,7 @@ module.exports = {
     'react'
   ],
   rules: {
+    '@typescript-eslint/no-unused-vars': 'off',
     'react/react-in-jsx-scope': 0,
   }
 };

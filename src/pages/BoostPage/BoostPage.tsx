@@ -1,12 +1,12 @@
 import marketplaceAssets from "@/nfts/metadata/nfts.json";
-import { IMarketplaceFilterTabs, INFTMetadata, ITabs } from "@/types/index.type";
-import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
-import { Grid2 } from "@mui/material";
-import { Direction } from "@smakss/react-scroll-direction";
-import { List } from "@telegram-apps/telegram-ui";
-import { useMemo, useState } from "react";
-import { BoostCard } from "./BoostCard";
-import { BoostCardMain } from "./BoostCardMain";
+import {IMarketplaceFilterTabs,INFTMetadata,ITabs} from "@/types/index.type";
+import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
+import {Grid2} from "@mui/material";
+import {Direction} from "@smakss/react-scroll-direction";
+import {List} from "@telegram-apps/telegram-ui";
+import {useMemo,useState} from "react";
+import {BoostCard} from "./BoostCard";
+import {BoostCardMain} from "./BoostCardMain";
 
 export const BoostPage = ({
   setVisible,
@@ -15,7 +15,7 @@ export const BoostPage = ({
   travelMapVisible,
   setTravelMapVisible,
   setTab,
-  scrollDir,
+  // scrollDir,
 }: {
   asset?: INFTMetadata;
   setCurrentAsset: React.Dispatch<
@@ -28,7 +28,7 @@ export const BoostPage = ({
   setTravelMapVisible: React.Dispatch<React.SetStateAction<boolean>>;
   scrollDir?: Direction;
 }) => {
-  const [marketplaceTab, setMarketplaceTab] = useState<IMarketplaceFilterTabs>(
+  const [marketplaceTab, _setMarketplaceTab] = useState<IMarketplaceFilterTabs>(
     "mingcute:hat-2-line"
   );
 

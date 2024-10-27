@@ -1,13 +1,12 @@
 import type {IconButtonProps} from "@mui/material/IconButton";
 
-import {useCallback,useState} from "react";
 
 import {Iconify} from "@/components/iconify";
-import {Card, Chip} from "@mui/material";
+import {Card,Chip} from "@mui/material";
 import Button from "@mui/material/Button";
-import {WalletPropover} from "./AccountPropover/WalletPropover";
 import {openAccountOrdersModal} from "./AccountOrdersModal/AccountOrdersModal";
 import useAccountOrders from "./AccountOrdersModal/hook/useAccountOrders";
+import {WalletPropover} from "./AccountPropover/WalletPropover";
 
 export type AccountPopoverProps = IconButtonProps & {
   data?: {

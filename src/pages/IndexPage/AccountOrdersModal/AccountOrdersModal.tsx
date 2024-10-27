@@ -1,28 +1,25 @@
-import { Iconify } from "@/components/iconify";
+import {Iconify} from "@/components/iconify";
+import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
+import {AEON_EXPLORE_WEBURL} from "@/config";
+import marketplaceAssets from "@/nfts/metadata/nfts.json";
+import {openAeonPayment} from "@/pages/AeonPaymentPage/components/AeonPaymentModal";
+import {INFTMetadata} from "@/types/index.type";
+import {decodeTimestampAgo,getOrderStatusColor,shortenAddress} from "@/utils";
 import {
-  AvatarGroup,
   Avatar,
   Button,
   Card,
   Chip,
   Container,
-  Divider,
   Grid2,
   IconButton,
-  Link,
   Skeleton,
-  Typography,
-  Box,
+  Typography
 } from "@mui/material";
-import {  Modal } from "@telegram-apps/telegram-ui";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {Modal} from "@telegram-apps/telegram-ui";
+import {useEffect,useMemo,useRef,useState} from "react";
+import {WalletPropover} from "../AccountPropover/WalletPropover";
 import useAccountOrders from "./hook/useAccountOrders";
-import { AEON_EXPLORE_WEBURL } from "@/config";
-import { decodeTimestampAgo, getOrderStatusColor, shortenAddress } from "@/utils";
-import { WalletPropover } from "../AccountPropover/WalletPropover";
-import {openAeonPayment} from "@/pages/AeonPaymentPage/components/AeonPaymentModal";
-import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
-import marketplaceAssets from "@/nfts/metadata/nfts.json";
 
 let _confirm: (props: {
   resolve?: (value: boolean) => void;

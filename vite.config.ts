@@ -25,6 +25,7 @@ export default defineConfig({
     //   certDir: resolve('certificates'),
     //   domains: ['tma.internal'],
     // }),
+    
   ],
   server: {
     // Specifying this property makes Vite dev server to start at the specified host. As long

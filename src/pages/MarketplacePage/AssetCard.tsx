@@ -1,8 +1,8 @@
-import { Iconify } from "@/components/iconify";
-import { BorderLinearProgress } from "@/components/Linear/customLinear";
-import { Link } from "@/components/Link/Link";
-import { INFTMetadata } from "@/types/index.type";
-import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
+import {Iconify} from "@/components/iconify";
+import {BorderLinearProgress} from "@/components/Linear/customLinear";
+import {INFTMetadata} from "@/types/index.type";
+import {generateFractionalPrice} from "@/utils";
+import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
 import {
   Button,
   Card,
@@ -11,15 +11,14 @@ import {
   Grid2,
   Typography,
 } from "@mui/material";
-import { useMemo } from "react";
-import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
-import {generateFractionalPrice} from "@/utils";
+import {useMemo} from "react";
+import {openPaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
 
 export const AssetCard = ({
   item,
   setCurrentAsset,
   setVisible,
-  visible,
+  // visible,
 }: {
   item: INFTMetadata;
   setCurrentAsset: React.Dispatch<
@@ -38,7 +37,6 @@ export const AssetCard = ({
     setVisible(true);
   };
 
-  const assetPurchase = () => {};
   return (
     <Grid2 size={6}>
       <Card

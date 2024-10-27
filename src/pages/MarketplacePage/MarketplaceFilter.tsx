@@ -1,6 +1,6 @@
-import { Iconify } from "@/components/iconify";
-import { IMarketplaceFilterTabs } from "@/types/index.type";
-import { MARKETPLACE_FILTERS_TABS } from "@/utils/constant";
+import {Iconify} from "@/components/iconify";
+import {IMarketplaceFilterTabs} from "@/types/index.type";
+import {MARKETPLACE_FILTERS_TABS} from "@/utils/constant";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -10,7 +10,7 @@ import * as React from "react";
 export const MarketplaceFilter = ({
   marketplaceTab,
   setMarketplaceTab,
-  scrollDir,
+  // scrollDir,
 }: {
   setMarketplaceTab: React.Dispatch<
     React.SetStateAction<IMarketplaceFilterTabs>
@@ -20,7 +20,7 @@ export const MarketplaceFilter = ({
 
 }) => {
   const handleChange = (
-    event: React.SyntheticEvent,
+    _event: React.SyntheticEvent,
     newValue: IMarketplaceFilterTabs
   ) => {
     setMarketplaceTab(newValue);

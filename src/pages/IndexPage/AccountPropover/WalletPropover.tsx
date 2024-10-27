@@ -1,14 +1,13 @@
-import type { IconButtonProps } from "@mui/material/IconButton";
 
-import { useCallback, useEffect, useState } from "react";
+import {useCallback,useState} from "react";
 
-import { Iconify } from "@/components/iconify";
-import { shortenAddress } from "@/utils";
-import { Card, Chip } from "@mui/material";
+import {Iconify} from "@/components/iconify";
+import {shortenAddress} from "@/utils";
+import {Chip} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import MenuItem, { menuItemClasses } from "@mui/material/MenuItem";
+import MenuItem,{menuItemClasses} from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
@@ -18,8 +17,8 @@ import {
   useTonConnectUI,
   useTonWallet,
 } from "@tonconnect/ui-react";
-import { openAccountOrdersModal } from "../AccountOrdersModal/AccountOrdersModal";
-import { useTonBalance } from "./hook/useAccountBalance";
+import {openAccountOrdersModal} from "../AccountOrdersModal/AccountOrdersModal";
+import {useTonBalance} from "./hook/useAccountBalance";
 
 export function WalletPropover({ allowPopover }: { allowPopover: boolean }) {
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(

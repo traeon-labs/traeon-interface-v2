@@ -1,8 +1,8 @@
-import { Iconify } from "@/components/iconify";
-import { BorderLinearProgress } from "@/components/Linear/customLinear";
-import { INFTMetadata, ITabs } from "@/types/index.type";
-import { generateFractionalPrice } from "@/utils";
-import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
+import {Iconify} from "@/components/iconify";
+import {BorderLinearProgress} from "@/components/Linear/customLinear";
+import {INFTMetadata,ITabs} from "@/types/index.type";
+import {generateFractionalPrice} from "@/utils";
+import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
 import {
   Button,
   Card,
@@ -11,17 +11,16 @@ import {
   Grid2,
   Typography,
 } from "@mui/material";
-import { useMemo } from "react";
-import { openPaymentConfirmModal } from "../AeonPaymentPage/components/PaymentConfirmModal";
-import { _MOCK_ATTS } from "../AssetModal/AssetModal";
+import {useMemo} from "react";
 import {openPaymentSellModal} from "../AeonPaymentPage/components/PaymentSellModal";
+import {_MOCK_ATTS} from "../AssetModal/AssetModal";
 
 export const BoostCardMain = ({
   item,
-  setCurrentAsset,
-  setVisible,
-  travelMapVisible,
-  setTravelMapVisible,
+  // setCurrentAsset,
+  // setVisible,
+  // travelMapVisible,
+  // setTravelMapVisible,
   setTab,
 }: // visible,
 {
@@ -29,6 +28,7 @@ export const BoostCardMain = ({
   setCurrentAsset: React.Dispatch<
     React.SetStateAction<INFTMetadata | undefined>
   >;
+
   setTab: React.Dispatch<React.SetStateAction<ITabs>>;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;

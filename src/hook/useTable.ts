@@ -1,10 +1,9 @@
-import { useState, useCallback } from 'react';
+import {useCallback,useState} from 'react';
 //
-import { TableProps } from './types';
 
 // ----------------------------------------------------------------------
 
-type ReturnType = TableProps;
+type ReturnType = any;
 
 export type UseTableProps = {
   defaultDense?: boolean;
@@ -70,7 +69,7 @@ export default function useTable(props?: UseTableProps): ReturnType {
     setSelected([]);
   }, []);
 
-  const onChangePage = useCallback((event: unknown, newPage: number) => {
+  const onChangePage = useCallback((_event: unknown, newPage: number) => {
     setPage(newPage);
   }, []);
 

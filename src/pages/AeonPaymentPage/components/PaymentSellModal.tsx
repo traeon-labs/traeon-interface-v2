@@ -1,11 +1,15 @@
-import { Iconify } from "@/components/iconify";
-import { BorderLinearProgress } from "@/components/Linear/customLinear";
-import { INFTMetadata } from "@/types/index.type";
-import { createAeonOrdersWithTma } from "@/utils/aeon/createOrder";
-import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
+import {Iconify} from "@/components/iconify";
+import {LineMdLoadingLoop} from "@/components/icons/LineMdLoadingLoop";
+import {openAccountOrdersModal} from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
+import useAccountOrders from "@/pages/IndexPage/AccountOrdersModal/hook/useAccountOrders";
+import {INFTMetadata} from "@/types/index.type";
+import {
+  generateAeonResError,
+  generateFractionalPrice
+} from "@/utils";
+import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
 import {
   Avatar,
-  AvatarGroup,
   Box,
   Button,
   CardMedia,
@@ -13,22 +17,12 @@ import {
   Container,
   Grid2,
   IconButton,
-  Stack,
+  Stack
 } from "@mui/material";
-import { Input, Modal, Typography } from "@telegram-apps/telegram-ui";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { openAeonPayment } from "./AeonPaymentModal";
-import {
-  generateAeonResError,
-  generateFractionalPrice,
-  generateOrderKey,
-} from "@/utils";
-import { useInitData } from "@tma.js/sdk-react";
-import { fetchAeonOrder } from "@/utils/aeon/fetchOrder";
-import useAccountOrders from "@/pages/IndexPage/AccountOrdersModal/hook/useAccountOrders";
-import { openAccountOrdersModal } from "@/pages/IndexPage/AccountOrdersModal/AccountOrdersModal";
-import { LineMdLoadingLoop } from "@/components/icons/LineMdLoadingLoop";
-import { cloudStorage as cloudData } from "@telegram-apps/sdk";
+import {Input,Modal,Typography} from "@telegram-apps/telegram-ui";
+import {useInitData} from "@tma.js/sdk-react";
+import {useEffect,useMemo,useRef,useState} from "react";
+import {openAeonPayment} from "./AeonPaymentModal";
 
 const _MOCK_ATTS = [
   {
@@ -62,17 +56,17 @@ export const PaymentSellModal = () => {
   const [visible, setVisible] = useState(false);
   const [asset, setAsset] = useState<INFTMetadata>();
   const [creatingOrder, setCreatingOrder] = useState<boolean>(false);
-  const [paymentType, setPaymentType] = useState<"TON" | "AEON">("AEON");
+  const [paymentType, _setPaymentType] = useState<"TON" | "AEON">("AEON");
   const resolveRef = useRef<(value: boolean) => void>(() => {
     throw new Error("RESOLVE_REF_UNSET");
   });
   const {
-    orders,
-    setUnfillOrders,
-    setOrders,
+    // orders,
+    // setUnfillOrders,
+    // setOrders,
     pendingOrders,
-    loadingOrders,
-    refreshOrdersData,
+    // loadingOrders,
+    // refreshOrdersData,
   } = useAccountOrders();
   useEffect(() => {
     _confirm = ({

@@ -1,12 +1,12 @@
 import marketplaceAssets from "@/nfts/metadata/nfts.json";
-import { IMarketplaceFilterTabs, INFTMetadata } from "@/types/index.type";
-import { Grid2 } from "@mui/material";
-import { List } from "@telegram-apps/telegram-ui";
-import { FC, useMemo, useState } from "react";
-import { AssetCard } from "./AssetCard";
-import { MarketplaceFilter } from "./MarketplaceFilter";
-import { MARKETPLACE_ASSET_CONFIG } from "@/utils/constant";
-import { Direction } from "@smakss/react-scroll-direction";
+import {IMarketplaceFilterTabs,INFTMetadata} from "@/types/index.type";
+import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
+import {Grid2} from "@mui/material";
+import {Direction} from "@smakss/react-scroll-direction";
+import {List} from "@telegram-apps/telegram-ui";
+import {useMemo,useState} from "react";
+import {AssetCard} from "./AssetCard";
+import {MarketplaceFilter} from "./MarketplaceFilter";
 
 export const MarketplacePage = ({
   setVisible,

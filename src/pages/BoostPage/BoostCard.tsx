@@ -4,22 +4,20 @@ import {INFTMetadata} from "@/types/index.type";
 import {generateFractionalPrice} from "@/utils";
 import {MARKETPLACE_ASSET_CONFIG} from "@/utils/constant";
 import {
-  Button,
   Card,
   CardMedia,
   Chip,
   Grid2,
-  Typography,
+  Typography
 } from "@mui/material";
 import {useMemo} from "react";
-import {openPaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConfirmModal";
 
 export const BoostCard = ({
   item,
-  setCurrentAsset,
-  setVisible,
-  setTravelMapVisible,
-  travelMapVisible
+  // setCurrentAsset,
+  // setVisible,
+  // setTravelMapVisible,
+  // travelMapVisible
   // visible,
 }: {
   item: INFTMetadata;

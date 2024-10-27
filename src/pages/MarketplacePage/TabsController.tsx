@@ -2,8 +2,7 @@ import {Iconify} from "@/components/iconify";
 import {ITabs} from "@/types/index.type";
 import {TABS} from "@/utils/constant";
 import {Card,Tab,Tabs} from "@mui/material";
-import useDetectScroll, { Direction, ScrollInfo } from "@smakss/react-scroll-direction";
-import {Dir} from "fs";
+import {Direction} from "@smakss/react-scroll-direction";
 
 export const TabsController = ({
   tab,

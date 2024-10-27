@@ -70,6 +70,8 @@ export const MainLoading = () => {
           <Typography variant="body1" sx={{ my: 2 }}>
             {currentWord}
           </Typography>
+          {/* <Avatar src="/logo-traeon.png" sx={{borderRadius: '10px', height: '200px', width: '200px'}}/> */}
+
           <LineMdLoadingLoop
             width={64}
             height={64}

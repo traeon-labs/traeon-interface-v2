@@ -20,7 +20,7 @@ export const BoostFilter = ({
 
 }) => {
   const handleChange = (
-    event: React.SyntheticEvent,
+    _event: React.SyntheticEvent,
     newValue: IMarketplaceFilterTabs
   ) => {
     setMarketplaceTab(newValue);

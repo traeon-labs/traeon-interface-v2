@@ -19,7 +19,7 @@ export type IMarketplaceFilterTabs =
   | "ph:bag-bold"
   | "mingcute:hat-2-line";
 
-export type IMUIColor = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning',
+export type IMUIColor = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'
 
 export type ILocationData = {
   id: string

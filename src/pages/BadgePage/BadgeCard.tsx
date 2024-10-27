@@ -16,7 +16,7 @@ import {openPaymentConfirmModal} from "../AeonPaymentPage/components/PaymentConf
 
 export const BadgeCard = ({
   item,
-  setCurrentAsset,
+  // setCurrentAsset,
   setVisible,
   // visible,
 }: {

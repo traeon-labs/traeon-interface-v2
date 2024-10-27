@@ -1,7 +1,8 @@
-import { AEON_SANDBOX_PAYMENTS_BASE_API, AEON_SIGN_KEY } from "@/config";
+import {AEON_SANDBOX_PAYMENTS_BASE_API} from "@/config";
+import {IAeonResponse} from "@/types/index.type";
 import axios from "axios";
-import { generateSignature } from "../sign";
-import { IAeonResponse } from "@/types/index.type";
+import {generateAeonResError} from "..";
+import {generateSignature} from "../sign";
 // Define the request parameters interface
 interface RequestParams {
   merchantOrderNo: string;
@@ -46,7 +47,8 @@ export async function createAeonOrdersWithTma(
     console.log(response)
     const aeonResponse: IAeonResponse = response.data;
     return aeonResponse;
-  } catch (error) {
+  } catch (error:any) {
     console.error("Error:", error);
+    return generateAeonResError(error?.msg || error?.message, error?.code)
   }
 }

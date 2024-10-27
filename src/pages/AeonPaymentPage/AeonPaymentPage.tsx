@@ -1,7 +1,5 @@
 import {TonWalletButton} from "@/components/TonWallet/TonWalletButton";
-import useSignSHA512 from "@/pages/AeonPaymentPage/hook/useSignSHA512";
 import {createAeonOrdersWithTma} from "@/utils/aeon/createOrder";
-import {generateSignature} from "@/utils/sign";
 import {Button,Cell,List,Section} from "@telegram-apps/telegram-ui";
 import {type FC} from "react";
 import {openAeonPayment} from "./components/AeonPaymentModal";

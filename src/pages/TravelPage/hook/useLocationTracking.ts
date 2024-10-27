@@ -1,9 +1,9 @@
 import useLocationStorage from "@/hook/useLocationStorage";
-import { ILocationData } from "@/types/index.type";
-import { DEFAULT_LOCATION } from "@/utils/constant";
+import {ILocationData} from "@/types/index.type";
+import {DEFAULT_LOCATION} from "@/utils/constant";
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {useEffect,useMemo,useRef,useState} from "react";
 import "../location.css";
 
 const MAPBOX_GEOCODING_URL =
@@ -14,10 +14,10 @@ const useLocationTracking = (
   pkToken: string
 ) => {
   const mapRef = useRef<mapboxgl.Map | null>(null);
-  const [zoom, setZoom] = useState(12.12);
+  const [zoom] = useState(12.12);
   const [locationData, setLocationData] = useState<ILocationData | undefined>();
   const currentLocationRef = useRef<mapboxgl.Marker | null>(null);
-  const { markLocations, refresh, journeysData } = useLocationStorage();
+  const { markLocations, refresh } = useLocationStorage();
   const watchId = useRef<number | null>(null);
   const [mapLoading, setMapLoading] = useState(false); // State to manage loading
 
@@ -147,7 +147,7 @@ const useLocationTracking = (
           watchId.current = navigator.geolocation.watchPosition(
             async (position) => {
               if (!mapRef.current) return;
-              // const { longitude, latitude } = position.coords;
+              const { longitude, latitude } = position.coords;
               currentLocationRef.current?.setLngLat([longitude, latitude]);
               await updateLocationData(longitude, latitude);
             },
