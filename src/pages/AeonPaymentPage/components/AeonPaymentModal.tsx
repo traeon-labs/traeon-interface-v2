@@ -130,10 +130,11 @@ export const AeonPaymentModal = () => {
                 }}
                 startIcon={<Iconify icon="uil:cancel" />}
                 className="aeon-box-border aeon-box-shadow-bold aeon-transition"
-                sx={{ width: "48%", marginRight: "1%", marginLeft: "1%" }}
+                sx={{ width: aeonResponse?.code === 'DEVICE_ERROR' ? "50%" : "", marginRight: "1%", marginLeft: "1%" }}
               >
                 Cancel
               </Button>
+              {aeonResponse?.code === 'DEVICE_ERROR' ? "" : 
               <Button
                 variant="outlined"
                 color="secondary"
@@ -145,7 +146,7 @@ export const AeonPaymentModal = () => {
                 onClick={() => {openAccountOrdersModal()}}
               >
                 Pending Orders
-              </Button>
+              </Button>}
             </Card>
           )}
         </Grid2>

@@ -1,5 +1,5 @@
 import {Iconify} from "@/components/iconify";
-import {ILocationStore} from "@/types/index.type";
+import {ILocationStore, ITabs} from "@/types/index.type";
 import {encodeLocationKey} from "@/utils";
 import {Button,Grid2,IconButton} from "@mui/material";
 import {cloudStorage as cloudData} from "@telegram-apps/sdk";

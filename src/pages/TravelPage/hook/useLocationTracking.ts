@@ -1,10 +1,12 @@
 import useLocationStorage from "@/hook/useLocationStorage";
-import {ILocationData, ITabs} from "@/types/index.type";
-import {DEFAULT_LOCATION} from "@/utils/constant";
+import { ILocationData, ITabs } from "@/types/index.type";
+import { DEFAULT_LOCATION } from "@/utils/constant";
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
-import {useEffect,useMemo,useRef,useState} from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "../location.css";
+import { openAeonPayment } from "@/pages/AeonPaymentPage/components/AeonPaymentModal";
+import { generateAeonResError } from "@/utils";
 
 const MAPBOX_GEOCODING_URL =
   "https://api.mapbox.com/geocoding/v5/mapbox.places";
@@ -65,7 +67,7 @@ const useLocationTracking = (
         // Store the marker for future removal
         markersRef.current.push(marker);
       });
-      console.log(markersRef)
+      console.log(markersRef);
       // Draw the line connecting the markers
       try {
         mapRef.current?.addSource(`line-source-${key}`, {
@@ -79,7 +81,7 @@ const useLocationTracking = (
             },
           },
         });
-  
+
         mapRef.current?.addLayer({
           id: `line-layer-${key}`,
           type: "line",
@@ -89,13 +91,12 @@ const useLocationTracking = (
             "line-cap": "round",
           },
           paint: {
-            "line-color": 'gray', // Use the same color for the line as the marker
+            "line-color": "gray", // Use the same color for the line as the marker
             "line-width": 4,
-            'line-dasharray': [2,2]
+            "line-dasharray": [2, 2],
           },
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     });
   };
 
@@ -108,16 +109,16 @@ const useLocationTracking = (
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
         zoom,
-        style: 'mapbox://styles/mapbox/outdoors-v12?optimize=true',
+        style: "mapbox://styles/mapbox/outdoors-v12?optimize=true",
         center: DEFAULT_LOCATION as any, // Default center
-        dragRotate: false,  // Disable drag rotation
-        trackResize: false,  // Disable automatic resize tracking
+        dragRotate: false, // Disable drag rotation
+        trackResize: false, // Disable automatic resize tracking
         preserveDrawingBuffer: true, // May help with some rendering issues
       });
 
       mapRef.current.addControl(new mapboxgl.NavigationControl());
 
-      mapRef.current.on('load', () => {
+      mapRef.current.on("load", () => {
         setMapLoading(false); // Set loading to false when the map has finished loading
       });
 
@@ -125,7 +126,7 @@ const useLocationTracking = (
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           if (!mapRef.current) return;
-          const {longitude, latitude} = position.coords;
+          const { longitude, latitude } = position.coords;
           // const [longitude, latitude] = DEFAULT_LOCATION;
 
           mapRef.current.setCenter([longitude, latitude]);
@@ -152,14 +153,28 @@ const useLocationTracking = (
               currentLocationRef.current?.setLngLat([longitude, latitude]);
               await updateLocationData(longitude, latitude);
             },
-            () => {if(setTab) setTab('mdi:shopping-outline')
-               console.error("Unable to access your location.")},
+            () => {
+              if (setTab) setTab("mdi:shopping-outline");
+              openAeonPayment(
+                generateAeonResError(
+                  "Traeon location tracking is optimized for Mobile devices. For desktop users, please ensure that your browser supports location tracking features.",
+                  "DEVICE_ERROR"
+                )
+              );
+              console.error("Unable to access your location.");
+            },
             { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 }
           );
         },
         async () => {
+          openAeonPayment(
+            generateAeonResError(
+              "Traeon location tracking is optimized for Mobile devices. For desktop users, please ensure that your browser supports location tracking features.",
+              "DEVICE_ERROR"
+            )
+          );
           await updateLocationData(DEFAULT_LOCATION[0], DEFAULT_LOCATION[1]);
-          if(setTab) setTab('mdi:shopping-outline')
+          if (setTab) setTab("mdi:shopping-outline");
           console.error("Unable to access your location.");
         }
       );
