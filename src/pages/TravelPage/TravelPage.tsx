@@ -38,7 +38,7 @@ export const TravelPage = ({
     {!visible ? (
       <Grid2 container spacing={1} p={2}>
         <Grid2 size={12}>
-          <Button
+        <Button
             variant="outlined"
             color="inherit"
             sx={{ width: "100%", height: "50px" }}
@@ -55,20 +55,18 @@ export const TravelPage = ({
         {locationLoading
           ? "Loading..."
           : journeyKeys.length === 0 ? (
-              <Grid2 size={12} sx={{ p: 2, textAlign: "left" }}>
-                <Typography variant="h6">
-                  No locations available.
-                </Typography>
-                <Typography variant="body1" sx={{ mt: 2 }}>
-                  Please follow these directions to get started:
-                  <ul>
-                    <li>Check your internet connection.</li>
-                    <li>Ensure your device's location services are enabled.</li>
-                    <li>Try refreshing the page.</li>
-                    <li>If the issue persists, contact support.</li>
-                  </ul>
-                </Typography>
-              </Grid2>
+            <Grid2 size={12} sx={{ p: 2, textAlign: "left" }}>
+            <Typography variant="h6">No check-in data found.</Typography>
+            <Typography variant="body1" sx={{ mt: 2 }}>
+              It looks like you haven't checked in yet. Here’s how to get started:
+              <ul>
+                <li>Check your internet connection.</li>
+                <li>Make sure your device's location services are enabled.</li>
+                <li>Refresh the page to reload your data.</li>
+                <li>If you still don't see any check-ins, reach out to support.</li>
+              </ul>
+            </Typography>
+          </Grid2>
             ) : (
               journeyKeys.slice(0, 2).map((jKey, _) => {
                 const jData = journeysData[jKey];
