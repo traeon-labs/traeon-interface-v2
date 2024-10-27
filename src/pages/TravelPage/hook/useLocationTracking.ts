@@ -1,5 +1,5 @@
 import useLocationStorage from "@/hook/useLocationStorage";
-import {ILocationData} from "@/types/index.type";
+import {ILocationData, ITabs} from "@/types/index.type";
 import {DEFAULT_LOCATION} from "@/utils/constant";
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
@@ -11,7 +11,8 @@ const MAPBOX_GEOCODING_URL =
 
 const useLocationTracking = (
   mapContainerRef: React.RefObject<HTMLDivElement>,
-  pkToken: string
+  pkToken: string,
+  setTab?: React.Dispatch<React.SetStateAction<ITabs>>
 ) => {
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const [zoom] = useState(12.12);
@@ -151,12 +152,14 @@ const useLocationTracking = (
               currentLocationRef.current?.setLngLat([longitude, latitude]);
               await updateLocationData(longitude, latitude);
             },
-            () => console.error("Unable to access your location."),
+            () => {if(setTab) setTab('mdi:shopping-outline')
+               console.error("Unable to access your location.")},
             { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 }
           );
         },
         async () => {
           await updateLocationData(DEFAULT_LOCATION[0], DEFAULT_LOCATION[1]);
+          if(setTab) setTab('mdi:shopping-outline')
           console.error("Unable to access your location.");
         }
       );

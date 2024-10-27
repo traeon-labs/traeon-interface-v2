@@ -10,7 +10,9 @@ import useLocationTracking from "./hook/useLocationTracking";
 export const TravelMapModal = ({
   visible,
   setVisible,
+  setTab,
 }: {
+  setTab: React.Dispatch<React.SetStateAction<ITabs>>;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -29,7 +31,7 @@ export const TravelMapModal = ({
     refresh,
     // mapLoading,
     // updateLocationData,
-  } = useLocationTracking(mapContainerRef, PK_TOKEN);
+  } = useLocationTracking(mapContainerRef, PK_TOKEN, setTab);
   const onCheckinWithMap = async () => {
     const contextLength = locationData?.context.length || 2;
     const region = locationData?.context?.[contextLength - 2]?.text;

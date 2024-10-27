@@ -28,6 +28,7 @@ import {TravelPage} from "../TravelPage/TravelPage";
 import {AccountOrdersModal} from "./AccountOrdersModal/AccountOrdersModal";
 import {AccountPopover} from "./AccountPropover";
 import "./IndexPage.css";
+import {MainLoading} from "./MainLoading";
 
 init();
 postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
@@ -77,7 +78,6 @@ export const IndexPage: FC = () => {
   });
   const [orders, setOrders] = useState<IAeonOrder[]>([]);
   const [unfillOrders, setUnfillOrders] = useState<IAeonOrder[]>([]);
-
   useEffect(() => {
     if (customElementRef.current) {
       setCustomElement(customElementRef.current);
@@ -100,7 +100,7 @@ export const IndexPage: FC = () => {
       >
         {/* <AeonPaymentPage/> */}
         {/* <MerchantConfigPage/> */}
-        {/* <MainLoading /> */}
+        <MainLoading />
         <AccountPopover />
         {tab === "mdi:shopping-outline" ? (
           <MarketplacePage
@@ -129,6 +129,7 @@ export const IndexPage: FC = () => {
         <TravelMapModal
           visible={travelMapModal}
           setVisible={setTravelMapModal}
+          setTab={setTab}
         />
         <AeonPaymentModal />
         <PaymentSellModal />
