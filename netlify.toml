@@ -2,9 +2,5 @@
   command = "npm run build" # The build command to run
   publish = "dist"           # Directory where the built files are stored (update if different)
 
-# Optional: Set up deploy preview configurations
-[[plugins]]
-  package = "@netlify/plugin-deploy-preview-commenting"
-
 [context.production.environment]
   NODE_ENV = "production"
