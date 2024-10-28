@@ -7,7 +7,7 @@ Traeon is a travel-focused application that seamlessly integrates Web3 technolog
 - **Seamless Travel Experience:** Connect with various travel services in one app.
 - **Web3 Integration:** Leverage blockchain technology for secure transactions.
 - **User-Friendly Interface:** Designed for both Web2 and Web3 users.
-- **Marketplace:** Purchase assets using TON ($TON) or Aeon crypto payment.
+- **Marketplace:** Purchase assets using TON Network or Aeon crypto payment.
 - **Community-Driven:** Open-source development encourages collaboration and contribution.
 
 ## Table of Contents
