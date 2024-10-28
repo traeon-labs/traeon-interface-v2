@@ -1,7 +1,7 @@
 # Traeon
 
 Traeon is a travel-focused application that seamlessly integrates Web3 technologies to enhance the travel experience. Designed as a Telegram Mini App, Traeon allows users to interact with decentralized applications (dApps) while enjoying a user-friendly interface that simplifies the complexities of Web3.
-
+Copyright (c) 2024 Traeon
 ## Features
 
 - **Seamless Travel Experience:** Connect with various travel services in one app.
