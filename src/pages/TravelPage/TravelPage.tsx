@@ -21,7 +21,6 @@ export const TravelPage = ({
 }) => {
   // const onResetData = async () => {
   //   const keys = await cloudData.getKeys();
-  //   await cloudData.deleteItem(keys);
   // };
   const {
     journeyKeys,
