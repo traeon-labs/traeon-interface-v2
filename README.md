@@ -22,8 +22,6 @@ Traeon is a travel-focused application that seamlessly integrates Web3 technolog
 
 ## Installation
 
-To get started with Traeon, clone the repository and install the necessary dependencies:
-
 ```bash
 cd traeon
 npm install
